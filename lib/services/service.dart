@@ -1,0 +1,11 @@
+import 'dart:convert';
+import 'package:lawpedia_app/model/model.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
+part 'google_signin_api.dart';
+part 'user_services.dart';
+part 'api_return_value.dart';
+part 'arsip_service.dart';
+part 'QA_service.dart';
+String baseUrl = "http://lawpedia.farzcentrix.com/api/";
