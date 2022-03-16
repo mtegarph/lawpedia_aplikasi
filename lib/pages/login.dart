@@ -64,10 +64,11 @@ class _LoginState extends State<Login> {
                   "31/05/2002")
               .then((value) {
             // print(value.message);
-            Get.to(MainPage(
-              google: user,
-              // facebook_user: _userObj,
-            ));
+            Navigator.of(context).pushReplacement(MaterialPageRoute(
+                builder: (context) => MainPage(
+                      //google: user,
+                      google: user,
+                    )));
           });
         });
         print(status);
@@ -85,10 +86,11 @@ class _LoginState extends State<Login> {
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
         // print(state.token);
         logindata!.setString('token', state.token.toString());
-        Get.to(MainPage(
-          google: user,
-          // facebook_user: _userObj,
-        ));
+        Navigator.of(context).pushReplacement(MaterialPageRoute(
+            builder: (context) => MainPage(
+                  //google: user,
+                  google: user,
+                )));
       }
     }
   }
@@ -290,11 +292,15 @@ class _LoginState extends State<Login> {
                                           if (state1 is berhasilLogin) {
                                             logindata!.setString('token',
                                                 state1.token.toString());
-
-                                            Get.to(MainPage(
-                                              //google: user,
-                                              facebook: _userFaceboook,
-                                            ));
+                                            Navigator.of(context)
+                                                .pushReplacement(
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            MainPage(
+                                                              //google: user,
+                                                              facebook:
+                                                                  _userFaceboook,
+                                                            )));
                                           }
                                           // print(value.message);
                                         });
@@ -317,10 +323,12 @@ class _LoginState extends State<Login> {
                                       // print(state.token);
                                       logindata!.setString(
                                           'token', state.token.toString());
-                                      Get.to(MainPage(
-                                        //google: user,
-                                        facebook: _userFaceboook,
-                                      ));
+                                      Navigator.of(context)
+                                          .pushReplacement(MaterialPageRoute(
+                                              builder: (context) => MainPage(
+                                                    //google: user,
+                                                    facebook: _userFaceboook,
+                                                  )));
                                     }
                                     // you are logged
 
