@@ -7,5 +7,6 @@ part 'google_signin_api.dart';
 part 'user_services.dart';
 part 'api_return_value.dart';
 part 'arsip_service.dart';
+part 'question.dart';
 part 'QA_service.dart';
 String baseUrl = "http://lawpedia.farzcentrix.com/api/";

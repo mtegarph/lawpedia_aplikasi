@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:carousel_slider/carousel_slider.dart';
@@ -15,7 +16,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:lawpedia_app/cubit/cubit.dart';
 import 'package:lawpedia_app/model/model.dart';
 import 'package:lawpedia_app/widget/widget.dart';
-
+import 'package:flutter_paginator/flutter_paginator.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:responsive_framework/responsive_row_column.dart';
 import 'package:responsive_framework/responsive_wrapper.dart';
@@ -24,6 +25,7 @@ import 'package:supercharged/supercharged.dart';
 import 'package:get/get.dart';
 import 'package:lawpedia_app/services/service.dart';
 import 'package:twitter_login/twitter_login.dart';
+import 'package:http/http.dart' as http;
 
 part 'konsultan_hukum.dart';
 part 'search_page.dart';

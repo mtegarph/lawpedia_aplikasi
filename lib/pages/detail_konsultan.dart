@@ -11,6 +11,7 @@ class _DetailKonsultanState extends State<DetailKonsultan> {
   @override
   Widget build(BuildContext context) {
     return Template(
+      width: 0,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.start,

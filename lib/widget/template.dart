@@ -2,8 +2,10 @@ part of 'widget.dart';
 
 class Template extends StatefulWidget {
   final String page;
+  final num width;
   final Widget child;
-  const Template({Key? key, required this.page, required this.child})
+  const Template(
+      {Key? key, required this.width, required this.page, required this.child})
       : super(key: key);
 
   @override
@@ -11,6 +13,20 @@ class Template extends StatefulWidget {
 }
 
 class _TemplateState extends State<Template> {
+  //num panjang = 0;
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  panjangJudul() {
+    if (widget.width != 0) {
+      return widget.width;
+    } else {
+      return 5.5;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -47,7 +63,8 @@ class _TemplateState extends State<Template> {
                             ),
                           ),
                           SizedBox(
-                            width: MediaQuery.of(context).size.width / 5.5,
+                            width: MediaQuery.of(context).size.width /
+                                panjangJudul(),
                           ),
                           Padding(
                             padding: const EdgeInsets.only(top: 10),

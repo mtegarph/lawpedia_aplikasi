@@ -12,6 +12,7 @@ class _AnswerState extends State<Answer> {
   @override
   Widget build(BuildContext context) {
     return Template(
+        width: 0,
         page: '',
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -62,8 +63,8 @@ class _AnswerState extends State<Answer> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding:
-                              const EdgeInsets.only(top: 25, bottom: 10, left: 25),
+                          padding: const EdgeInsets.only(
+                              top: 25, bottom: 10, left: 25),
                           child: Text(
                             "Jawab",
                             style: TextStyle(

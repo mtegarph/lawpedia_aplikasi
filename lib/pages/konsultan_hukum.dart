@@ -11,6 +11,7 @@ class _KonsultanHukumState extends State<KonsultanHukum> {
   @override
   Widget build(BuildContext context) {
     return Template(
+      width: 0,
         page: "Konsultan Hukum",
         child: Padding(
           padding: const EdgeInsets.all(20.0),

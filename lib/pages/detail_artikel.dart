@@ -11,6 +11,7 @@ class _DetailArtikelState extends State<DetailArtikel> {
   @override
   Widget build(BuildContext context) {
     return Template(
+      width: 0,
         page: '',
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),

@@ -11,6 +11,7 @@ class _NotifState extends State<Notif> {
   @override
   Widget build(BuildContext context) {
     return Template(
+      width: 4,
       child: Column(
         children: [
           Container(

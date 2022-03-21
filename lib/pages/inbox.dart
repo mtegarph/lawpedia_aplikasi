@@ -10,6 +10,151 @@ class _InboxState extends State<Inbox> {
       "Flutter is Google’s mobile UI framework for crafting high-quality native interfaces on iOS and Android in record time. Flutter works with existing code, is used by developers and organizations around the world, and is free and open source.";
 
   int index = 0;
+  final controller = ScrollController();
+  List<Datum>? items;
+  GlobalKey<PaginatorState> paginatorGlobalKey = GlobalKey();
+  GlobalKey<PaginatorState> paginatorGlobalKey2 = GlobalKey();
+  //api get list pertanyaan
+  Future<QuestionList> getQuestionDetail(int? page) async {
+    String apiUrl = baseUrl + 'questions?page=' + page.toString();
+    SharedPreferences logindata = await SharedPreferences.getInstance();
+    String token = logindata.getString('token').toString();
+    print(token);
+    var client = http.Client();
+    var apiResult = await client.get(
+      Uri.parse(apiUrl),
+      headers: {"auth-token": "$token"},
+    );
+    if (apiResult.statusCode != 200) {
+      print(apiResult.statusCode.toString());
+    }
+    // var data = jsonDecode(apiResult.body);
+    //Question? pertanyaan = QuestionList.fromJson(jsonDecode(apiResult.body)).data.questions;
+    QuestionList questionList =
+        QuestionList.fromJson(jsonDecode(apiResult.body));
+
+    // print(data['auth_token']);
+    return questionList;
+  }
+
+  Future<QuestionList> getQuestionDetailAnswered(int? page) async {
+    String apiUrl =
+        baseUrl + 'questions?page=' + page.toString() + '&status=answered';
+    SharedPreferences logindata = await SharedPreferences.getInstance();
+    String token = logindata.getString('token').toString();
+    print(token);
+    var client = http.Client();
+    var apiResult = await client.get(
+      Uri.parse(apiUrl),
+      headers: {"auth-token": "$token"},
+    );
+    if (apiResult.statusCode != 200) {
+      print(apiResult.statusCode.toString());
+    }
+    // var data = jsonDecode(apiResult.body);
+    //Question? pertanyaan = QuestionList.fromJson(jsonDecode(apiResult.body)).data.questions;
+    QuestionList questionList =
+        QuestionList.fromJson(jsonDecode(apiResult.body));
+
+    // print(data['auth_token']);
+    return questionList;
+  }
+
+  //fungsi untuk membuat list widget nya
+  Widget listItemBuilder(dynamic item, int index) {
+    Datum questionList = item as Datum;
+    return Padding(
+      padding: const EdgeInsets.only(top: 5),
+      child: InkWell(
+        onTap: () {
+          print("Ola");
+        },
+        child: Container(
+          padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+          width: double.infinity,
+          height: 100,
+          color: Colors.white,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding:
+                        new EdgeInsets.symmetric(horizontal: 10.0, vertical: 5),
+                    child: Text(questionList.qTitle.toString(),
+                        style: TextStyle(
+                            color: '4F4F4F'.toColor(),
+                            fontSize: 20,
+                            fontFamily: 'Raleway',
+                            fontWeight: FontWeight.normal)),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                    child: Text(
+                      questionList.createdAt.toString(),
+                      style: TextStyle(
+                          color: 'A1A1A1'.toColor(),
+                          fontSize: 14,
+                          fontFamily: 'Raleway',
+                          fontWeight: FontWeight.w600),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+//loading indicator
+  Widget loadingWidgetMaker() {
+    return Container(
+      alignment: Alignment.center,
+      height: 160.0,
+      child: CircularProgressIndicator(),
+    );
+  }
+
+  //jika ada error
+  Widget errorWidgetMaker(QuestionList dataproduk, retryListener) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Text("error"),
+        ),
+        FlatButton(
+          onPressed: retryListener,
+          child: Text('Retry'),
+        )
+      ],
+    );
+  }
+
+  //mengambil berapa banyak data total yang bisa ditampilkan
+  int totalPagesGetter(QuestionList dataProduk) {
+    //int? total = dataProduk.data!.questions!.to!.toInt();
+
+    return dataProduk.data!.questions!.to?.toInt() ?? 0;
+  }
+
+//untuk menaruh data data list dari api ke dalam data list lokal
+  List<dynamic> listItemsGetterPages(QuestionList produk) {
+    List<Datum> list = [];
+    produk.data?.questions?.data?.forEach((value) {
+      list.add(value);
+    });
+    print("data : ${list.length}");
+    return list;
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -70,340 +215,38 @@ class _InboxState extends State<Inbox> {
           ),
           backgroundColor: 'F2F2F2'.toColor(),
           body: TabBarView(children: [
-            ListView(
-              children: [
-                SizedBox(
-                  height: 20,
-                ),
-                InkWell(
-                  onTap: () {
-                    Get.to(Answer(visible: false));
-                    print("Ola");
-                  },
-                  child: Container(
-                    padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-                    width: double.infinity,
-                    height: 100,
-                    color: Colors.white,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            DescriptionTextWidget(
-                              text: deskripsi,
-                              color: '4F4F4F',
-                              size: 20,
-                              length: 40,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 5),
-                              child: Text(
-                                "16/09/2021",
-                                style: TextStyle(
-                                    color: 'A1A1A1'.toColor(),
-                                    fontSize: 14,
-                                    fontFamily: 'Raleway',
-                                    fontWeight: FontWeight.w600),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(12.0),
-                          child: Text(
-                            "13:30",
-                            style: TextStyle(
-                                color: 'A1A1A1'.toColor(),
-                                fontSize: 14,
-                                fontFamily: 'Raleway',
-                                fontWeight: FontWeight.w600),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                InkWell(
-                  onTap: () {
-                    print("Ola");
-                  },
-                  child: Container(
-                    padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-                    width: double.infinity,
-                    height: 100,
-                    color: Colors.white,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            DescriptionTextWidget(
-                              text: deskripsi,
-                              color: '4F4F4F',
-                              size: 20,
-                              length: 40,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 5),
-                              child: Text(
-                                "16/09/2021",
-                                style: TextStyle(
-                                    color: 'A1A1A1'.toColor(),
-                                    fontSize: 14,
-                                    fontFamily: 'Raleway',
-                                    fontWeight: FontWeight.w600),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(12.0),
-                          child: Text(
-                            "13:30",
-                            style: TextStyle(
-                                color: 'A1A1A1'.toColor(),
-                                fontSize: 14,
-                                fontFamily: 'Raleway',
-                                fontWeight: FontWeight.w600),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                InkWell(
-                  onTap: () {
-                    print("Ola");
-                  },
-                  child: Container(
-                    padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-                    width: double.infinity,
-                    height: 100,
-                    color: Colors.white,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            DescriptionTextWidget(
-                              text: deskripsi,
-                              color: '4F4F4F',
-                              size: 20,
-                              length: 40,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 5),
-                              child: Text(
-                                "16/09/2021",
-                                style: TextStyle(
-                                    color: 'A1A1A1'.toColor(),
-                                    fontSize: 14,
-                                    fontFamily: 'Raleway',
-                                    fontWeight: FontWeight.w600),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(12.0),
-                          child: Text(
-                            "13:30",
-                            style: TextStyle(
-                                color: 'A1A1A1'.toColor(),
-                                fontSize: 14,
-                                fontFamily: 'Raleway',
-                                fontWeight: FontWeight.w600),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                )
-              ],
+            Paginator.listView(
+              key: paginatorGlobalKey,
+              totalItemsGetter: totalPagesGetter,
+              emptyListWidgetBuilder: (pageData) {
+                return Container();
+              },
+              listItemBuilder: listItemBuilder,
+              pageLoadFuture: getQuestionDetail,
+              scrollPhysics: BouncingScrollPhysics(),
+              loadingWidgetBuilder: loadingWidgetMaker,
+              errorWidgetBuilder: errorWidgetMaker,
+              pageErrorChecker: (QuestionList pageData) {
+                return false;
+              },
+              pageItemsGetter: listItemsGetterPages,
             ),
-            ListView(
-              children: [
-                SizedBox(
-                  height: 20,
-                ),
-                InkWell(
-                  onTap: () {
-                    Get.to(Answer(visible: true));
-                    print("Ola 1");
-                  },
-                  child: Container(
-                    padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-                    width: double.infinity,
-                    height: 100,
-                    color: Colors.white,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            DescriptionTextWidget(
-                              text: deskripsi,
-                              color: '4F4F4F',
-                              size: 20,
-                              length: 40,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 5),
-                              child: Text(
-                                "16/09/2021",
-                                style: TextStyle(
-                                    color: 'A1A1A1'.toColor(),
-                                    fontSize: 14,
-                                    fontFamily: 'Raleway',
-                                    fontWeight: FontWeight.w600),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(12.0),
-                          child: Text(
-                            "13:30",
-                            style: TextStyle(
-                                color: 'A1A1A1'.toColor(),
-                                fontSize: 14,
-                                fontFamily: 'Raleway',
-                                fontWeight: FontWeight.w600),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                InkWell(
-                  onTap: () {
-                    print("Ola");
-                  },
-                  child: Container(
-                    padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-                    width: double.infinity,
-                    height: 100,
-                    color: Colors.white,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            DescriptionTextWidget(
-                              text: deskripsi,
-                              color: '4F4F4F',
-                              size: 20,
-                              length: 40,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 5),
-                              child: Text(
-                                "16/09/2021",
-                                style: TextStyle(
-                                    color: 'A1A1A1'.toColor(),
-                                    fontSize: 14,
-                                    fontFamily: 'Raleway',
-                                    fontWeight: FontWeight.w600),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(12.0),
-                          child: Text(
-                            "13:30",
-                            style: TextStyle(
-                                color: 'A1A1A1'.toColor(),
-                                fontSize: 14,
-                                fontFamily: 'Raleway',
-                                fontWeight: FontWeight.w600),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                InkWell(
-                  onTap: () {
-                    print("Ola");
-                  },
-                  child: Container(
-                    padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-                    width: double.infinity,
-                    height: 100,
-                    color: Colors.white,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            DescriptionTextWidget(
-                              text: deskripsi,
-                              color: '4F4F4F',
-                              size: 20,
-                              length: 40,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 5),
-                              child: Text(
-                                "16/09/2021",
-                                style: TextStyle(
-                                    color: 'A1A1A1'.toColor(),
-                                    fontSize: 14,
-                                    fontFamily: 'Raleway',
-                                    fontWeight: FontWeight.w600),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(12.0),
-                          child: Text(
-                            "13:30",
-                            style: TextStyle(
-                                color: 'A1A1A1'.toColor(),
-                                fontSize: 14,
-                                fontFamily: 'Raleway',
-                                fontWeight: FontWeight.w600),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                )
-              ],
-            )
+            Paginator.listView(
+              key: paginatorGlobalKey2,
+              totalItemsGetter: totalPagesGetter,
+              emptyListWidgetBuilder: (pageData) {
+                return Container();
+              },
+              listItemBuilder: listItemBuilder,
+              pageLoadFuture: getQuestionDetailAnswered,
+              scrollPhysics: BouncingScrollPhysics(),
+              loadingWidgetBuilder: loadingWidgetMaker,
+              errorWidgetBuilder: errorWidgetMaker,
+              pageErrorChecker: (QuestionList pageData) {
+                return false;
+              },
+              pageItemsGetter: listItemsGetterPages,
+            ),
           ])),
     );
   }
