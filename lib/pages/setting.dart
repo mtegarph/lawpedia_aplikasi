@@ -269,9 +269,9 @@ class _SettingState extends State<Setting> {
 
           InkWell(
             onTap: () async {
-              widget.facebook!.isEmpty
-                  ? await GoogleSignInApi.logout()
-                  : await FacebookAuth.i.logOut();
+              widget.facebook != null
+                  ? await FacebookAuth.i.logOut()
+                  : await GoogleSignInApi.logout();
               Navigator.of(context).pushReplacement(
                   MaterialPageRoute(builder: (context) => Login()));
             },
