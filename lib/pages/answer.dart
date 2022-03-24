@@ -117,7 +117,7 @@ class _AnswerState extends State<Answer> {
                     ],
                   ),
                 )
-              : Loading(),
+              : Center(child: Loading()),
         ));
   }
 }
