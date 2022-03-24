@@ -67,7 +67,7 @@ class _InboxState extends State<Inbox> {
       padding: const EdgeInsets.only(top: 5),
       child: InkWell(
         onTap: () {
-          print("Ola");
+          Get.to(Answer(id: questionList.questionId.toString()));
         },
         child: Container(
           padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
