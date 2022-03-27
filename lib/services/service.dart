@@ -9,4 +9,5 @@ part 'api_return_value.dart';
 part 'arsip_service.dart';
 part 'question.dart';
 part 'QA_service.dart';
+part 'konsultanHukum.dart';
 String baseUrl = "http://lawpedia.farzcentrix.com/api/";

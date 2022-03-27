@@ -3,3 +3,5 @@ part 'question_list.dart';
 part 'cari.dart';
 part 'login.dart';
 part 'questionDetail.dart';
+part 'bannerKonsultan.dart';
+part 'konsultanHukum.dart';
