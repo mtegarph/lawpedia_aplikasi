@@ -42,4 +42,25 @@ class UserService {
     return ApiReturnValue(
         message: login.message, success: login.status, token: login.authToken);
   }
+
+  static Future<ApiReturnValue<UserDetail>> getUser() async {
+    String apiUrl = baseUrl + 'user-profile';
+    SharedPreferences logindata = await SharedPreferences.getInstance();
+    String token = logindata.getString('token').toString();
+    print(token);
+    var client = http.Client();
+    var apiResult = await client.get(
+      Uri.parse(apiUrl),
+      headers: {"auth-token": "$token"},
+    );
+    if (apiResult.statusCode != 200) {
+      print(apiResult.statusCode.toString());
+    }
+    // var data = jsonDecode(apiResult.body);
+    UserDetail listUser = UserDetail.fromJson(jsonDecode(apiResult.body));
+
+    // print(data['auth_token']);
+    return ApiReturnValue(
+        message: listUser.message, success: listUser.status, value: listUser);
+  }
 }

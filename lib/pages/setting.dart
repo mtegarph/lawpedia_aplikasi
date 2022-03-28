@@ -66,9 +66,10 @@ class _SettingState extends State<Setting> {
                 padding: const EdgeInsets.only(left: 30, top: 20),
                 child: CircleAvatar(
                     radius: 60,
-                    backgroundImage: NetworkImage(
-                        widget.user?.photoUrl.toString() ??
-                            widget.facebook?["picture"]["data"]["url"])),
+                    backgroundImage: NetworkImage(widget.user?.photoUrl
+                            .toString() ??
+                        widget.facebook?["picture"]["data"]["url"] ??
+                        "https://i.pinimg.com/736x/89/90/48/899048ab0cc455154006fdb9676964b3.jpg")),
               ),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -76,18 +77,23 @@ class _SettingState extends State<Setting> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(left: 25),
-                    child: Text(
-                      widget.user?.displayName.toString() ??
-                          widget.facebook?["name"],
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 20,
-                          fontFamily: 'Raleway',
-                          fontWeight: FontWeight.bold),
+                    child: Container(
+                      alignment: Alignment.centerLeft,
+                      width: 150,
+                      height: 50,
+                      child: Text(
+                        widget.user?.displayName.toString() ??
+                            widget.facebook?["name"],
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 20,
+                            fontFamily: 'Raleway',
+                            fontWeight: FontWeight.bold),
+                      ),
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(left: 20, top: 10),
+                    margin: EdgeInsets.only(left: 20),
                     width: 140,
                     height: 30,
                     child: Align(
@@ -269,6 +275,9 @@ class _SettingState extends State<Setting> {
 
           InkWell(
             onTap: () async {
+              SharedPreferences logindata =
+                  await SharedPreferences.getInstance();
+              logindata.setString('token', '');
               widget.facebook != null
                   ? await FacebookAuth.i.logOut()
                   : await GoogleSignInApi.logout();
