@@ -24,8 +24,21 @@ class LoginCubit extends Cubit<LoginState> {
       emit(gagalLoginState(result.success.toString()));
       print(" salah: ${result.message}");
     } else {
-     // print(" token: ${result.token.toString()}");
+      // print(" token: ${result.token.toString()}");
       emit(berhasilLogin(result.token.toString()));
+    }
+  }
+
+  Future<void> editUsesr(String first_name, String last_name,
+      String tgl_lahir, String no_telp) async {
+    ApiReturnValue result = await UserService.editUsesr(first_name, last_name,
+        tgl_lahir, no_telp);
+    if (result.success == "error") {
+      emit(gagalLoginState(result.success.toString()));
+      print(" salah: ${result.message}");
+    } else {
+      // print(" token: ${result.token.toString()}");
+      emit(berhasilLogin(result.message.toString()));
     }
   }
 }

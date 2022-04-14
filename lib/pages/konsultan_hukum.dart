@@ -159,6 +159,11 @@ class _KonsultanHukumState extends State<KonsultanHukum> {
                                   ),
                                 ),
                               ),
+                              DescriptionTextWidget(
+                                  text: listKonsultan[index].khDesc!.toString(),
+                                  size: 15,
+                                  length: 35,
+                                  color: Colors.black.toString())
                               // Text(
                               //   "Pengalaman 10 tahun",
                               //   style: TextStyle(

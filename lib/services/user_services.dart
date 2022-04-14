@@ -63,4 +63,29 @@ class UserService {
     return ApiReturnValue(
         message: listUser.message, success: listUser.status, value: listUser);
   }
+
+  static Future<ApiReturnValue> editUsesr(
+      String first_name, String last_name, String tgl_lahir,String no_telp) async {
+    String apiUrl = baseUrl + 'user-profile';
+    var client = http.Client();
+    SharedPreferences logindata = await SharedPreferences.getInstance();
+    String token = logindata.getString('token').toString();
+    print(token);
+    var apiResult = await client.post(Uri.parse(apiUrl), headers: {
+      "auth-token": "$token"
+    }, body: {
+      '_method': 'patch',
+      'no_telp': no_telp,
+      'first_name': first_name,
+      'last_name': last_name,
+      'tngl_lahir': tgl_lahir
+    });
+    if (apiResult.statusCode != 200) {
+      print(apiResult.statusCode.toString());
+    }
+    var data = jsonDecode(apiResult.body);
+
+    print(data['auth_token']);
+    return ApiReturnValue(message: data['message'], success: data['status']);
+  }
 }

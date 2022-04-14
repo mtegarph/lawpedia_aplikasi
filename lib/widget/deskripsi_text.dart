@@ -42,7 +42,14 @@ class _DescriptionTextWidgetState extends State<DescriptionTextWidget> {
     return new Container(
       padding: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 5),
       child: secondHalf.toString().isEmpty
-          ? new Text(firstHalf.toString())
+          ? new Text(firstHalf.toString(),
+              style: TextStyle(
+                  color: widget.color == null
+                      ? Colors.black38
+                      : widget.color.toString().toColor(),
+                  fontSize: widget.size?.toDouble(),
+                  fontFamily: 'Raleway',
+                  fontWeight: FontWeight.normal))
           : new Column(
               children: <Widget>[
                 new Text(

@@ -142,7 +142,7 @@ class _InboxState extends State<Inbox> {
   int totalPagesGetter(QuestionList dataProduk) {
     //int? total = dataProduk.data!.questions!.to!.toInt();
 
-    return dataProduk.data!.questions!.to?.toInt() ?? 0;
+    return dataProduk.data!.questions!.total?.toInt() ?? 0;
   }
 
 //untuk menaruh data data list dari api ke dalam data list lokal

@@ -439,16 +439,13 @@ class _HomePageState extends State<HomePage> {
                                             ),
                                           ),
                                         ),
-                                        //   Text(
-                                        //   state.bannerKonsultan.data!
-                                        //       .konsultanHukum![index].khDesc!
-                                        //       .toString(),
-                                        //   style: TextStyle(
-                                        //     color: Colors.black,
-                                        //     fontSize: 15,
-                                        //     fontFamily: 'Raleway',
-                                        //   ),
-                                        // ),
+                                        DescriptionTextWidget(
+                                            text: state.bannerKonsultan.data!
+                                                .konsultanHukum![index].khDesc!
+                                                .toString(),
+                                            size: 15,
+                                            length: 35,
+                                            color: Colors.black.toString())
                                       ],
                                     ),
                                     state

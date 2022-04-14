@@ -36,115 +36,7 @@ class _DetailKonsultanState extends State<DetailKonsultan> {
           Align(
             alignment: Alignment.centerLeft,
             child: Padding(
-              padding: const EdgeInsets.only(top: 60, left: 50),
-              child: Text(
-                'Lawyer yang tersedia',
-                style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 20,
-                    fontFamily: 'Raleway',
-                    fontWeight: FontWeight.bold),
-              ),
-            ),
-          ),
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Padding(
-                padding: const EdgeInsets.only(top: 20, left: 60, right: 60),
-                child: Row(
-                  //  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                          //color: 'C6B69D'.toColor(),
-                          borderRadius: BorderRadius.circular(10.0),
-                          image: DecorationImage(
-                              image: AssetImage('assets/image/warren.png'),
-                              fit: BoxFit.contain)),
-                      height: 80,
-                      width: 80,
-                    ),
-                    SizedBox(
-                      width: 25,
-                    ),
-                    Text(
-                      'Warren Buffet',
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 19,
-                          fontFamily: 'Raleway',
-                          fontWeight: FontWeight.w500),
-                    ),
-                  ],
-                )),
-          ),
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Padding(
-                padding: const EdgeInsets.only(top: 10, left: 60, right: 60),
-                child: Row(
-                  //  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                          //color: 'C6B69D'.toColor(),
-                          borderRadius: BorderRadius.circular(10.0),
-                          image: DecorationImage(
-                              image: AssetImage('assets/image/elon.png'),
-                              fit: BoxFit.contain)),
-                      height: 80,
-                      width: 80,
-                    ),
-                    SizedBox(
-                      width: 25,
-                    ),
-                    Text(
-                      'Elon Musk',
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 19,
-                          fontFamily: 'Raleway',
-                          fontWeight: FontWeight.w500),
-                    ),
-                  ],
-                )),
-          ),
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Padding(
-                padding: const EdgeInsets.only(top: 10, left: 60, right: 60),
-                child: Row(
-                  //  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                          color: 'C2C3D2'.toColor(),
-                          //color: 'C6B69D'.toColor(),
-                          borderRadius: BorderRadius.circular(10.0),
-                          image: DecorationImage(
-                              image: AssetImage('assets/image/charles.png'),
-                              fit: BoxFit.contain)),
-                      height: 80,
-                      width: 80,
-                    ),
-                    SizedBox(
-                      width: 25,
-                    ),
-                    Text(
-                      'Charles Hoskinson',
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 19,
-                          fontFamily: 'Raleway',
-                          fontWeight: FontWeight.w500),
-                    ),
-                  ],
-                )),
-          ),
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Padding(
-              padding: const EdgeInsets.only(top: 30, left: 50),
+              padding: const EdgeInsets.only(top: 40, left: 50),
               child: Text(
                 'Data Diri',
                 style: TextStyle(
@@ -158,12 +50,12 @@ class _DetailKonsultanState extends State<DetailKonsultan> {
           Container(
             margin: EdgeInsets.only(top: 8),
             width: 450,
-            height: 230,
+            height: 280,
             child: Text(
               "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer suscipit enim consequat eros bibendum, non eleifend erat molestie. Nulla a nunc id quam euismod finibus sit amet in purus. Duis lacinia neque tortor, eu viverra sem vulputate id. Etiam pharetra purus tellus. Vivamus consectetur volutpat tincidunt. Nam facilisis commodo ante, finibus eleifend neque congue non. Vestibulum vel commodo leo, eget vestibulum turpis. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. ",
               style: TextStyle(
                 color: Colors.black,
-                fontSize: 16,
+                fontSize: 18,
                 fontFamily: 'Raleway',
               ),
               textAlign: TextAlign.justify,

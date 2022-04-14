@@ -6,3 +6,4 @@ part 'questionDetail.dart';
 part 'bannerKonsultan.dart';
 part 'konsultanHukum.dart';
 part 'user.dart';
+part 'kamusHukum.dart';

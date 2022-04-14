@@ -41,17 +41,17 @@ class Data {
 }
 
 class Questions {
-  Questions({
-    this.currentPage,
-    this.data,
-    this.firstPageUrl,
-    this.from,
-    this.nextPageUrl,
-    this.path,
-    this.perPage,
-    this.prevPageUrl,
-    this.to,
-  });
+  Questions(
+      {this.currentPage,
+      this.data,
+      this.firstPageUrl,
+      this.from,
+      this.nextPageUrl,
+      this.path,
+      this.perPage,
+      this.prevPageUrl,
+      this.to,
+      this.total});
 
   int? currentPage;
   List<Datum>? data;
@@ -62,6 +62,7 @@ class Questions {
   int? perPage;
   dynamic? prevPageUrl;
   int? to;
+  int? total;
 
   factory Questions.fromJson(Map<String, dynamic> json) => Questions(
         currentPage: json["current_page"],
@@ -73,6 +74,7 @@ class Questions {
         perPage: json["per_page"],
         prevPageUrl: json["prev_page_url"],
         to: json["to"],
+        total: json["total"],
       );
 
   Map<String, dynamic> toJson() => {
