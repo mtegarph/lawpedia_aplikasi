@@ -7,3 +7,4 @@ part 'bannerKonsultan.dart';
 part 'konsultanHukum.dart';
 part 'user.dart';
 part 'kamusHukum.dart';
+part 'artikel.dart';

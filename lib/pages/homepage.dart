@@ -14,6 +14,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   bool _switchValue = false;
   bool loading_home = true;
+  bool loading_artikel = true;
   String? token;
   TextEditingController judulController = new TextEditingController();
   TextEditingController pertanyaanController = new TextEditingController();
@@ -35,6 +36,11 @@ class _HomePageState extends State<HomePage> {
     context.read<KonsultanhukumCubit>().getBannerKonsultan().then((value) {
       setState(() {
         loading_home = false;
+      });
+    });
+    context.read<ArtikelCubit>().getArtikelBanner().then((value) {
+      setState(() {
+        loading_artikel = false;
       });
     });
   }
@@ -637,344 +643,166 @@ class _HomePageState extends State<HomePage> {
                 SizedBox(
                   height: 20.0,
                 ),
-                CarouselSlider(
-                  options: CarouselOptions(
-
-                      // autoPlay: true,
-                      enlargeCenterPage: false,
-                      viewportFraction: 0.95,
-                      height: 300.0,
-                      //aspectRatio: 16 / 9,
-                      autoPlayCurve: Curves.fastOutSlowIn,
-                      enableInfiniteScroll: false,
-                      autoPlayAnimationDuration: Duration(milliseconds: 3000)),
-                  items: [
-                    Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: Container(
-                        padding: EdgeInsets.only(bottom: 10),
-                        child: Stack(
-                          fit: StackFit.loose,
-                          children: [
-                            Container(
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                  image: DecorationImage(
-                                      scale: 20,
-                                      image: NetworkImage(
-                                          "https://i.pinimg.com/564x/94/17/82/941782f60e16a9d7f9b4cea4ae7025e0.jpg"),
-                                      fit: BoxFit.cover)),
-                            ),
-                            Align(
-                              alignment: Alignment.bottomCenter,
-                              child: Container(
-                                  height: 130,
-                                  width:
-                                      MediaQuery.of(context).size.width / 1.11,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.only(
-                                          bottomRight: Radius.circular(10),
-                                          bottomLeft: Radius.circular(10)),
-                                      color: Colors.white,
-                                      boxShadow: [
-                                        BoxShadow(
-                                            color: Colors.black12,
-                                            blurRadius: 10,
-                                            spreadRadius: 4)
-                                      ]),
-                                  child: Padding(
-                                    padding: EdgeInsets.all(25),
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          "Hukum Pemberian Warisan",
-                                          style: TextStyle(
-                                              fontFamily: "Raleway",
-                                              color: "DA2323".toColor(),
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 27),
-                                        ),
-                                        Row(
-                                          children: [
-                                            Row(
-                                              children: [
-                                                Image(
-                                                  image: AssetImage(
-                                                      "assets/image/user.png"),
-                                                  fit: BoxFit.fitWidth,
-                                                  height: 18,
-                                                ),
-                                                SizedBox(
-                                                  width: 5,
-                                                ),
-                                                Text(
-                                                  "Brad Culp",
-                                                  style: TextStyle(
-                                                      fontFamily: "Raleway",
-                                                      color: "373737".toColor(),
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                      fontSize: 18),
-                                                ),
-                                              ],
-                                            ),
-                                            SizedBox(
-                                              width: 25,
-                                            ),
-                                            Row(
-                                              children: [
-                                                Image(
-                                                  image: AssetImage(
-                                                      "assets/image/eye.png"),
-                                                  fit: BoxFit.fitWidth,
-                                                  height: 15,
-                                                ),
-                                                SizedBox(
-                                                  width: 5,
-                                                ),
-                                                Text(
-                                                  "5.000",
-                                                  style: TextStyle(
-                                                      fontFamily: "Raleway",
-                                                      color: "373737".toColor(),
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                      fontSize: 18),
-                                                ),
-                                              ],
-                                            )
-                                          ],
-                                        )
-                                      ],
-                                    ),
-                                  )),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: Container(
-                        padding: EdgeInsets.only(bottom: 10),
-                        child: Stack(
-                          fit: StackFit.loose,
-                          children: [
-                            Container(
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                  image: DecorationImage(
-                                      scale: 20,
-                                      image: NetworkImage(
-                                          "https://i.pinimg.com/564x/94/17/82/941782f60e16a9d7f9b4cea4ae7025e0.jpg"),
-                                      fit: BoxFit.cover)),
-                            ),
-                            Align(
-                              alignment: Alignment.bottomCenter,
-                              child: Container(
-                                  height: 130,
-                                  width:
-                                      MediaQuery.of(context).size.width / 1.11,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.only(
-                                          bottomRight: Radius.circular(10),
-                                          bottomLeft: Radius.circular(10)),
-                                      color: Colors.white,
-                                      boxShadow: [
-                                        BoxShadow(
-                                            color: Colors.black12,
-                                            blurRadius: 10,
-                                            spreadRadius: 4)
-                                      ]),
-                                  child: Padding(
-                                    padding: EdgeInsets.all(25),
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          "Hukum Pemberian Warisan",
-                                          style: TextStyle(
-                                              fontFamily: "Raleway",
-                                              color: "DA2323".toColor(),
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 27),
-                                        ),
-                                        Row(
-                                          children: [
-                                            Row(
-                                              children: [
-                                                Image(
-                                                  image: AssetImage(
-                                                      "assets/image/user.png"),
-                                                  fit: BoxFit.fitWidth,
-                                                  height: 18,
-                                                ),
-                                                SizedBox(
-                                                  width: 5,
-                                                ),
-                                                Text(
-                                                  "Brad Culp",
-                                                  style: TextStyle(
-                                                      fontFamily: "Raleway",
-                                                      color: "373737".toColor(),
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                      fontSize: 18),
-                                                ),
-                                              ],
-                                            ),
-                                            SizedBox(
-                                              width: 25,
-                                            ),
-                                            Row(
-                                              children: [
-                                                Image(
-                                                  image: AssetImage(
-                                                      "assets/image/eye.png"),
-                                                  fit: BoxFit.fitWidth,
-                                                  height: 15,
-                                                ),
-                                                SizedBox(
-                                                  width: 5,
-                                                ),
-                                                Text(
-                                                  "5.000",
-                                                  style: TextStyle(
-                                                      fontFamily: "Raleway",
-                                                      color: "373737".toColor(),
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                      fontSize: 18),
-                                                ),
-                                              ],
-                                            )
-                                          ],
-                                        )
-                                      ],
-                                    ),
-                                  )),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: Container(
-                        padding: EdgeInsets.only(bottom: 10),
-                        child: Stack(
-                          fit: StackFit.loose,
-                          children: [
-                            Container(
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                  image: DecorationImage(
-                                      scale: 20,
-                                      image: NetworkImage(
-                                          "https://i.pinimg.com/564x/94/17/82/941782f60e16a9d7f9b4cea4ae7025e0.jpg"),
-                                      fit: BoxFit.cover)),
-                            ),
-                            Align(
-                              alignment: Alignment.bottomCenter,
-                              child: Container(
-                                  height: 130,
-                                  width:
-                                      MediaQuery.of(context).size.width / 1.11,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.only(
-                                          bottomRight: Radius.circular(10),
-                                          bottomLeft: Radius.circular(10)),
-                                      color: Colors.white,
-                                      boxShadow: [
-                                        BoxShadow(
-                                            color: Colors.black12,
-                                            blurRadius: 10,
-                                            spreadRadius: 4)
-                                      ]),
-                                  child: Padding(
-                                    padding: EdgeInsets.all(25),
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          "Hukum Pemberian Warisan",
-                                          style: TextStyle(
-                                              fontFamily: "Raleway",
-                                              color: "DA2323".toColor(),
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 27),
-                                        ),
-                                        Row(
-                                          children: [
-                                            Row(
-                                              children: [
-                                                Image(
-                                                  image: AssetImage(
-                                                      "assets/image/user.png"),
-                                                  fit: BoxFit.fitWidth,
-                                                  height: 18,
-                                                ),
-                                                SizedBox(
-                                                  width: 5,
-                                                ),
-                                                Text(
-                                                  "Brad Culp",
-                                                  style: TextStyle(
-                                                      fontFamily: "Raleway",
-                                                      color: "373737".toColor(),
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                      fontSize: 18),
-                                                ),
-                                              ],
-                                            ),
-                                            SizedBox(
-                                              width: 25,
-                                            ),
-                                            Row(
-                                              children: [
-                                                Image(
-                                                  image: AssetImage(
-                                                      "assets/image/eye.png"),
-                                                  fit: BoxFit.fitWidth,
-                                                  height: 15,
-                                                ),
-                                                SizedBox(
-                                                  width: 5,
-                                                ),
-                                                Text(
-                                                  "5.000",
-                                                  style: TextStyle(
-                                                      fontFamily: "Raleway",
-                                                      color: "373737".toColor(),
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                      fontSize: 18),
-                                                ),
-                                              ],
-                                            )
-                                          ],
-                                        )
-                                      ],
-                                    ),
-                                  )),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                BlocBuilder<ArtikelCubit, ArtikelState>(
+                    builder: (context, state) => (state is ArtikelSukses)
+                        ? CarouselSlider.builder(
+                            itemCount:
+                                state.bannerArtikel.data?.articles?.length,
+                            options: CarouselOptions(
+                                //  autoPlay: true,
+                                enlargeCenterPage: false,
+                                viewportFraction: 0.95,
+                                height: 300.0,
+                                //aspectRatio: 16 / 9,
+                                autoPlayCurve: Curves.fastOutSlowIn,
+                                enableInfiniteScroll: false,
+                                autoPlayAnimationDuration:
+                                    Duration(milliseconds: 3000)),
+                            itemBuilder: (BuildContext context, int index,
+                                int realIndex) {
+                              return Padding(
+                                padding: const EdgeInsets.all(15.0),
+                                child: Container(
+                                  padding: EdgeInsets.only(bottom: 10),
+                                  child: Stack(
+                                    fit: StackFit.loose,
+                                    children: [
+                                      Container(
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(10.0),
+                                            image: DecorationImage(
+                                                scale: 20,
+                                                image: NetworkImage(
+                                                    "https://i.pinimg.com/564x/94/17/82/941782f60e16a9d7f9b4cea4ae7025e0.jpg"),
+                                                fit: BoxFit.cover)),
+                                      ),
+                                      Align(
+                                        alignment: Alignment.bottomCenter,
+                                        child: Container(
+                                            height: 130,
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                1.11,
+                                            decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.only(
+                                                    bottomRight:
+                                                        Radius.circular(10),
+                                                    bottomLeft:
+                                                        Radius.circular(10)),
+                                                color: Colors.white,
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                      color: Colors.black12,
+                                                      blurRadius: 10,
+                                                      spreadRadius: 4)
+                                                ]),
+                                            child: Padding(
+                                              padding: EdgeInsets.symmetric(
+                                                  vertical: 25, horizontal: 20),
+                                              child: Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  DescriptionTextWidget(
+                                                    color: "DA2323",
+                                                    size: 27,
+                                                    length: 30,
+                                                    text: state.bannerArtikel
+                                                                .data !=
+                                                            null
+                                                        ? state
+                                                            .bannerArtikel
+                                                            .data!
+                                                            .articles![index]
+                                                            .articleTitle
+                                                            .toString()
+                                                        : "Judul",
+                                                  ),
+                                                  Row(
+                                                    children: [
+                                                      Row(
+                                                        children: [
+                                                          Image(
+                                                            image: AssetImage(
+                                                                "assets/image/user.png"),
+                                                            fit:
+                                                                BoxFit.fitWidth,
+                                                            height: 18,
+                                                          ),
+                                                          SizedBox(
+                                                            width: 5,
+                                                          ),
+                                                          Text(
+                                                            state.bannerArtikel
+                                                                        .data !=
+                                                                    null
+                                                                ? state
+                                                                    .bannerArtikel
+                                                                    .data!
+                                                                    .articles![
+                                                                        index]
+                                                                    .authorFirstName
+                                                                    .toString()
+                                                                : "Brad Culp",
+                                                            style: TextStyle(
+                                                                fontFamily:
+                                                                    "Raleway",
+                                                                color: "373737"
+                                                                    .toColor(),
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w400,
+                                                                fontSize: 18),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      SizedBox(
+                                                        width: 25,
+                                                      ),
+                                                      Row(
+                                                        children: [
+                                                          Image(
+                                                            image: AssetImage(
+                                                                "assets/image/eye.png"),
+                                                            fit:
+                                                                BoxFit.fitWidth,
+                                                            height: 15,
+                                                          ),
+                                                          SizedBox(
+                                                            width: 5,
+                                                          ),
+                                                          Text(
+                                                            "5.000",
+                                                            style: TextStyle(
+                                                                fontFamily:
+                                                                    "Raleway",
+                                                                color: "373737"
+                                                                    .toColor(),
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w400,
+                                                                fontSize: 18),
+                                                          ),
+                                                        ],
+                                                      )
+                                                    ],
+                                                  )
+                                                ],
+                                              ),
+                                            )),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                          )
+                        : Loading()),
                 SizedBox(
                   height: 20.0,
                 ),
