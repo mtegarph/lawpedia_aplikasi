@@ -177,7 +177,7 @@ class _KonsultanHukumState extends State<KonsultanHukum> {
                           listKonsultan[index].khImg != null
                               ? Image.network(
                                   listKonsultan[index].khImg.toString(),
-                                  height: 250,
+                                  height: 150,
                                 )
                               : Padding(
                                   padding: const EdgeInsets.all(20.0),

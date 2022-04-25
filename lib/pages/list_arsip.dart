@@ -48,7 +48,7 @@ class _ListArsipState extends State<ListArsip> {
                       Padding(
                         padding: const EdgeInsets.only(top: 10),
                         child: Text(
-                          "Transportasi",
+                          "Notaris & PPAT",
                           style: TextStyle(
                               color: Colors.black,
                               fontSize: 26.4,

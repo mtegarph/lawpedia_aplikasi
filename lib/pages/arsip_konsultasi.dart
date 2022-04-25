@@ -8,6 +8,22 @@ class ArsipKonsultasi extends StatefulWidget {
 }
 
 class _ArsipKonsultasiState extends State<ArsipKonsultasi> {
+  List<String> itemsPhoto = [
+    'assets/image/book-solid.svg',
+    'assets/image/building-solid.svg',
+    'assets/image/copyright-solid.svg',
+    'assets/image/book-open-solid.svg',
+    'assets/image/ring-solid.svg',
+    'assets/image/file-contract-solid.svg',
+  ];
+  List<String> nama = [
+    'Notaris & PPAT',
+    'Pendirian & Perubaran',
+    'Hak Kekayaan Intelektual',
+    'Legal Drafting',
+    'Percerairan',
+    'LDD Legal Due Dilligent',
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -97,53 +113,60 @@ class _ArsipKonsultasiState extends State<ArsipKonsultasi> {
                 child: GridView.count(
                   physics: NeverScrollableScrollPhysics(),
                   crossAxisCount: 4,
-                  crossAxisSpacing: 20.0,
+                  crossAxisSpacing: 10.0,
                   mainAxisSpacing: 20.0,
                   shrinkWrap: true,
                   children: List.generate(
-                    16,
+                    6,
                     (index) {
-                      return Column(
-                        children: [
-                          GestureDetector(
-                            onTap: () {
-                              print("Halo");
-                              Get.to(ListArsip());
-                            },
-                            child: Container(
-                              height: 70,
-                              decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10)),
-                                  boxShadow: [
-                                    BoxShadow(
-                                        color: 'E2E2E2'.toColor(),
-                                        blurRadius: 5)
-                                  ]),
-                              child: Padding(
-                                padding: const EdgeInsets.all(10.0),
-                                child: Image(
-                                  image:
-                                      AssetImage("assets/image/bus-solid.png"),
-                                  height: 30,
-                                  fit: BoxFit.cover,
+                      return SingleChildScrollView(
+                        physics: NeverScrollableScrollPhysics(),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                Get.to(ListArsip());
+                              },
+                              child: Container(
+                                height: 70,
+                                width: 70,
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10)),
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color: 'E2E2E2'.toColor(),
+                                          blurRadius: 5)
+                                    ]),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: SvgPicture.asset(
+                                    itemsPhoto[index],
+                                    color: Colors.red,
+                                    fit: BoxFit.contain,
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 15),
-                            child: Text(
-                              'Transportasi',
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  color: Colors.black,
-                                  fontFamily: 'Roboto',
-                                  fontWeight: FontWeight.w500),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 10),
+                              child: Center(
+                                child: Text(
+                                  nama[index],
+                                  style: TextStyle(
+                                      fontSize: 15,
+                                      color: Colors.black,
+                                      fontFamily: 'Roboto',
+                                      fontWeight: FontWeight.w500),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       );
                     },
                   ),

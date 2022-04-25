@@ -27,7 +27,22 @@ class _HomePageState extends State<HomePage> {
           child: child,
         ),
       );
-
+  List<String> itemsPhoto = [
+    'assets/image/book-solid.svg',
+    'assets/image/building-solid.svg',
+    'assets/image/copyright-solid.svg',
+    'assets/image/book-open-solid.svg',
+    'assets/image/ring-solid.svg',
+    'assets/image/file-contract-solid.svg',
+  ];
+  List<String> nama = [
+    'Notaris & PPAT',
+    'Pendirian & Perubaran',
+    'Hak Kekayaan Intelektual',
+    'Legal Drafting',
+    'Percerairan',
+    'LDD Legal Due Dilligent',
+  ];
   @override
   void initState() {
     // TODO: implement initState
@@ -463,7 +478,7 @@ class _HomePageState extends State<HomePage> {
                                         ? Image.network(
                                             state.bannerKonsultan.data
                                                 ?.konsultanHukum?[index].khImg,
-                                            height: 250,
+                                            height: 150,
                                           )
                                         : Padding(
                                             padding: const EdgeInsets.all(20.0),
@@ -539,52 +554,60 @@ class _HomePageState extends State<HomePage> {
                   child: GridView.count(
                     physics: NeverScrollableScrollPhysics(),
                     crossAxisCount: 4,
-                    crossAxisSpacing: 20.0,
+                    crossAxisSpacing: 10.0,
                     mainAxisSpacing: 20.0,
                     shrinkWrap: true,
                     children: List.generate(
-                      8,
+                      6,
                       (index) {
-                        return Column(
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                Get.to(ListArsip());
-                              },
-                              child: Container(
-                                height: 70,
-                                decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10)),
-                                    boxShadow: [
-                                      BoxShadow(
-                                          color: 'E2E2E2'.toColor(),
-                                          blurRadius: 5)
-                                    ]),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(10.0),
-                                  child: Image(
-                                    image: AssetImage(
-                                        "assets/image/bus-solid.png"),
-                                    height: 30,
-                                    fit: BoxFit.cover,
+                        return SingleChildScrollView(
+                          physics: NeverScrollableScrollPhysics(),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  Get.to(ListArsip());
+                                },
+                                child: Container(
+                                  height: 70,
+                                  width: 70,
+                                  decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(10)),
+                                      boxShadow: [
+                                        BoxShadow(
+                                            color: 'E2E2E2'.toColor(),
+                                            blurRadius: 5)
+                                      ]),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: SvgPicture.asset(
+                                      itemsPhoto[index],
+                                      color: Colors.red,
+                                      fit: BoxFit.contain,
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 15),
-                              child: Text(
-                                'Transportasi',
-                                style: TextStyle(
-                                    fontSize: 15,
-                                    color: Colors.black,
-                                    fontFamily: 'Roboto',
-                                    fontWeight: FontWeight.w500),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 10),
+                                child: Center(
+                                  child: Text(
+                                    nama[index],
+                                    style: TextStyle(
+                                        fontSize: 15,
+                                        color: Colors.black,
+                                        fontFamily: 'Roboto',
+                                        fontWeight: FontWeight.w500),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         );
                       },
                     ),
@@ -660,143 +683,154 @@ class _HomePageState extends State<HomePage> {
                                     Duration(milliseconds: 3000)),
                             itemBuilder: (BuildContext context, int index,
                                 int realIndex) {
-                              return Padding(
-                                padding: const EdgeInsets.all(15.0),
-                                child: Container(
-                                  padding: EdgeInsets.only(bottom: 10),
-                                  child: Stack(
-                                    fit: StackFit.loose,
-                                    children: [
-                                      Container(
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(10.0),
-                                            image: DecorationImage(
-                                                scale: 20,
-                                                image: NetworkImage(
-                                                    "https://i.pinimg.com/564x/94/17/82/941782f60e16a9d7f9b4cea4ae7025e0.jpg"),
-                                                fit: BoxFit.cover)),
-                                      ),
-                                      Align(
-                                        alignment: Alignment.bottomCenter,
-                                        child: Container(
-                                            height: 130,
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                1.11,
-                                            decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.only(
-                                                    bottomRight:
-                                                        Radius.circular(10),
-                                                    bottomLeft:
-                                                        Radius.circular(10)),
-                                                color: Colors.white,
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                      color: Colors.black12,
-                                                      blurRadius: 10,
-                                                      spreadRadius: 4)
-                                                ]),
-                                            child: Padding(
-                                              padding: EdgeInsets.symmetric(
-                                                  vertical: 25, horizontal: 20),
-                                              child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  DescriptionTextWidget(
-                                                    color: "DA2323",
-                                                    size: 27,
-                                                    length: 30,
-                                                    text: state.bannerArtikel
-                                                                .data !=
-                                                            null
-                                                        ? state
-                                                            .bannerArtikel
-                                                            .data!
-                                                            .articles![index]
-                                                            .articleTitle
-                                                            .toString()
-                                                        : "Judul",
-                                                  ),
-                                                  Row(
-                                                    children: [
-                                                      Row(
-                                                        children: [
-                                                          Image(
-                                                            image: AssetImage(
-                                                                "assets/image/user.png"),
-                                                            fit:
-                                                                BoxFit.fitWidth,
-                                                            height: 18,
-                                                          ),
-                                                          SizedBox(
-                                                            width: 5,
-                                                          ),
-                                                          Text(
-                                                            state.bannerArtikel
-                                                                        .data !=
-                                                                    null
-                                                                ? state
-                                                                    .bannerArtikel
-                                                                    .data!
-                                                                    .articles![
-                                                                        index]
-                                                                    .authorFirstName
-                                                                    .toString()
-                                                                : "Brad Culp",
-                                                            style: TextStyle(
-                                                                fontFamily:
-                                                                    "Raleway",
-                                                                color: "373737"
-                                                                    .toColor(),
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w400,
-                                                                fontSize: 18),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                      SizedBox(
-                                                        width: 25,
-                                                      ),
-                                                      Row(
-                                                        children: [
-                                                          Image(
-                                                            image: AssetImage(
-                                                                "assets/image/eye.png"),
-                                                            fit:
-                                                                BoxFit.fitWidth,
-                                                            height: 15,
-                                                          ),
-                                                          SizedBox(
-                                                            width: 5,
-                                                          ),
-                                                          Text(
-                                                            "5.000",
-                                                            style: TextStyle(
-                                                                fontFamily:
-                                                                    "Raleway",
-                                                                color: "373737"
-                                                                    .toColor(),
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w400,
-                                                                fontSize: 18),
-                                                          ),
-                                                        ],
-                                                      )
-                                                    ],
-                                                  )
-                                                ],
-                                              ),
-                                            )),
-                                      ),
-                                    ],
+                              return GestureDetector(
+                                onTap: () {
+                                  Get.to(DetailArtikel(
+                                      id: state.bannerArtikel.data!
+                                          .articles![index].articleId));
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.all(15.0),
+                                  child: Container(
+                                    padding: EdgeInsets.only(bottom: 10),
+                                    child: Stack(
+                                      fit: StackFit.loose,
+                                      children: [
+                                        Container(
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(10.0),
+                                              image: DecorationImage(
+                                                  scale: 20,
+                                                  image: NetworkImage(
+                                                      "https://i.pinimg.com/564x/94/17/82/941782f60e16a9d7f9b4cea4ae7025e0.jpg"),
+                                                  fit: BoxFit.cover)),
+                                        ),
+                                        Align(
+                                          alignment: Alignment.bottomCenter,
+                                          child: Container(
+                                              height: 130,
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  1.11,
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.only(
+                                                          bottomRight:
+                                                              Radius.circular(
+                                                                  10),
+                                                          bottomLeft:
+                                                              Radius.circular(
+                                                                  10)),
+                                                  color: Colors.white,
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                        color: Colors.black12,
+                                                        blurRadius: 10,
+                                                        spreadRadius: 4)
+                                                  ]),
+                                              child: Padding(
+                                                padding: EdgeInsets.symmetric(
+                                                    vertical: 25,
+                                                    horizontal: 20),
+                                                child: Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    DescriptionTextWidget(
+                                                      color: "DA2323",
+                                                      size: 27,
+                                                      length: 30,
+                                                      text: state.bannerArtikel
+                                                                  .data !=
+                                                              null
+                                                          ? state
+                                                              .bannerArtikel
+                                                              .data!
+                                                              .articles![index]
+                                                              .articleTitle
+                                                              .toString()
+                                                          : "Judul",
+                                                    ),
+                                                    Row(
+                                                      children: [
+                                                        Row(
+                                                          children: [
+                                                            Image(
+                                                              image: AssetImage(
+                                                                  "assets/image/user.png"),
+                                                              fit: BoxFit
+                                                                  .fitWidth,
+                                                              height: 18,
+                                                            ),
+                                                            SizedBox(
+                                                              width: 5,
+                                                            ),
+                                                            Text(
+                                                              state.bannerArtikel
+                                                                          .data !=
+                                                                      null
+                                                                  ? state
+                                                                      .bannerArtikel
+                                                                      .data!
+                                                                      .articles![
+                                                                          index]
+                                                                      .authorFirstName
+                                                                      .toString()
+                                                                  : "Brad Culp",
+                                                              style: TextStyle(
+                                                                  fontFamily:
+                                                                      "Raleway",
+                                                                  color: "373737"
+                                                                      .toColor(),
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w400,
+                                                                  fontSize: 18),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        SizedBox(
+                                                          width: 25,
+                                                        ),
+                                                        Row(
+                                                          children: [
+                                                            Image(
+                                                              image: AssetImage(
+                                                                  "assets/image/eye.png"),
+                                                              fit: BoxFit
+                                                                  .fitWidth,
+                                                              height: 15,
+                                                            ),
+                                                            SizedBox(
+                                                              width: 5,
+                                                            ),
+                                                            Text(
+                                                              "5.000",
+                                                              style: TextStyle(
+                                                                  fontFamily:
+                                                                      "Raleway",
+                                                                  color: "373737"
+                                                                      .toColor(),
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w400,
+                                                                  fontSize: 18),
+                                                            ),
+                                                          ],
+                                                        )
+                                                      ],
+                                                    )
+                                                  ],
+                                                ),
+                                              )),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               );

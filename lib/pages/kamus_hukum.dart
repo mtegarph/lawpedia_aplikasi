@@ -40,7 +40,11 @@ class _KamusHukumState extends State<KamusHukum> {
         final url = dataKamusHukum.kahuFile;
         if (await canLaunch(url.toString())) {
           await launch(url.toString(),
-              forceSafariVC: true, forceWebView: true, enableJavaScript: true);
+              forceSafariVC: false,
+              forceWebView: false,
+              enableJavaScript: true);
+        } else {
+          throw 'Could not launch $url';
         }
       },
       child: Container(

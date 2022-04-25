@@ -73,17 +73,17 @@ class _LoginState extends State<Login> {
         });
         print(status);
       } else if (state is berhasilLogin) {
-        final snackBar = SnackBar(
-          content: const Text('Login Dengan Google'),
-          action: SnackBarAction(
-            label: 'ok',
-            onPressed: () {
-              //  Navigator.of(context).pop();
-              // Some code to undo the change.
-            },
-          ),
-        );
-        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        // final snackBar = SnackBar(
+        //   content: const Text('Login Dengan Google'),
+        //   action: SnackBarAction(
+        //     label: 'ok',
+        //     onPressed: () {
+        //       //  Navigator.of(context).pop();
+        //       // Some code to undo the change.
+        //     },
+        //   ),
+        // );
+       // ScaffoldMessenger.of(context).showSnackBar(snackBar);
         // print(state.token);
         logindata!.setString('token', state.token.toString());
         Navigator.of(context).pushReplacement(MaterialPageRoute(
