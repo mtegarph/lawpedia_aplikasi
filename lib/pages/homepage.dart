@@ -19,6 +19,13 @@ class _HomePageState extends State<HomePage> {
   TextEditingController judulController = new TextEditingController();
   TextEditingController pertanyaanController = new TextEditingController();
   bool loading = false;
+  int page = 1;
+  bool hasMore = true;
+  bool loading_arsip = false;
+  String message = "";
+  final controller = ScrollController();
+  final controller2 = ScrollController();
+  List<DatumKategori> listArsip = [];
   Widget makeDismissable({required Widget child}) => GestureDetector(
         behavior: HitTestBehavior.opaque,
         onTap: () => Navigator.of(context).pop(),
@@ -34,6 +41,12 @@ class _HomePageState extends State<HomePage> {
     'assets/image/book-open-solid.svg',
     'assets/image/ring-solid.svg',
     'assets/image/file-contract-solid.svg',
+    'assets/image/book-solid.svg',
+    'assets/image/building-solid.svg',
+    'assets/image/copyright-solid.svg',
+    'assets/image/book-open-solid.svg',
+    'assets/image/ring-solid.svg',
+    'assets/image/file-contract-solid.svg',
   ];
   List<String> nama = [
     'Notaris & PPAT',
@@ -43,6 +56,43 @@ class _HomePageState extends State<HomePage> {
     'Percerairan',
     'LDD Legal Due Dilligent',
   ];
+  Future getListArsip() async {
+    if (loading_arsip) return;
+    loading_arsip = true;
+    String apiUrl =
+        'http://lawpedia.farzcentrix.com/api/consulting-archive/categories?page=' +
+            page.toString();
+    SharedPreferences logindata = await SharedPreferences.getInstance();
+    String token = logindata.getString('token').toString();
+    print(token);
+    var client = http.Client();
+    var apiResult = await client.get(
+      Uri.parse(apiUrl),
+      headers: {"auth-token": "$token"},
+    );
+    if (apiResult.statusCode != 200) {
+      print(apiResult.statusCode.toString());
+    }
+    var data = jsonDecode(apiResult.body);
+    print(data['message']);
+    ArsipKonsultasiKategori list =
+        ArsipKonsultasiKategori.fromJson(jsonDecode(apiResult.body));
+
+    setState(() {
+      message = list.message.toString();
+      page++;
+      print(page);
+      loading_arsip = false;
+      if (list.data!.archiveCategories!.data!.length <
+          list.data!.archiveCategories!.to!) {
+        hasMore = false;
+      } else {
+        hasMore = true;
+      }
+      listArsip.addAll(list.data!.archiveCategories!.data!);
+    });
+  }
+
   @override
   void initState() {
     // TODO: implement initState
@@ -57,6 +107,14 @@ class _HomePageState extends State<HomePage> {
       setState(() {
         loading_artikel = false;
       });
+    });
+    getListArsip();
+    print(listArsip.length);
+    print(message);
+    controller.addListener(() {
+      if (controller.position.maxScrollExtent == controller.offset) {
+        getListArsip();
+      }
     });
   }
 
@@ -550,19 +608,18 @@ class _HomePageState extends State<HomePage> {
                   },
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(35.0),
-                  child: GridView.count(
-                    physics: NeverScrollableScrollPhysics(),
-                    crossAxisCount: 4,
-                    crossAxisSpacing: 10.0,
-                    mainAxisSpacing: 20.0,
-                    shrinkWrap: true,
-                    children: List.generate(
-                      6,
-                      (index) {
-                        return SingleChildScrollView(
-                          physics: NeverScrollableScrollPhysics(),
-                          child: Column(
+                    padding: const EdgeInsets.all(35.0),
+                    child: GridView.builder(
+                      shrinkWrap: true,
+                      controller: controller2,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 4,
+                        crossAxisSpacing: 10.0,
+                        mainAxisSpacing: 20.0,
+                      ),
+                      itemBuilder: (context, index) {
+                        if (index < listArsip.length) {
+                          return Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -596,7 +653,7 @@ class _HomePageState extends State<HomePage> {
                                 padding: const EdgeInsets.only(top: 10),
                                 child: Center(
                                   child: Text(
-                                    nama[index],
+                                    listArsip[index].acCategory.toString(),
                                     style: TextStyle(
                                         fontSize: 15,
                                         color: Colors.black,
@@ -607,12 +664,19 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ),
                             ],
-                          ),
-                        );
+                          );
+                        } else if (loading_arsip == true) {
+                          return Container(
+                            alignment: Alignment.center,
+                            height: 160.0,
+                            child: CircularProgressIndicator(),
+                          );
+                        } else {
+                          return Container();
+                        }
                       },
-                    ),
-                  ),
-                ),
+                      itemCount: 8,
+                    )),
                 ElevatedButton.icon(
                   style: ElevatedButton.styleFrom(
                       padding: EdgeInsets.zero,

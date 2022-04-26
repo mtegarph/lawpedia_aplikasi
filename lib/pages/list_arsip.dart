@@ -100,7 +100,7 @@ class _ListArsipState extends State<ListArsip> {
               ),
               GestureDetector(
                 onTap: () {
-                  Get.to(Answer(visible: true,));
+                  Get.to(Answer(visible: true,id: '1',));
                   print("Halo");
                 },
                 child: Row(

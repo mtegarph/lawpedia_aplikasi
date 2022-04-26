@@ -8,7 +8,20 @@ class ArsipKonsultasi extends StatefulWidget {
 }
 
 class _ArsipKonsultasiState extends State<ArsipKonsultasi> {
+  int page = 1;
+  bool hasMore = true;
+  bool loading = false;
+  String message = "";
+  final controller = ScrollController();
+  final controller2 = ScrollController();
+  List<DatumKategori> listArsip = [];
   List<String> itemsPhoto = [
+    'assets/image/book-solid.svg',
+    'assets/image/building-solid.svg',
+    'assets/image/copyright-solid.svg',
+    'assets/image/book-open-solid.svg',
+    'assets/image/ring-solid.svg',
+    'assets/image/file-contract-solid.svg',
     'assets/image/book-solid.svg',
     'assets/image/building-solid.svg',
     'assets/image/copyright-solid.svg',
@@ -24,6 +37,57 @@ class _ArsipKonsultasiState extends State<ArsipKonsultasi> {
     'Percerairan',
     'LDD Legal Due Dilligent',
   ];
+
+  Future getListArsip() async {
+    if (loading) return;
+    loading = true;
+    String apiUrl =
+        'http://lawpedia.farzcentrix.com/api/consulting-archive/categories?page=' +
+            page.toString();
+    SharedPreferences logindata = await SharedPreferences.getInstance();
+    String token = logindata.getString('token').toString();
+    print(token);
+    var client = http.Client();
+    var apiResult = await client.get(
+      Uri.parse(apiUrl),
+      headers: {"auth-token": "$token"},
+    );
+    if (apiResult.statusCode != 200) {
+      print(apiResult.statusCode.toString());
+    }
+    var data = jsonDecode(apiResult.body);
+    print(data['message']);
+    ArsipKonsultasiKategori list =
+        ArsipKonsultasiKategori.fromJson(jsonDecode(apiResult.body));
+
+    setState(() {
+      message = list.message.toString();
+      page++;
+      print(page);
+      loading = false;
+      if (list.data!.archiveCategories!.data!.length <
+          list.data!.archiveCategories!.to!) {
+        hasMore = false;
+      } else {
+        hasMore = true;
+      }
+      listArsip.addAll(list.data!.archiveCategories!.data!);
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getListArsip();
+    print(listArsip.length);
+    print(message);
+    controller.addListener(() {
+      if (controller.position.maxScrollExtent == controller.offset) {
+        getListArsip();
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -109,19 +173,18 @@ class _ArsipKonsultasiState extends State<ArsipKonsultasi> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(35.0),
-                child: GridView.count(
-                  physics: NeverScrollableScrollPhysics(),
-                  crossAxisCount: 4,
-                  crossAxisSpacing: 10.0,
-                  mainAxisSpacing: 20.0,
-                  shrinkWrap: true,
-                  children: List.generate(
-                    6,
-                    (index) {
-                      return SingleChildScrollView(
-                        physics: NeverScrollableScrollPhysics(),
-                        child: Column(
+                  padding: const EdgeInsets.all(35.0),
+                  child: GridView.builder(
+                    shrinkWrap: true,
+                    controller: controller2,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 4,
+                      crossAxisSpacing: 10.0,
+                      mainAxisSpacing: 20.0,
+                    ),
+                    itemBuilder: (context, index) {
+                      if (index < listArsip.length) {
+                        return Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -155,7 +218,7 @@ class _ArsipKonsultasiState extends State<ArsipKonsultasi> {
                               padding: const EdgeInsets.only(top: 10),
                               child: Center(
                                 child: Text(
-                                  nama[index],
+                                  listArsip[index].acCategory.toString(),
                                   style: TextStyle(
                                       fontSize: 15,
                                       color: Colors.black,
@@ -166,12 +229,13 @@ class _ArsipKonsultasiState extends State<ArsipKonsultasi> {
                               ),
                             ),
                           ],
-                        ),
-                      );
+                        );
+                      } else {
+                        return Container();
+                      }
                     },
-                  ),
-                ),
-              ),
+                    itemCount: listArsip.length + 1,
+                  )),
             ]),
       ]),
     );

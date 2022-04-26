@@ -8,3 +8,4 @@ part 'konsultanHukum.dart';
 part 'user.dart';
 part 'kamusHukum.dart';
 part 'artikel.dart';
+part 'arsip_konsul.dart';
