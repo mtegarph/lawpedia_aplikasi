@@ -95,9 +95,9 @@ class _HasilSearchState extends State<HasilSearch> {
                           ),
                           onSuggestionSelected: (Cari? sugesti) async {
                             final cari = sugesti!;
-                            Get.to(HasilSearch(
-                              cari: cari,
-                            ));
+                            // Get.to(HasilSearch(
+                            //   cari: cari,
+                            // ));
                             Get.offUntil(
                                 MaterialPageRoute(
                                     builder: (context) => HasilSearch(

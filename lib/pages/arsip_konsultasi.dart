@@ -190,7 +190,10 @@ class _ArsipKonsultasiState extends State<ArsipKonsultasi> {
                           children: [
                             GestureDetector(
                               onTap: () {
-                                Get.to(ListArsip());
+                                Get.to(ListArsip(
+                                  id: listArsip[index].acId,
+                                  title: listArsip[index].acCategory,
+                                ));
                               },
                               child: Container(
                                 height: 70,
