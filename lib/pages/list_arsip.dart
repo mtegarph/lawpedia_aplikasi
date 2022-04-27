@@ -291,12 +291,14 @@ class _ListArsipState extends State<ListArsip> {
                           ],
                         ),
                       )
-                    : hasMore == true
-                        ? Container(
-                            alignment: Alignment.center,
-                            height: 160.0,
-                            child: CircularProgressIndicator(),
-                          )
+                    : listArsip != null
+                        ? hasMore == true
+                            ? Container(
+                                alignment: Alignment.center,
+                                height: 160.0,
+                                child: CircularProgressIndicator(),
+                              )
+                            : Container()
                         : Container(),
               )
             ]),
