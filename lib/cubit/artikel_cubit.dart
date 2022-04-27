@@ -7,18 +7,11 @@ part 'artikel_state.dart';
 class ArtikelCubit extends Cubit<ArtikelState> {
   ArtikelCubit() : super(ArtikelInitial());
 
-  Future<void> getArtikelBanner() async {
-    ApiReturnValue<BannerArtikel> banner = await Artikel.getBannerArtikel();
-    if (banner.success == "error") {
-      emit(ArtikelFailed(banner.message.toString()));
-    } else {
-      emit(ArtikelSukses(banner.value!));
-    }
-  }
+  
 
   Future<void> getDetailArtikel(int id) async {
     ApiReturnValue<ArtikelDetail> banner = await Artikel.getDetailArtikel(id);
-    if (banner.success == "error") {
+    if (banner.value == null) {
       emit(DetailArtikelFailed(banner.message.toString()));
     } else {
       emit(DetailArtikelSukses(banner.value!));

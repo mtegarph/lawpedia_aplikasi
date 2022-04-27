@@ -16,6 +16,7 @@ class _ListArsipState extends State<ListArsip> {
   int page = 1;
   bool hasMore = true;
   bool loading = false;
+  bool kosong = false;
   String message = "";
   final controller = ScrollController();
   final controller2 = ScrollController();
@@ -46,7 +47,10 @@ class _ListArsipState extends State<ListArsip> {
       page++;
       print(page);
       loading = false;
-      if (list.data!.questions!.to! <= list.data!.questions!.data!.length) {
+      if (list.data!.questions?.to == null) {
+        kosong = true;
+      } else if (list.data!.questions!.to! <=
+          list.data!.questions!.data!.length) {
         hasMore = false;
       } else {
         hasMore = true;
@@ -291,13 +295,15 @@ class _ListArsipState extends State<ListArsip> {
                           ],
                         ),
                       )
-                    : hasMore == true
-                        ? Container(
-                            alignment: Alignment.center,
-                            height: 160.0,
-                            child: CircularProgressIndicator(),
-                          )
-                        : Container(),
+                    : kosong == true
+                        ? Container()
+                        : hasMore == true
+                            ? Container(
+                                alignment: Alignment.center,
+                                height: 160.0,
+                                child: CircularProgressIndicator(),
+                              )
+                            : Container(),
               )
             ]),
       ]),

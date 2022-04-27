@@ -103,7 +103,7 @@ class _HomePageState extends State<HomePage> {
         loading_home = false;
       });
     });
-    context.read<ArtikelCubit>().getArtikelBanner().then((value) {
+    context.read<BannerArtikelCubit>().getArtikelBanner().then((value) {
       setState(() {
         loading_artikel = false;
       });
@@ -733,7 +733,7 @@ class _HomePageState extends State<HomePage> {
                 SizedBox(
                   height: 20.0,
                 ),
-                BlocBuilder<ArtikelCubit, ArtikelState>(
+                BlocBuilder<BannerArtikelCubit, BannerArtikelState>(
                     builder: (context, state) => (state is ArtikelSukses)
                         ? CarouselSlider.builder(
                             itemCount:
@@ -753,8 +753,13 @@ class _HomePageState extends State<HomePage> {
                               return GestureDetector(
                                 onTap: () {
                                   Get.to(DetailArtikel(
-                                      id: state.bannerArtikel.data!
-                                          .articles![index].articleId));
+                                          id: state.bannerArtikel.data!
+                                              .articles![index].articleId))!
+                                      .then((value) {
+                                    context
+                                        .read<BannerArtikelCubit>()
+                                        .getArtikelBanner();
+                                  });
                                 },
                                 child: Padding(
                                   padding: const EdgeInsets.all(15.0),
