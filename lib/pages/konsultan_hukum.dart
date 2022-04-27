@@ -192,7 +192,7 @@ class _KonsultanHukumState extends State<KonsultanHukum> {
                   );
                 } else {
                   return hasMore == true
-                      ? Text("TIdak ada Data Lagi")
+                      ? Container()
                       : Center(
                           child: Loading(),
                         );

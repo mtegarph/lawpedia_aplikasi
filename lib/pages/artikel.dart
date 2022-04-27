@@ -11,6 +11,7 @@ class _ArtikelState extends State<Artikel> {
   final controller = ScrollController();
   final controller2 = ScrollController();
   List<PopularArticle> listArtikel = [];
+  List<PopularArticle> listArtikelPopular = [];
   int page = 1;
   bool hasMore = true;
   bool loading = false;
@@ -44,6 +45,7 @@ class _ArtikelState extends State<Artikel> {
         hasMore = true;
       }
       listArtikel.addAll(list.data!.articles!.data!);
+      listArtikelPopular.addAll(list.data!.popularArticles!);
     });
   }
 
@@ -217,175 +219,174 @@ class _ArtikelState extends State<Artikel> {
                       color: Colors.black),
                 ),
               ),
-              BlocBuilder<ArtikelCubit, ArtikelState>(
-                  builder: (context, state) => (state is ArtikelSukses)
-                      ? CarouselSlider.builder(
-                          itemCount: state.bannerArtikel.data?.articles?.length,
-                          options: CarouselOptions(
-                              //  autoPlay: true,
-                              enlargeCenterPage: false,
-                              viewportFraction: 0.95,
-                              height: 270.0,
-                              //aspectRatio: 16 / 9,
-                              autoPlayCurve: Curves.fastOutSlowIn,
-                              enableInfiniteScroll: false,
-                              autoPlayAnimationDuration:
-                                  Duration(milliseconds: 3000)),
-                          itemBuilder:
-                              (BuildContext context, int index, int realIndex) {
-                            return GestureDetector(
-                              onTap: () {
-                                Get.to(DetailArtikel(
-                                    id: state.bannerArtikel.data!
-                                        .articles![index].articleId));
-                              },
-                              child: Padding(
-                                padding: const EdgeInsets.all(15.0),
-                                child: Container(
-                                  padding: EdgeInsets.only(bottom: 10),
-                                  child: Stack(
-                                    fit: StackFit.loose,
-                                    children: [
-                                      Container(
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(10.0),
-                                            image: DecorationImage(
-                                                scale: 20,
-                                                image: NetworkImage(
-                                                    "https://i.pinimg.com/564x/94/17/82/941782f60e16a9d7f9b4cea4ae7025e0.jpg"),
-                                                fit: BoxFit.cover)),
-                                      ),
-                                      Align(
-                                        alignment: Alignment.bottomCenter,
-                                        child: Container(
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .height /
-                                                9.0,
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                1.11,
-                                            decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.only(
-                                                    bottomRight:
-                                                        Radius.circular(10),
-                                                    bottomLeft:
-                                                        Radius.circular(10)),
-                                                color: Colors.white,
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                      color: Colors.black12,
-                                                      blurRadius: 10,
-                                                      spreadRadius: 4)
-                                                ]),
-                                            child: Padding(
-                                              padding: EdgeInsets.symmetric(
-                                                  vertical: 25, horizontal: 20),
-                                              child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  DescriptionTextWidget(
-                                                    color: "DA2323",
-                                                    size: 23,
-                                                    length: 30,
-                                                    text: state.bannerArtikel
-                                                                .data !=
-                                                            null
-                                                        ? state
-                                                            .bannerArtikel
-                                                            .data!
-                                                            .articles![index]
-                                                            .articleTitle
-                                                            .toString()
-                                                        : "Judul",
-                                                  ),
-                                                  Row(
-                                                    children: [
-                                                      Row(
-                                                        children: [
-                                                          Image(
-                                                            image: AssetImage(
-                                                                "assets/image/user.png"),
-                                                            fit:
-                                                                BoxFit.fitWidth,
-                                                            height: 18,
-                                                          ),
-                                                          SizedBox(
-                                                            width: 5,
-                                                          ),
-                                                          Text(
-                                                            state.bannerArtikel
-                                                                        .data !=
-                                                                    null
-                                                                ? state
-                                                                    .bannerArtikel
-                                                                    .data!
-                                                                    .articles![
-                                                                        index]
-                                                                    .authorFirstName
-                                                                    .toString()
-                                                                : "Brad Culp",
-                                                            style: TextStyle(
-                                                                fontFamily:
-                                                                    "Raleway",
-                                                                color: "373737"
-                                                                    .toColor(),
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w400,
-                                                                fontSize: 18),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                      SizedBox(
-                                                        width: 25,
-                                                      ),
-                                                      Row(
-                                                        children: [
-                                                          Image(
-                                                            image: AssetImage(
-                                                                "assets/image/eye.png"),
-                                                            fit:
-                                                                BoxFit.fitWidth,
-                                                            height: 15,
-                                                          ),
-                                                          SizedBox(
-                                                            width: 5,
-                                                          ),
-                                                          Text(
-                                                            "5.000",
-                                                            style: TextStyle(
-                                                                fontFamily:
-                                                                    "Raleway",
-                                                                color: "373737"
-                                                                    .toColor(),
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w400,
-                                                                fontSize: 18),
-                                                          ),
-                                                        ],
-                                                      )
-                                                    ],
-                                                  )
-                                                ],
-                                              ),
-                                            )),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            );
+              (loading == true)
+                  ? Container(
+                      alignment: Alignment.center,
+                      height: 160.0,
+                      child: CircularProgressIndicator(),
+                    )
+                  : CarouselSlider.builder(
+                      itemCount: listArtikelPopular.length,
+                      options: CarouselOptions(
+                          //  autoPlay: true,
+                          enlargeCenterPage: false,
+                          viewportFraction: 0.95,
+                          height: 270.0,
+                          //aspectRatio: 16 / 9,
+                          autoPlayCurve: Curves.fastOutSlowIn,
+                          enableInfiniteScroll: false,
+                          autoPlayAnimationDuration:
+                              Duration(milliseconds: 3000)),
+                      itemBuilder:
+                          (BuildContext context, int index, int realIndex) {
+                        return GestureDetector(
+                          onTap: () {
+                            Get.to(DetailArtikel(
+                                id: listArtikelPopular[index].articleId));
                           },
-                        )
-                      : Loading()),
+                          child: Padding(
+                            padding: const EdgeInsets.all(15.0),
+                            child: Container(
+                              padding: EdgeInsets.only(bottom: 10),
+                              child: Stack(
+                                fit: StackFit.loose,
+                                children: [
+                                  Container(
+                                    decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                        image: DecorationImage(
+                                            scale: 20,
+                                            image: NetworkImage(
+                                                "https://i.pinimg.com/564x/94/17/82/941782f60e16a9d7f9b4cea4ae7025e0.jpg"),
+                                            fit: BoxFit.cover)),
+                                  ),
+                                  Align(
+                                    alignment: Alignment.bottomCenter,
+                                    child: Container(
+                                        height:
+                                            MediaQuery.of(context).size.height /
+                                                9.0,
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                1.11,
+                                        decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.only(
+                                                bottomRight:
+                                                    Radius.circular(10),
+                                                bottomLeft:
+                                                    Radius.circular(10)),
+                                            color: Colors.white,
+                                            boxShadow: [
+                                              BoxShadow(
+                                                  color: Colors.black12,
+                                                  blurRadius: 10,
+                                                  spreadRadius: 4)
+                                            ]),
+                                        child: Padding(
+                                          padding: EdgeInsets.symmetric(
+                                              vertical: 20, horizontal: 20),
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Align(
+                                                alignment: Alignment.topLeft,
+                                                child: DescriptionTextWidget(
+                                                  color: "DA2323",
+                                                  size: 23,
+                                                  length: 30,
+                                                  text: listArtikelPopular[
+                                                              index] !=
+                                                          null
+                                                      ? listArtikelPopular[
+                                                              index]
+                                                          .articleTitle
+                                                          .toString()
+                                                      : "Judul",
+                                                ),
+                                              ),
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 10, top: 10),
+                                                child: Row(
+                                                  children: [
+                                                    Row(
+                                                      children: [
+                                                        Image(
+                                                          image: AssetImage(
+                                                              "assets/image/user.png"),
+                                                          fit: BoxFit.fitWidth,
+                                                          height: 18,
+                                                        ),
+                                                        SizedBox(
+                                                          width: 5,
+                                                        ),
+                                                        Text(
+                                                          listArtikelPopular[
+                                                                      index] !=
+                                                                  null
+                                                              ? listArtikelPopular[
+                                                                      index]
+                                                                  .authorFirstName
+                                                                  .toString()
+                                                              : "Brad Culp",
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  "Raleway",
+                                                              color: "373737"
+                                                                  .toColor(),
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w400,
+                                                              fontSize: 18),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    SizedBox(
+                                                      width: 25,
+                                                    ),
+                                                    Row(
+                                                      children: [
+                                                        Image(
+                                                          image: AssetImage(
+                                                              "assets/image/eye.png"),
+                                                          fit: BoxFit.fitWidth,
+                                                          height: 15,
+                                                        ),
+                                                        SizedBox(
+                                                          width: 5,
+                                                        ),
+                                                        Text(
+                                                          "5.000",
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  "Raleway",
+                                                              color: "373737"
+                                                                  .toColor(),
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w400,
+                                                              fontSize: 18),
+                                                        ),
+                                                      ],
+                                                    )
+                                                  ],
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                        )),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
               Padding(
                 padding: const EdgeInsets.only(top: 30, left: 30, bottom: 5),
                 child: Text(
