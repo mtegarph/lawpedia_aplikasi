@@ -37,8 +37,8 @@ class _KonsultanHukumState extends State<KonsultanHukum> {
       page++;
       print(page);
       loading = false;
-      if (list.data!.konsultanHukum!.data!.length <
-          list.data!.konsultanHukum!.to!) {
+      if (list.data!.konsultanHukum!.to! <=
+          list.data!.konsultanHukum!.data!.length) {
         hasMore = false;
       }
       listKonsultan.addAll(list.data!.konsultanHukum!.data!);

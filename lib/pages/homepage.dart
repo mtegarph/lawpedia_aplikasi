@@ -602,7 +602,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 TitleWithMoreBtn(
-                  title: "Arsip Konsultasi",
+                  title: "Layanan Hukum",
                   press: () {
                     Get.to(ArsipKonsultasi());
                   },

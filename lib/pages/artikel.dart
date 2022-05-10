@@ -39,7 +39,7 @@ class _ArtikelState extends State<Artikel> {
       page++;
       print(page);
       loading = false;
-      if (list.data!.articles!.data!.length < list.data!.articles!.to!) {
+      if (list.data!.articles!.to! <= list.data!.articles!.data!.length) {
         hasMore = false;
       } else {
         hasMore = true;
