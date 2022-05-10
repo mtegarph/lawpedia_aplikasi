@@ -123,9 +123,9 @@ class _ArsipKonsultasiState extends State<ArsipKonsultasi> {
                         width: 100,
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 10),
+                        padding: const EdgeInsets.only(top: 10, left: 15),
                         child: Text(
-                          "Arsip Konsultasi",
+                          "Layanan Hukum",
                           style: TextStyle(
                               color: Colors.black,
                               fontSize: 26.4,
