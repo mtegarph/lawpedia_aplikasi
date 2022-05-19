@@ -12,12 +12,32 @@ class Answer extends StatefulWidget {
 
 class _AnswerState extends State<Answer> {
   bool loading = true;
+  String? desc;
   // DatumQuestionDetail? detail;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    context.read<QuestiondetailCubit>().getQuestionDetail(widget.id);
+    context
+        .read<QuestiondetailCubit>()
+        .getQuestionDetail(widget.id)
+        .then((value) {
+      setState(() {
+        desc =
+            (context.bloc<QuestiondetailCubit>().state as QuestionDetailSuccess)
+                .questionDetail
+                .data!
+                .questions!
+                .answer!
+                .answer!;
+      });
+      final document = parse(desc);
+      final String parsedString =
+          parse(document.body!.text).documentElement!.text;
+      setState(() {
+        desc = parsedString;
+      });
+    });
   }
 
   @override
@@ -63,7 +83,7 @@ class _AnswerState extends State<Answer> {
                               textAlign: TextAlign.justify,
                             ),
                           )),
-                      state.questionDetail.data?.questions?.answeredAt != null
+                      state.questionDetail.data?.questions?.answer != null
                           ? Container(
                               margin:
                                   const EdgeInsets.only(right: 10, left: 10),
@@ -96,7 +116,7 @@ class _AnswerState extends State<Answer> {
                                       width: 440,
                                       height: 400,
                                       child: Text(
-                                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer suscipit enim consequat eros bibendum, non eleifend erat molestie. Nulla a nunc id quam euismod finibus sit amet in purus. Duis lacinia neque tortor, eu viverra sem vulputate id. Etiam pharetra purus tellus. Vivamus consectetur volutpat tincidunt. Nam facilisis commodo ante, finibus eleifend neque congue non. Vestibulum vel commodo leo, eget vestibulum turpis. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nunc luctus vitae lectus et dictum. Cras eu porta magna. Suspendisse mi ligula, viverra non condimentum at, pretium sit amet urna.",
+                                        '$desc',
                                         style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 18,

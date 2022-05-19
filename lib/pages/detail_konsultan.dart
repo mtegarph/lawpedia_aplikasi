@@ -1,153 +1,213 @@
 part of 'page.dart';
 
 class DetailKonsultan extends StatefulWidget {
-  const DetailKonsultan({Key? key}) : super(key: key);
+  final int id;
+  const DetailKonsultan({Key? key, required this.id}) : super(key: key);
 
   @override
   State<DetailKonsultan> createState() => _DetailKonsultanState();
 }
 
 class _DetailKonsultanState extends State<DetailKonsultan> {
+  bool loading_home = true;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    context.read<RekomendasiCubit>().getRekomendasiKonsultan();
+    context
+        .read<KonstultanhukumdetailCubit>()
+        .getDetailKonsultan(widget.id)
+        .then((value) {
+      setState(() {
+        loading_home = false;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Template(
       width: 0,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          SizedBox(
-            height: 20,
-          ),
-          CircleAvatar(
-              radius: 75,
-              backgroundImage: AssetImage('assets/image/warren.png')),
-          Padding(
-            padding: const EdgeInsets.only(top: 30),
-            child: Text(
-              'Warren Buffet & Association',
-              style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 28,
-                  fontFamily: 'Raleway',
-                  fontWeight: FontWeight.bold),
-            ),
-          ),
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Padding(
-              padding: const EdgeInsets.only(top: 40, left: 50),
-              child: Text(
-                'Data Diri',
-                style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 20,
-                    fontFamily: 'Raleway',
-                    fontWeight: FontWeight.bold),
-              ),
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.only(top: 8),
-            width: 450,
-            height: 280,
-            child: Text(
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer suscipit enim consequat eros bibendum, non eleifend erat molestie. Nulla a nunc id quam euismod finibus sit amet in purus. Duis lacinia neque tortor, eu viverra sem vulputate id. Etiam pharetra purus tellus. Vivamus consectetur volutpat tincidunt. Nam facilisis commodo ante, finibus eleifend neque congue non. Vestibulum vel commodo leo, eget vestibulum turpis. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. ",
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 18,
-                fontFamily: 'Raleway',
-              ),
-              textAlign: TextAlign.justify,
-            ),
-          ),
-          TitleWithMoreBtn(title: 'Konsultan Hukum Lainnya', press: () {}),
-          SizedBox(
-            height: 30,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Column(
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                        //color: 'C6B69D'.toColor(),
-                        borderRadius: BorderRadius.circular(10.0),
-                        image: DecorationImage(
-                            image: AssetImage('assets/image/warren.png'),
-                            fit: BoxFit.contain)),
-                    height: 110,
-                    width: 130,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Text(
-                      'Warren Buffet',
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 16,
-                          fontFamily: 'Raleway',
-                          fontWeight: FontWeight.bold),
+      child: BlocBuilder<KonstultanhukumdetailCubit,
+              KonstultanhukumdetailState>(
+          builder: (context, state) => (state is KonsultanHukumDetailSukses)
+              ? Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      height: 20,
                     ),
-                  ),
-                ],
-              ),
-              Column(
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                        // color: 'C6B69D'.toColor(),
-                        borderRadius: BorderRadius.circular(10.0),
-                        image: DecorationImage(
-                            image: AssetImage('assets/image/elon.png'),
-                            fit: BoxFit.contain)),
-                    height: 110,
-                    width: 130,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Text(
-                      'Elon Musk',
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 16,
-                          fontFamily: 'Raleway',
-                          fontWeight: FontWeight.bold),
+                    CircleAvatar(
+                        radius: 75,
+                        backgroundImage:
+                            state.detailkonsultan.data!.konsultanHukum!.khImg !=
+                                    null
+                                ? NetworkImage(state.detailkonsultan.data!
+                                    .konsultanHukum!.khImg!)
+                                : AssetImage('assets/image/user_vector.png')
+                                    as ImageProvider),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 30),
+                      child: Text(
+                        state.detailkonsultan.data!.konsultanHukum!.khName!,
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 28,
+                            fontFamily: 'Raleway',
+                            fontWeight: FontWeight.bold),
+                      ),
                     ),
-                  ),
-                ],
-              ),
-              Column(
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                        color: 'C2C3D2'.toColor(),
-                        borderRadius: BorderRadius.circular(10.0),
-                        image: DecorationImage(
-                            image: AssetImage('assets/image/charles.png'),
-                            fit: BoxFit.contain)),
-                    height: 110,
-                    width: 130,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Text(
-                      'Charles Hoskinson',
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 16,
-                          fontFamily: 'Raleway',
-                          fontWeight: FontWeight.bold),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 40, left: 50),
+                        child: Text(
+                          'Data Diri',
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 20,
+                              fontFamily: 'Raleway',
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
                     ),
-                  ),
-                ],
-              )
-            ],
-          )
-        ],
-      ),
+                    Container(
+                      margin: EdgeInsets.only(top: 8),
+                      width: 450,
+                      height: 280,
+                      child: Text(
+                        state.detailkonsultan.data!.konsultanHukum!.khDesc!,
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 18,
+                          fontFamily: 'Raleway',
+                        ),
+                        textAlign: TextAlign.justify,
+                      ),
+                    ),
+                    TitleWithMoreBtn(
+                        title: 'Konsultan Hukum Lainnya', press: () {}),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    BlocBuilder<RekomendasiCubit, RekomendasiState>(
+                        builder: (context, state) => (state
+                                is RekomendasiSukses)
+                            ? SizedBox(
+                                height: 200,
+                                child: Expanded(
+                                  child: ListView.builder(
+                                    scrollDirection: Axis.horizontal,
+                                    itemCount: state.detailkonsultan.data!
+                                        .konsultanHukum!.data!.length,
+                                    itemBuilder: (context, index) {
+                                      return GestureDetector(
+                                        onTap: () {
+                                          Navigator.pushReplacement(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (BuildContext
+                                                          context) =>
+                                                      DetailKonsultan(
+                                                          id: state
+                                                              .detailkonsultan
+                                                              .data!
+                                                              .konsultanHukum!
+                                                              .data![index]
+                                                              .khId!)));
+                                          // Get.offUntil(
+                                          //     MaterialPageRoute(
+                                          //         builder: (context) =>
+                                          //             DetailKonsultan(
+                                          //                 id: state
+                                          //                     .detailkonsultan
+                                          //                     .data!
+                                          //                     .konsultanHukum!
+                                          //                     .data![index]
+                                          //                     .khId!)),
+                                          //     (route) => true);
+                                        },
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            Column(
+                                              children: [
+                                                Container(
+                                                  decoration: BoxDecoration(
+                                                      //color: 'C6B69D'.toColor(),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              25.0),
+                                                      image: DecorationImage(
+                                                          image: state
+                                                                      .detailkonsultan
+                                                                      .data!
+                                                                      .konsultanHukum!
+                                                                      .data![
+                                                                          index]
+                                                                      .khImg !=
+                                                                  null
+                                                              ? NetworkImage(state
+                                                                  .detailkonsultan
+                                                                  .data!
+                                                                  .konsultanHukum!
+                                                                  .data![index]
+                                                                  .khImg
+                                                                  .toString())
+                                                              : AssetImage(
+                                                                      'assets/image/user_vector.png')
+                                                                  as ImageProvider,
+                                                          fit: BoxFit.contain)),
+                                                  height: 110,
+                                                  width: 130,
+                                                ),
+                                                SizedBox(
+                                                  width: 150,
+                                                  child: Center(
+                                                    child: Padding(
+                                                      padding: const EdgeInsets
+                                                              .symmetric(
+                                                          horizontal: 15.0,
+                                                          vertical: 10.0),
+                                                      child: Text(
+                                                        state
+                                                            .detailkonsultan
+                                                            .data!
+                                                            .konsultanHukum!
+                                                            .data![index]
+                                                            .khName!,
+                                                        style: TextStyle(
+                                                            color: Colors.black,
+                                                            fontSize: 16,
+                                                            fontFamily:
+                                                                'Raleway',
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                ),
+                              )
+                            : Loading())
+                  ],
+                )
+              : loading_home == true
+                  ? Loading()
+                  : Container()),
       page: 'Konstultan Hukum',
     );
   }

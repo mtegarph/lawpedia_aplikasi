@@ -1,5 +1,6 @@
 part of 'model.dart';
 
+//list Arsip kategori
 class ArsipKonsultasiKategori {
   ArsipKonsultasiKategori({
     this.status,
@@ -116,6 +117,7 @@ class DatumKategori {
       };
 }
 
+//kategori arsip deetail
 class ArsipKonsultasiDetail {
   ArsipKonsultasiDetail({
     this.status,
@@ -244,3 +246,4 @@ class DatumKategoriDetail {
         "questioned_at": questionedAt?.toIso8601String(),
       };
 }
+

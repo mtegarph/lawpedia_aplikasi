@@ -115,7 +115,10 @@ class _KonsultanHukumState extends State<KonsultanHukum> {
                 if (index < listKonsultan.length) {
                   return GestureDetector(
                     onTap: () {
-                      Get.to(DetailKonsultan());
+                      print("ID KONSULTAN: "+listKonsultan[index].khId!.toString());
+                      Get.to(DetailKonsultan(
+                        id: listKonsultan[index].khId!.toInt(),
+                      ));
                     },
                     child: Container(
                       margin: EdgeInsets.all(5.0),
@@ -159,11 +162,11 @@ class _KonsultanHukumState extends State<KonsultanHukum> {
                                   ),
                                 ),
                               ),
-                              DescriptionTextWidget(
-                                  text: listKonsultan[index].khDesc!.toString(),
-                                  size: 15,
-                                  length: 35,
-                                  color: Colors.black.toString())
+                              // DescriptionTextWidget(
+                              //     text: listKonsultan[index].khDesc!.toString(),
+                              //     size: 15,
+                              //     length: 35,
+                              //     color: Colors.black.toString())
                               // Text(
                               //   "Pengalaman 10 tahun",
                               //   style: TextStyle(
@@ -179,7 +182,8 @@ class _KonsultanHukumState extends State<KonsultanHukum> {
                                   listKonsultan[index].khImg.toString(),
                                   height: 150,
                                 )
-                              : Padding(
+                              : 
+                              Padding(
                                   padding: const EdgeInsets.all(20.0),
                                   child: Image.asset(
                                     'assets/image/user_vector.png',

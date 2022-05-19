@@ -32,7 +32,7 @@ class Question {
 
   static Future<ApiReturnValue<QuestionDetail>> detailBertanya(
       String id) async {
-    String apiUrl = baseUrl + 'questions/$id';
+    String apiUrl = baseUrl + 'consulting-archive/$id';
 
     SharedPreferences logindata = await SharedPreferences.getInstance();
     String token = logindata.getString('token').toString();
