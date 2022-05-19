@@ -5,3 +5,5 @@ export 'konsultanhukum_cubit.dart';
 export 'user_cubit.dart';
 export 'artikel_cubit.dart';
 export 'banner_artikel_cubit.dart';
+export 'konstultanhukumdetail_cubit.dart';
+export 'rekomendasi_cubit.dart';

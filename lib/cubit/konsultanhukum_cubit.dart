@@ -17,4 +17,5 @@ class KonsultanhukumCubit extends Cubit<KonsultanhukumState> {
       emit(KonsultanHukumSukses(banner.value!));
     }
   }
+  
 }

@@ -25,7 +25,7 @@ class _ListArsipState extends State<ListArsip> {
     if (loading) return;
     loading = true;
     String apiUrl =
-        baseUrl + 'consulting-archive/${widget.id}?page=' + page.toString();
+        baseUrl + 'consulting-archive?category=${widget.id}&page=' + page.toString();
     SharedPreferences logindata = await SharedPreferences.getInstance();
     String token = logindata.getString('token').toString();
     print(token);

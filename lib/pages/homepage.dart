@@ -475,77 +475,94 @@ class _HomePageState extends State<HomePage> {
                             ),
                             itemBuilder: (BuildContext context, int index,
                                 int realIndex) {
-                              return Container(
-                                margin: EdgeInsets.all(5.0),
-                                decoration: BoxDecoration(
-                                  color: 'C6B69D'.toColor(),
-                                  borderRadius: BorderRadius.circular(10.0),
+                              return GestureDetector(
+                                onTap: () {
+                                  Get.to(DetailKonsultan(
+                                    id: state.bannerKonsultan.data!
+                                        .konsultanHukum![index].khId!,
+                                  ));
+                                },
+                                child: Container(
+                                  margin: EdgeInsets.all(5.0),
+                                  decoration: BoxDecoration(
+                                    color: 'C6B69D'.toColor(),
+                                    borderRadius: BorderRadius.circular(10.0),
 
-                                  // image: DecorationImage(
-                                  //     image: NetworkImage(
-                                  //         "https://i.pinimg.com/564x/94/17/82/941782f60e16a9d7f9b4cea4ae7025e0.jpg"),
-                                  //     fit: BoxFit.cover)
-                                ),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Container(
-                                          height: 70,
-                                          width: 250,
-                                          child: Padding(
-                                            padding: EdgeInsets.only(
-                                                left: 15, bottom: 5),
-                                            child: Text(
-                                              state
+                                    // image: DecorationImage(
+                                    //     image: NetworkImage(
+                                    //         "https://i.pinimg.com/564x/94/17/82/941782f60e16a9d7f9b4cea4ae7025e0.jpg"),
+                                    //     fit: BoxFit.cover)
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Container(
+                                            height: 70,
+                                            width: 250,
+                                            child: Padding(
+                                              padding: EdgeInsets.only(
+                                                  left: 15, bottom: 5),
+                                              child: Text(
+                                                state
+                                                    .bannerKonsultan
+                                                    .data!
+                                                    .konsultanHukum![index]
+                                                    .khName!
+                                                    .toString(),
+                                                style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 27,
+                                                    fontFamily: 'Raleway',
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                            ),
+                                          ),
+                                          DescriptionTextWidget(
+                                              text: state
                                                   .bannerKonsultan
                                                   .data!
                                                   .konsultanHukum![index]
-                                                  .khName!
+                                                  .khDesc!
                                                   .toString(),
-                                              style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 27,
-                                                  fontFamily: 'Raleway',
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ),
-                                        ),
-                                        DescriptionTextWidget(
-                                            text: state.bannerKonsultan.data!
-                                                .konsultanHukum![index].khDesc!
-                                                .toString(),
-                                            size: 15,
-                                            length: 35,
-                                            color: Colors.black.toString())
-                                      ],
-                                    ),
-                                    state
-                                                .bannerKonsultan
-                                                .data
-                                                ?.konsultanHukum?[index]
-                                                .khImg !=
-                                            null
-                                        ? Image.network(
-                                            state.bannerKonsultan.data
-                                                ?.konsultanHukum?[index].khImg,
-                                            height: 150,
-                                          )
-                                        : Padding(
-                                            padding: const EdgeInsets.all(20.0),
-                                            child: Image.asset(
-                                              'assets/image/user_vector.png',
+                                              size: 15,
+                                              length: 35,
+                                              color: Colors.black.toString())
+                                        ],
+                                      ),
+                                      state
+                                                  .bannerKonsultan
+                                                  .data
+                                                  ?.konsultanHukum?[index]
+                                                  .khImg !=
+                                              null
+                                          ? Image.network(
+                                              state
+                                                  .bannerKonsultan
+                                                  .data
+                                                  ?.konsultanHukum?[index]
+                                                  .khImg,
                                               height: 150,
-                                            ),
-                                          )
-                                  ],
+                                            )
+                                          : Padding(
+                                              padding:
+                                                  const EdgeInsets.all(20.0),
+                                              child: Image.asset(
+                                                'assets/image/user_vector.png',
+                                                height: 150,
+                                              ),
+                                            )
+                                    ],
+                                  ),
                                 ),
                               );
                             },

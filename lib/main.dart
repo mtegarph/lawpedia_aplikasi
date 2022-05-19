@@ -30,6 +30,8 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => UserCubit()),
         BlocProvider(create: (_) => ArtikelCubit()),
         BlocProvider(create: (_) => BannerArtikelCubit()),
+        BlocProvider(create: (_) => KonstultanhukumdetailCubit()),
+        BlocProvider(create: (_) => RekomendasiCubit()),
       ],
       child: GetMaterialApp(
         title: 'Flutter Demo',
