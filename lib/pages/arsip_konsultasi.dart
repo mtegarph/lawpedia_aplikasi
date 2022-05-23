@@ -41,6 +41,7 @@ class _ArsipKonsultasiState extends State<ArsipKonsultasi> {
   Future getListArsip() async {
     if (loading) return;
     loading = true;
+
     String apiUrl =
         'http://lawpedia.farzcentrix.com/api/consulting-archive/categories?page=' +
             page.toString();
@@ -88,6 +89,7 @@ class _ArsipKonsultasiState extends State<ArsipKonsultasi> {
     });
   }
 
+  TextEditingController _searchQuery = new TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -125,7 +127,7 @@ class _ArsipKonsultasiState extends State<ArsipKonsultasi> {
                       Padding(
                         padding: const EdgeInsets.only(top: 10, left: 15),
                         child: Text(
-                          "Layanan Hukum",
+                          "Arsip Konsultasi",
                           style: TextStyle(
                               color: Colors.black,
                               fontSize: 26.4,
@@ -154,16 +156,25 @@ class _ArsipKonsultasiState extends State<ArsipKonsultasi> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(left: 20),
-                        child: Text(
-                          "Cari Pertanyaan",
-                          style: TextStyle(
-                              color: 'A1A1A1'.toColor(),
-                              fontSize: 16,
-                              fontFamily: 'Raleway',
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ),
+                          padding: const EdgeInsets.only(left: 20),
+                          child: Container(
+                              width: MediaQuery.of(context).size.width / 1.3,
+                              child: TextField(
+                                controller: _searchQuery,
+                                autofocus: true,
+                                decoration: const InputDecoration(
+                                  hintText: 'cari Pertanyaan',
+                                  border: InputBorder.none,
+                                  hintStyle:
+                                      const TextStyle(color: Colors.grey),
+                                ),
+                                style: const TextStyle(
+                                    color: Colors.black, fontSize: 16.0),
+                                // onChanged: updateSearchQuery,
+                                onSubmitted: (data) {
+                                  Get.to(HasilSearch(cari: data));
+                                },
+                              ))),
                       Padding(
                         padding: const EdgeInsets.only(right: 20),
                         child: Icon(Icons.search),

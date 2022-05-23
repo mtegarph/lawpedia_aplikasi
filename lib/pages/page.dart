@@ -29,7 +29,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:twitter_login/twitter_login.dart';
 import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
-
+part 'hasil_search_artikel.dart';
 part 'konsultan_hukum.dart';
 part 'search_page.dart';
 part 'login.dart';
