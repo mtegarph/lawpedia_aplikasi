@@ -97,7 +97,7 @@ class _SearchPageState extends State<SearchPage> {
                                 hintStyle: const TextStyle(color: Colors.grey),
                               ),
                               style: const TextStyle(
-                                  color: Colors.white, fontSize: 16.0),
+                                  color: Colors.black, fontSize: 16.0),
                               // onChanged: updateSearchQuery,
                               onSubmitted: (data) {
                                 Get.to(HasilSearch(cari: data));
