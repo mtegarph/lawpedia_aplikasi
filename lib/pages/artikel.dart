@@ -166,13 +166,7 @@ class _ArtikelState extends State<Artikel> {
                                         // Get.to(HasilSearch(
                                         //   cari: cari,
                                         // ));
-                                        Get.offUntil(
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    HasilSearch(
-                                                      cari: cari,
-                                                    )),
-                                            (route) => true);
+
                                         // setState(() {
                                         //   data = cari.toJson();
                                         //   show = true;

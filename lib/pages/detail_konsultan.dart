@@ -49,7 +49,8 @@ class _DetailKonsultanState extends State<DetailKonsultan> {
                                 : AssetImage('assets/image/user_vector.png')
                                     as ImageProvider),
                     Padding(
-                      padding: const EdgeInsets.only(top: 30),
+                      padding:
+                          const EdgeInsets.only(top: 30, left: 10, right: 10),
                       child: Text(
                         state.detailkonsultan.data!.konsultanHukum!.khName!,
                         style: TextStyle(
@@ -64,7 +65,7 @@ class _DetailKonsultanState extends State<DetailKonsultan> {
                       child: Padding(
                         padding: const EdgeInsets.only(top: 40, left: 50),
                         child: Text(
-                          'Data Diri',
+                          'Deskripsi',
                           style: TextStyle(
                               color: Colors.black,
                               fontSize: 20,
@@ -96,110 +97,119 @@ class _DetailKonsultanState extends State<DetailKonsultan> {
                         builder: (context, state) => (state
                                 is RekomendasiSukses)
                             ? SizedBox(
-                                height: 200,
-                                child: Expanded(
-                                  child: ListView.builder(
-                                    scrollDirection: Axis.horizontal,
-                                    itemCount: state.detailkonsultan.data!
-                                        .konsultanHukum!.data!.length,
-                                    itemBuilder: (context, index) {
-                                      return GestureDetector(
-                                        onTap: () {
-                                          Navigator.pushReplacement(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (BuildContext
-                                                          context) =>
-                                                      DetailKonsultan(
-                                                          id: state
-                                                              .detailkonsultan
-                                                              .data!
-                                                              .konsultanHukum!
-                                                              .data![index]
-                                                              .khId!)));
-                                          // Get.offUntil(
-                                          //     MaterialPageRoute(
-                                          //         builder: (context) =>
-                                          //             DetailKonsultan(
-                                          //                 id: state
-                                          //                     .detailkonsultan
-                                          //                     .data!
-                                          //                     .konsultanHukum!
-                                          //                     .data![index]
-                                          //                     .khId!)),
-                                          //     (route) => true);
-                                        },
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: [
-                                            Column(
-                                              children: [
-                                                Container(
-                                                  decoration: BoxDecoration(
-                                                      //color: 'C6B69D'.toColor(),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              25.0),
-                                                      image: DecorationImage(
-                                                          image: state
-                                                                      .detailkonsultan
-                                                                      .data!
-                                                                      .konsultanHukum!
-                                                                      .data![
-                                                                          index]
-                                                                      .khImg !=
-                                                                  null
-                                                              ? NetworkImage(state
-                                                                  .detailkonsultan
-                                                                  .data!
-                                                                  .konsultanHukum!
-                                                                  .data![index]
-                                                                  .khImg
-                                                                  .toString())
-                                                              : AssetImage(
-                                                                      'assets/image/user_vector.png')
-                                                                  as ImageProvider,
-                                                          fit: BoxFit.contain)),
-                                                  height: 110,
-                                                  width: 130,
-                                                ),
-                                                SizedBox(
-                                                  width: 150,
-                                                  child: Center(
-                                                    child: Padding(
-                                                      padding: const EdgeInsets
-                                                              .symmetric(
-                                                          horizontal: 15.0,
-                                                          vertical: 10.0),
-                                                      child: Text(
-                                                        state
-                                                            .detailkonsultan
-                                                            .data!
-                                                            .konsultanHukum!
-                                                            .data![index]
-                                                            .khName!,
-                                                        style: TextStyle(
-                                                            color: Colors.black,
-                                                            fontSize: 16,
-                                                            fontFamily:
-                                                                'Raleway',
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .bold),
-                                                      ),
+                                width: 550,
+                                height: 190,
+                                child: ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: state.detailkonsultan.data!
+                                      .konsultanHukum!.data!.length,
+                                  itemBuilder: (context, index) {
+                                    return GestureDetector(
+                                      onTap: () {
+                                        // Navigator.pushReplacement(
+                                        //     context,
+                                        //     MaterialPageRoute(
+                                        //         builder: (BuildContext
+                                        //                 context) =>
+                                        //             DetailKonsultan(
+                                        //                 id: state
+                                        //                     .detailkonsultan
+                                        //                     .data!
+                                        //                     .konsultanHukum!
+                                        //                     .data![index]
+                                        //                     .khId!)));
+                                        // Get.offUntil(
+                                        //     MaterialPageRoute(
+                                        //         builder: (context) =>
+                                        //             DetailKonsultan(
+                                        //                 id: state
+                                        //                     .detailkonsultan
+                                        //                     .data!
+                                        //                     .konsultanHukum!
+                                        //                     .data![index]
+                                        //                     .khId!)),
+                                        //     (route) => true);
+                                        Navigator.pushAndRemoveUntil(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => DetailKonsultan(
+                                                  id: state
+                                                      .detailkonsultan
+                                                      .data!
+                                                      .konsultanHukum!
+                                                      .data![index]
+                                                      .khId!)), // this mymainpage is your page to refresh
+                                          (Route<dynamic> route) => true,
+                                        );
+                                      },
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Column(
+                                            children: [
+                                              Container(
+                                                decoration: BoxDecoration(
+                                                    //color: 'C6B69D'.toColor(),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            25.0),
+                                                    image: DecorationImage(
+                                                        image: state
+                                                                    .detailkonsultan
+                                                                    .data!
+                                                                    .konsultanHukum!
+                                                                    .data![
+                                                                        index]
+                                                                    .khImg !=
+                                                                null
+                                                            ? NetworkImage(state
+                                                                .detailkonsultan
+                                                                .data!
+                                                                .konsultanHukum!
+                                                                .data![index]
+                                                                .khImg
+                                                                .toString())
+                                                            : AssetImage(
+                                                                    'assets/image/user_vector.png')
+                                                                as ImageProvider,
+                                                        fit: BoxFit.contain)),
+                                                height: 110,
+                                                width: 130,
+                                              ),
+                                              SizedBox(
+                                                width: 150,
+                                                child: Center(
+                                                  child: Padding(
+                                                    padding: const EdgeInsets
+                                                            .symmetric(
+                                                        horizontal: 15.0,
+                                                        vertical: 10.0),
+                                                    child: Text(
+                                                      state
+                                                          .detailkonsultan
+                                                          .data!
+                                                          .konsultanHukum!
+                                                          .data![index]
+                                                          .khName!,
+                                                      style: TextStyle(
+                                                          color: Colors.black,
+                                                          fontSize: 16,
+                                                          fontFamily: 'Raleway',
+                                                          fontWeight:
+                                                              FontWeight.bold),
                                                     ),
                                                   ),
                                                 ),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      );
-                                    },
-                                  ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  },
                                 ),
                               )
                             : Loading())

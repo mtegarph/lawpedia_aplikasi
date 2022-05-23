@@ -506,8 +506,8 @@ class _HomePageState extends State<HomePage> {
                                             CrossAxisAlignment.center,
                                         children: [
                                           Container(
-                                            height: 70,
-                                            width: 250,
+                                            height: 65,
+                                            width: 290,
                                             child: Padding(
                                               padding: EdgeInsets.only(
                                                   left: 15, bottom: 5),
@@ -520,7 +520,7 @@ class _HomePageState extends State<HomePage> {
                                                     .toString(),
                                                 style: TextStyle(
                                                     color: Colors.black,
-                                                    fontSize: 27,
+                                                    fontSize: 25,
                                                     fontFamily: 'Raleway',
                                                     fontWeight:
                                                         FontWeight.bold),
@@ -551,7 +551,7 @@ class _HomePageState extends State<HomePage> {
                                                   .data
                                                   ?.konsultanHukum?[index]
                                                   .khImg,
-                                              height: 150,
+                                              height: 180,
                                             )
                                           : Padding(
                                               padding:

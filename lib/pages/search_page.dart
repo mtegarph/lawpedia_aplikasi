@@ -8,6 +8,14 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
+  TextEditingController _searchQuery = new TextEditingController();
+  @override
+  void initState() {
+    super.initState();
+
+    _searchQuery = new TextEditingController();
+  }
+
   @override
   Widget build(BuildContext context) {
     TextEditingController search = new TextEditingController();
@@ -79,48 +87,63 @@ class _SearchPageState extends State<SearchPage> {
                     Padding(
                         padding: const EdgeInsets.only(left: 20),
                         child: Container(
-                          width: MediaQuery.of(context).size.width / 1.3,
-                          child: TypeAheadField<Cari?>(
-                            itemBuilder: (context, Cari? sugesti) {
-                              final cari = sugesti!;
-                              return ListTile(
-                                title: Text(cari.title),
-                              );
-                            },
-                            noItemsFoundBuilder: (context) => Container(
-                              height: 100,
-                              child: Center(
-                                  child: Text(
-                                "Tidak ada pertanyaan",
-                                style: TextStyle(fontSize: 24),
-                              )),
-                            ),
-                            onSuggestionSelected: (Cari? sugesti) async {
-                              final cari = sugesti!;
-                              Get.to(HasilSearch(
-                                cari: cari,
-                              ));
-                              // setState(() {
-                              //   data = cari.toJson();
-                              //   show = true;
-                              // });
-                              print(show);
-                              // ScaffoldMessenger.of(context)
-                              //   ..removeCurrentSnackBar()
-                              //   ..showSnackBar(SnackBar(
-                              //       content:
-                              //           Text("Terpiliih: ${cari.title}")));
-                            },
-                            suggestionsCallback: ArsipApi.getData,
-                            debounceDuration: Duration(milliseconds: 500),
-                            textFieldConfiguration: TextFieldConfiguration(
-                              decoration: InputDecoration(
-                                hintText: "cari Pertanyaan",
+                            width: MediaQuery.of(context).size.width / 1.3,
+                            child: TextField(
+                              controller: _searchQuery,
+                              autofocus: true,
+                              decoration: const InputDecoration(
+                                hintText: 'cari Pertanyaan',
                                 border: InputBorder.none,
+                                hintStyle: const TextStyle(color: Colors.grey),
                               ),
-                            ),
-                          ),
-                        )),
+                              style: const TextStyle(
+                                  color: Colors.white, fontSize: 16.0),
+                              // onChanged: updateSearchQuery,
+                              onSubmitted: (data) {
+                                Get.to(HasilSearch(cari: data));
+                              },
+                            )
+                            // TypeAheadField<Cari?>(
+                            //   itemBuilder: (context, Cari? sugesti) {
+                            //     final cari = sugesti!;
+                            //     return ListTile(
+                            //       title: Text(cari.title),
+                            //     );
+                            //   },
+                            //   noItemsFoundBuilder: (context) => Container(
+                            //     height: 100,
+                            //     child: Center(
+                            //         child: Text(
+                            //       "Tidak ada pertanyaan",
+                            //       style: TextStyle(fontSize: 24),
+                            //     )),
+                            //   ),
+                            //   onSuggestionSelected: (Cari? sugesti) async {
+                            //     final cari = sugesti!;
+                            //     Get.to(HasilSearch(
+                            //       cari: cari,
+                            //     ));
+                            //     // setState(() {
+                            //     //   data = cari.toJson();
+                            //     //   show = true;
+                            //     // });
+                            //     print(show);
+                            //     // ScaffoldMessenger.of(context)
+                            //     //   ..removeCurrentSnackBar()
+                            //     //   ..showSnackBar(SnackBar(
+                            //     //       content:
+                            //     //           Text("Terpiliih: ${cari.title}")));
+                            //   },
+                            //   suggestionsCallback: ArsipApi.getData,
+                            //   debounceDuration: Duration(milliseconds: 500),
+                            //   textFieldConfiguration: TextFieldConfiguration(
+                            //     decoration: InputDecoration(
+                            //       hintText: "cari Pertanyaan",
+                            //       border: InputBorder.none,
+                            //     ),
+                            //   ),
+                            // ),
+                            )),
                     Padding(
                       padding: const EdgeInsets.only(right: 20),
                       child: Icon(Icons.search),
