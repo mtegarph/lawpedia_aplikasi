@@ -47,5 +47,7 @@ part 'hasil_search.dart';
 part 'notif.dart';
 part 'kamus_hukum.dart';
 part 'arsip_konsultasi.dart';
+part 'kategori_kamus_hukum.dart';
 part 'user-edit.dart';
+part 'hasil_search_Kamus_hukum.dart';
 part 'detail_konsultan.dart';

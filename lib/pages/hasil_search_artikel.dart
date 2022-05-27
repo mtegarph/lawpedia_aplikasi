@@ -262,11 +262,15 @@ class _HasilSearchArtikelState extends State<HasilSearchArtikel> {
                         ),
                       );
                     } else {
-                      return hasMore == true
-                          ? Center(
-                              child: Loading(),
-                            )
-                          : Text("TIdak ada Data Lagi");
+                      return kosong == true
+                        ? Container()
+                        : hasMore == true
+                            ? Container(
+                                alignment: Alignment.center,
+                                height: 160.0,
+                                child: CircularProgressIndicator(),
+                              )
+                            : Container();
                     }
                   })
             ],

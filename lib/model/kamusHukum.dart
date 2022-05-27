@@ -130,3 +130,72 @@ class DatumKamusHukum {
   //     "created_at": createdAt.toIso8601String(),
   // };
 }
+
+class KamusHukumKategori {
+  KamusHukumKategori({
+    this.status,
+    this.message,
+    this.data,
+  });
+
+  String? status;
+  String? message;
+  DataKategoriKamusHukum? data;
+
+  factory KamusHukumKategori.fromJson(Map<String, dynamic> json) =>
+      KamusHukumKategori(
+        status: json["status"] == null ? null : json["status"],
+        message: json["message"] == null ? null : json["message"],
+        data: json["data"] == null
+            ? null
+            : DataKategoriKamusHukum.fromJson(json["data"]),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "status": status == null ? null : status,
+        "message": message == null ? null : message,
+        "data": data == null ? null : data?.toJson(),
+      };
+}
+
+class DataKategoriKamusHukum {
+  DataKategoriKamusHukum({
+    this.kahuCategory,
+  });
+
+  List<KahuCategory>? kahuCategory;
+
+  factory DataKategoriKamusHukum.fromJson(Map<String, dynamic> json) =>
+      DataKategoriKamusHukum(
+        kahuCategory: json["kahu_category"] == null
+            ? null
+            : List<KahuCategory>.from(
+                json["kahu_category"].map((x) => KahuCategory.fromJson(x))),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "kahu_category": kahuCategory == null
+            ? null
+            : List<dynamic>.from(kahuCategory!.map((x) => x.toJson())),
+      };
+}
+
+class KahuCategory {
+  KahuCategory({
+    this.idCategory,
+    this.category,
+  });
+
+  String? idCategory;
+  String? category;
+
+  factory KahuCategory.fromJson(Map<String, dynamic> json) => KahuCategory(
+        idCategory: json["id_category"] == null ? null : json["id_category"],
+        category: json["category"] == null ? null : json["category"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id_category": idCategory == null ? null : idCategory,
+        "category": category == null ? null : category,
+      };
+}

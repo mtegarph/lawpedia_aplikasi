@@ -1,7 +1,8 @@
 part of 'page.dart';
 
 class KamusHukum extends StatefulWidget {
-  const KamusHukum({Key? key}) : super(key: key);
+  final String? id;
+  const KamusHukum({Key? key, @required this.id}) : super(key: key);
 
   @override
   State<KamusHukum> createState() => _KamusHukumState();
@@ -9,9 +10,10 @@ class KamusHukum extends StatefulWidget {
 
 class _KamusHukumState extends State<KamusHukum> {
   GlobalKey<PaginatorState> paginatorGlobalKey = GlobalKey();
-
+  String _chosenValue = 'title';
   Future<KamusHukumData> getQuestionDetail(int? page) async {
-    String apiUrl = baseUrl + 'kamus-hukum?page=' + page.toString();
+    String apiUrl =
+        baseUrl + 'kamus-hukum?page=' + page.toString() + "&cat=${widget.id}";
     SharedPreferences logindata = await SharedPreferences.getInstance();
     String token = logindata.getString('token').toString();
 
@@ -126,7 +128,8 @@ class _KamusHukumState extends State<KamusHukum> {
     print("data : ${list.length}");
     return list;
   }
-    TextEditingController _searchQuery = new TextEditingController();
+
+  TextEditingController _searchQuery = new TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -176,49 +179,84 @@ class _KamusHukumState extends State<KamusHukum> {
                   ),
                 ),
               ),
-              GestureDetector(
-                onTap: () {
-                  print("Tap");
-                },
-                child: Container(
-                  margin: EdgeInsets.symmetric(horizontal: 25.0),
-                  width: MediaQuery.of(context).size.width,
-                  height: 50.0,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10.0),
-                    color: "e3e3e3".toColor(),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Padding(
-                          padding: const EdgeInsets.only(left: 20),
-                          child: Container(
-                              width: MediaQuery.of(context).size.width / 1.3,
-                              child: TextField(
-                                controller: _searchQuery,
-                                autofocus: true,
-                                decoration: const InputDecoration(
-                                  hintText: 'cari Pertanyaan',
-                                  border: InputBorder.none,
-                                  hintStyle:
-                                      const TextStyle(color: Colors.grey),
-                                ),
-                                style: const TextStyle(
-                                    color: Colors.white, fontSize: 16.0),
-                                // onChanged: updateSearchQuery,
-                                onSubmitted: (data) {
-                                  Get.to(HasilSearch(cari: data));
-                                },
-                              ))),
-                      Padding(
-                        padding: const EdgeInsets.only(right: 20),
-                        child: Icon(Icons.search),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(0.0),
+                    child: DropdownButton<String>(
+                      value: _chosenValue,
+                      elevation: 16,
+                      style: const TextStyle(color: Colors.black),
+                      underline: Container(
+                        height: 2,
+                        color: Colors.deepPurpleAccent,
                       ),
-                    ],
+                      onChanged: (String? newValue) {
+                        setState(() {
+                          _chosenValue = newValue!;
+                        });
+                        print(_chosenValue);
+                      },
+                      items: <String>['title', 'date-entry', 'keyword']
+                          .map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
+                    ),
                   ),
-                ),
+                  GestureDetector(
+                    onTap: () {
+                      print("Tap");
+                    },
+                    child: Container(
+                      margin: EdgeInsets.symmetric(horizontal: 25.0),
+                      width: MediaQuery.of(context).size.width / 1.45,
+                      height: 50.0,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10.0),
+                        color: "e3e3e3".toColor(),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Padding(
+                              padding: const EdgeInsets.only(left: 20),
+                              child: Container(
+                                  width: MediaQuery.of(context).size.width / 3,
+                                  child: TextField(
+                                    controller: _searchQuery,
+                                    autofocus: true,
+                                    decoration: const InputDecoration(
+                                      hintText: 'cari Kamus Hukum',
+                                      border: InputBorder.none,
+                                      hintStyle:
+                                          const TextStyle(color: Colors.grey),
+                                    ),
+                                    style: const TextStyle(
+                                        color: Colors.black, fontSize: 16.0),
+                                    // onChanged: updateSearchQuery,
+                                    onSubmitted: (data) {
+                                      Get.to(HasilSearchKamusHukum(
+                                        cari: data,
+                                        filter: _chosenValue,
+                                        kat: widget.id,
+                                      ));
+                                    },
+                                  ))),
+                          Padding(
+                            padding: const EdgeInsets.only(right: 20),
+                            child: Icon(Icons.search),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
               ),
               SizedBox(
                 height: 25,
@@ -234,8 +272,10 @@ class _KamusHukumState extends State<KamusHukum> {
                 pageLoadFuture: getQuestionDetail,
                 scrollPhysics: BouncingScrollPhysics(),
                 loadingWidgetBuilder: () {
-                  return Center(
-                    child: Loading(),
+                  return Container(
+                    alignment: Alignment.center,
+                    height: 160.0,
+                    child: CircularProgressIndicator(),
                   );
                 },
                 errorWidgetBuilder: errorWidgetMaker,

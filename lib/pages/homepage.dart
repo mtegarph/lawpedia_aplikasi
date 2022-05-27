@@ -708,7 +708,7 @@ class _HomePageState extends State<HomePage> {
                           Size(MediaQuery.of(context).size.width / 1.1, 100),
                       alignment: Alignment.centerLeft),
                   onPressed: () {
-                    Get.to(KamusHukum());
+                    Get.to(KategoriKamusHukum());
                   },
                   icon: Stack(
                     fit: StackFit.passthrough,
