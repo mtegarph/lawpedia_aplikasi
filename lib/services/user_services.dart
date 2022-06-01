@@ -20,18 +20,18 @@ class UserService {
       String email,
       String account,
       String profile,
-      String first_name,
-      String last_name,
-      String tgl_lahir) async {
+      String firstName,
+      String lastName,
+      String tglLahir) async {
     String apiUrl = baseUrl + 'register';
     var client = http.Client();
     var apiResult = await client.post(Uri.parse(apiUrl), body: {
       'email': email,
       'account_type': account,
       'profile_pict': profile,
-      'first_name': first_name,
-      'last_name': last_name,
-      'tngl_lahir': tgl_lahir
+      'first_name': firstName,
+      'last_name': lastName,
+      'tngl_lahir': tglLahir
     });
     if (apiResult.statusCode != 200) {
       print(apiResult.statusCode.toString());
@@ -51,7 +51,7 @@ class UserService {
     var client = http.Client();
     var apiResult = await client.get(
       Uri.parse(apiUrl),
-      headers: {"auth-token": "$token"},
+      headers: {"auth-token": token},
     );
     if (apiResult.statusCode != 200) {
       print(apiResult.statusCode.toString());
@@ -65,20 +65,20 @@ class UserService {
   }
 
   static Future<ApiReturnValue> editUsesr(
-      String first_name, String last_name, String tgl_lahir,String no_telp) async {
+      String firstName, String lastName, String tglLahir,String noTelp) async {
     String apiUrl = baseUrl + 'user-profile';
     var client = http.Client();
     SharedPreferences logindata = await SharedPreferences.getInstance();
     String token = logindata.getString('token').toString();
     print(token);
     var apiResult = await client.post(Uri.parse(apiUrl), headers: {
-      "auth-token": "$token"
+      "auth-token": token
     }, body: {
       '_method': 'patch',
-      'no_telp': no_telp,
-      'first_name': first_name,
-      'last_name': last_name,
-      'tngl_lahir': tgl_lahir
+      'no_telp': noTelp,
+      'first_name': firstName,
+      'last_name': lastName,
+      'tngl_lahir': tglLahir
     });
     if (apiResult.statusCode != 200) {
       print(apiResult.statusCode.toString());

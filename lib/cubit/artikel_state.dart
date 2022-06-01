@@ -25,7 +25,7 @@ class DetailArtikelSukses extends ArtikelState {
 class DetailArtikelFailed extends ArtikelState {
   final String message;
 
-  DetailArtikelFailed(this.message);
+  const DetailArtikelFailed(this.message);
   @override
   List<Object> get props => [message];
 }

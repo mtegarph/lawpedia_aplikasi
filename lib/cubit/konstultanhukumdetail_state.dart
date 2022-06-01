@@ -18,7 +18,7 @@ class KonsultanHukumDetailSukses extends KonstultanhukumdetailState {
 class KonsultanHukumDetailFailed extends KonstultanhukumdetailState {
   final String message;
 
-  KonsultanHukumDetailFailed(this.message);
+  const KonsultanHukumDetailFailed(this.message);
   @override
   String toString() {
     return 'KonsultanHukumFailedState{errorMessage: $message}';

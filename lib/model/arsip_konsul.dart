@@ -107,13 +107,13 @@ class DatumKategori {
   factory DatumKategori.fromJson(Map<String, dynamic> json) => DatumKategori(
         acId: json["ac_id"],
         acCategory: json["ac_category"],
-        pinOrder: json["pin_order"] == null ? null : json["pin_order"],
+        pinOrder: json["pin_order"],
       );
 
   Map<String, dynamic> toJson() => {
         "ac_id": acId,
         "ac_category": acCategory,
-        "pin_order": pinOrder == null ? null : pinOrder,
+        "pin_order": pinOrder,
       };
 }
 

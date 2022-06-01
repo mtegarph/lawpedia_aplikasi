@@ -17,7 +17,7 @@ class TitleWithMoreBtn extends StatelessWidget {
         child: Row(
           children: <Widget>[
             TitleWithCustomUnderline(text: title),
-            Spacer(),
+            const Spacer(),
             GestureDetector(
                 onTap: press,
                 child: Text(
@@ -44,7 +44,7 @@ class TitleWithCustomUnderline extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 24,
       child: Stack(
         children: <Widget>[
@@ -52,7 +52,7 @@ class TitleWithCustomUnderline extends StatelessWidget {
             padding: const EdgeInsets.only(left: 16 / 4),
             child: Text(
               text,
-              style: TextStyle(
+              style: const TextStyle(
                   fontSize: 20,
                   fontFamily: 'Inter',
                   fontWeight: FontWeight.bold,

@@ -51,7 +51,7 @@ class _ArsipKonsultasiState extends State<ArsipKonsultasi> {
     var client = http.Client();
     var apiResult = await client.get(
       Uri.parse(apiUrl),
-      headers: {"auth-token": "$token"},
+      headers: {"auth-token": token},
     );
     if (apiResult.statusCode != 200) {
       print(apiResult.statusCode.toString());
@@ -89,7 +89,7 @@ class _ArsipKonsultasiState extends State<ArsipKonsultasi> {
     });
   }
 
-  TextEditingController _searchQuery = new TextEditingController();
+  final TextEditingController _searchQuery = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -101,7 +101,7 @@ class _ArsipKonsultasiState extends State<ArsipKonsultasi> {
               SafeArea(
                 child: Container(
                   //margin: EdgeInsets.only(bottom: defaultMargin),
-                  padding: EdgeInsets.symmetric(horizontal: 16),
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
                   width: double.infinity,
                   height: 100,
                   color: Colors.white,
@@ -116,16 +116,16 @@ class _ArsipKonsultasiState extends State<ArsipKonsultasi> {
                           height: 50,
                           width: 50,
                           // margin: EdgeInsets.only(right: 26),
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                               image: DecorationImage(
                                   image: AssetImage('assets/image/Left.png'))),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 100,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10, left: 15),
+                      const Padding(
+                        padding: EdgeInsets.only(top: 10, left: 15),
                         child: Text(
                           "Arsip Konsultasi",
                           style: TextStyle(
@@ -144,7 +144,7 @@ class _ArsipKonsultasiState extends State<ArsipKonsultasi> {
                   print("Tap");
                 },
                 child: Container(
-                  margin: EdgeInsets.symmetric(horizontal: 25.0),
+                  margin: const EdgeInsets.symmetric(horizontal: 25.0),
                   width: MediaQuery.of(context).size.width,
                   height: 50.0,
                   decoration: BoxDecoration(
@@ -157,7 +157,7 @@ class _ArsipKonsultasiState extends State<ArsipKonsultasi> {
                     children: [
                       Padding(
                           padding: const EdgeInsets.only(left: 20),
-                          child: Container(
+                          child: SizedBox(
                               width: MediaQuery.of(context).size.width / 1.3,
                               child: TextField(
                                 controller: _searchQuery,
@@ -166,7 +166,7 @@ class _ArsipKonsultasiState extends State<ArsipKonsultasi> {
                                   hintText: 'cari Pertanyaan',
                                   border: InputBorder.none,
                                   hintStyle:
-                                      const TextStyle(color: Colors.grey),
+                                      TextStyle(color: Colors.grey),
                                 ),
                                 style: const TextStyle(
                                     color: Colors.black, fontSize: 16.0),
@@ -175,8 +175,8 @@ class _ArsipKonsultasiState extends State<ArsipKonsultasi> {
                                   Get.to(HasilSearch(cari: data));
                                 },
                               ))),
-                      Padding(
-                        padding: const EdgeInsets.only(right: 20),
+                      const Padding(
+                        padding: EdgeInsets.only(right: 20),
                         child: Icon(Icons.search),
                       ),
                     ],
@@ -198,7 +198,7 @@ class _ArsipKonsultasiState extends State<ArsipKonsultasi> {
                             ));
                           },
                           child: Container(
-                            margin: EdgeInsets.symmetric(
+                            margin: const EdgeInsets.symmetric(
                                 horizontal: 25.0, vertical: 10),
                             width: MediaQuery.of(context).size.width,
                             height: 70.0,
@@ -210,7 +210,7 @@ class _ArsipKonsultasiState extends State<ArsipKonsultasi> {
                                   color: Colors.grey.withOpacity(0.5),
                                   spreadRadius: 3,
                                   blurRadius: 5,
-                                  offset: Offset(
+                                  offset: const Offset(
                                       0, 5), // changes position of shadow
                                 ),
                               ],
@@ -221,7 +221,7 @@ class _ArsipKonsultasiState extends State<ArsipKonsultasi> {
                               children: [
                                 Padding(
                                     padding: const EdgeInsets.only(left: 20),
-                                    child: Container(
+                                    child: SizedBox(
                                       width:
                                           MediaQuery.of(context).size.width / 3,
                                       child: Text(
@@ -233,8 +233,8 @@ class _ArsipKonsultasiState extends State<ArsipKonsultasi> {
                                             fontWeight: FontWeight.w500),
                                       ),
                                     )),
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 35.0),
+                                const Padding(
+                                  padding: EdgeInsets.only(right: 35.0),
                                   child: Image(
                                       image: AssetImage(
                                           'assets/image/chevron.png')),

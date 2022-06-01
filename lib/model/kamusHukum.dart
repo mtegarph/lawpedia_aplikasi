@@ -144,16 +144,16 @@ class KamusHukumKategori {
 
   factory KamusHukumKategori.fromJson(Map<String, dynamic> json) =>
       KamusHukumKategori(
-        status: json["status"] == null ? null : json["status"],
-        message: json["message"] == null ? null : json["message"],
+        status: json["status"],
+        message: json["message"],
         data: json["data"] == null
             ? null
             : DataKategoriKamusHukum.fromJson(json["data"]),
       );
 
   Map<String, dynamic> toJson() => {
-        "status": status == null ? null : status,
-        "message": message == null ? null : message,
+        "status": status,
+        "message": message,
         "data": data == null ? null : data?.toJson(),
       };
 }
@@ -190,12 +190,12 @@ class KahuCategory {
   String? category;
 
   factory KahuCategory.fromJson(Map<String, dynamic> json) => KahuCategory(
-        idCategory: json["id_category"] == null ? null : json["id_category"],
-        category: json["category"] == null ? null : json["category"],
+        idCategory: json["id_category"],
+        category: json["category"],
       );
 
   Map<String, dynamic> toJson() => {
-        "id_category": idCategory == null ? null : idCategory,
-        "category": category == null ? null : category,
+        "id_category": idCategory,
+        "category": category,
       };
 }

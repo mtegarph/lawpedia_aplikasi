@@ -38,7 +38,7 @@ class _LoginState extends State<Login> {
     final user = await GoogleSignInApi.login();
     if (user == null) {
       ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text("Gagal Login Dengan google")));
+          .showSnackBar(const SnackBar(content: Text("Gagal Login Dengan google")));
     } else {
       await context.read<LoginCubit>().login(user.email, 'google');
       LoginState state = context.read<LoginCubit>().state;
@@ -142,10 +142,11 @@ class _LoginState extends State<Login> {
         });
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: loading
-            ? Loading()
+            ? const Loading()
             : Stack(
                 children: [
                   const Image(
@@ -173,7 +174,7 @@ class _LoginState extends State<Login> {
                   Align(
                     alignment: Alignment.center,
                     child: Container(
-                      decoration: BoxDecoration(boxShadow: [
+                      decoration: const BoxDecoration(boxShadow: [
                         BoxShadow(color: Colors.black38, blurRadius: 30.0)
                       ]),
                       child: Card(
@@ -210,7 +211,7 @@ class _LoginState extends State<Login> {
                                 onPressed: () {
                                   signInGoogle();
                                 },
-                                icon: FaIcon(
+                                icon: const FaIcon(
                                   FontAwesomeIcons.google,
                                   color: Colors.red,
                                 ),
@@ -354,7 +355,7 @@ class _LoginState extends State<Login> {
                                   //   print(_userObj);
                                   // });
                                 },
-                                icon: FaIcon(
+                                icon: const FaIcon(
                                   FontAwesomeIcons.facebook,
                                   color: Colors.blue,
                                 ),

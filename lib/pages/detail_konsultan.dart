@@ -36,7 +36,7 @@ class _DetailKonsultanState extends State<DetailKonsultan> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     CircleAvatar(
@@ -46,24 +46,24 @@ class _DetailKonsultanState extends State<DetailKonsultan> {
                                     null
                                 ? NetworkImage(state.detailkonsultan.data!
                                     .konsultanHukum!.khImg!)
-                                : AssetImage('assets/image/user_vector.png')
+                                : const AssetImage('assets/image/user_vector.png')
                                     as ImageProvider),
                     Padding(
                       padding:
                           const EdgeInsets.only(top: 30, left: 10, right: 10),
                       child: Text(
                         state.detailkonsultan.data!.konsultanHukum!.khName!,
-                        style: TextStyle(
+                        style: const TextStyle(
                             color: Colors.black,
                             fontSize: 28,
                             fontFamily: 'Courier',
                             fontWeight: FontWeight.bold),
                       ),
                     ),
-                    Align(
+                    const Align(
                       alignment: Alignment.centerLeft,
                       child: Padding(
-                        padding: const EdgeInsets.only(top: 40, left: 50),
+                        padding: EdgeInsets.only(top: 40, left: 50),
                         child: Text(
                           'Deskripsi',
                           style: TextStyle(
@@ -75,12 +75,12 @@ class _DetailKonsultanState extends State<DetailKonsultan> {
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.only(top: 8),
+                      margin: const EdgeInsets.only(top: 8),
                       width: 450,
                       height: 280,
                       child: Text(
                         state.detailkonsultan.data!.konsultanHukum!.khDesc!,
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.black,
                           fontSize: 18,
                           fontFamily: 'Courier',
@@ -90,7 +90,7 @@ class _DetailKonsultanState extends State<DetailKonsultan> {
                     ),
                     TitleWithMoreBtn(
                         title: 'Konsultan Hukum Lainnya', press: () {}),
-                    SizedBox(
+                    const SizedBox(
                       height: 30,
                     ),
                     BlocBuilder<RekomendasiCubit, RekomendasiState>(
@@ -172,7 +172,7 @@ class _DetailKonsultanState extends State<DetailKonsultan> {
                                                                 .data![index]
                                                                 .khImg
                                                                 .toString())
-                                                            : AssetImage(
+                                                            : const AssetImage(
                                                                     'assets/image/user_vector.png')
                                                                 as ImageProvider,
                                                         fit: BoxFit.contain)),
@@ -194,7 +194,7 @@ class _DetailKonsultanState extends State<DetailKonsultan> {
                                                           .konsultanHukum!
                                                           .data![index]
                                                           .khName!,
-                                                      style: TextStyle(
+                                                      style: const TextStyle(
                                                           color: Colors.black,
                                                           fontSize: 16,
                                                           fontFamily: 'Raleway',
@@ -212,11 +212,11 @@ class _DetailKonsultanState extends State<DetailKonsultan> {
                                   },
                                 ),
                               )
-                            : Loading())
+                            : const Loading())
                   ],
                 )
               : loading_home == true
-                  ? Loading()
+                  ? const Loading()
                   : Container()),
       page: 'Konstultan Hukum',
     );

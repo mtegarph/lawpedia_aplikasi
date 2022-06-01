@@ -24,7 +24,7 @@ class _KonsultanHukumState extends State<KonsultanHukum> {
     var client = http.Client();
     var apiResult = await client.get(
       Uri.parse(apiUrl),
-      headers: {"auth-token": "$token"},
+      headers: {"auth-token": token},
     );
     if (apiResult.statusCode != 200) {
       print(apiResult.statusCode.toString());
@@ -67,7 +67,7 @@ class _KonsultanHukumState extends State<KonsultanHukum> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(70.0),
+          preferredSize: const Size.fromHeight(70.0),
           child: AppBar(
             elevation: 0,
             automaticallyImplyLeading: false,
@@ -78,11 +78,11 @@ class _KonsultanHukumState extends State<KonsultanHukum> {
               child: Container(
                 height: 100,
                 width: 100,
-                margin: EdgeInsets.only(
+                margin: const EdgeInsets.only(
                   top: 20,
                   left: 16,
                 ),
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                     image: DecorationImage(
                         fit: BoxFit.cover,
                         image: AssetImage('assets/image/Left.png'))),
@@ -91,8 +91,8 @@ class _KonsultanHukumState extends State<KonsultanHukum> {
             centerTitle: true,
             backgroundColor: Colors.white,
             //  iconTheme: IconThemeData(color: Colors.black),
-            title: Padding(
-              padding: const EdgeInsets.only(top: 30, right: 20),
+            title: const Padding(
+              padding: EdgeInsets.only(top: 30, right: 20),
               child: Text(
                 "Konsultan Hukum",
                 style: TextStyle(
@@ -121,7 +121,7 @@ class _KonsultanHukumState extends State<KonsultanHukum> {
                       ));
                     },
                     child: Container(
-                      margin: EdgeInsets.all(5.0),
+                      margin: const EdgeInsets.all(5.0),
                       decoration: BoxDecoration(
                         color: 'C6B69D'.toColor(),
                         borderRadius: BorderRadius.circular(10.0),
@@ -130,7 +130,7 @@ class _KonsultanHukumState extends State<KonsultanHukum> {
                             color: Colors.grey.withOpacity(0.5),
                             spreadRadius: 5,
                             blurRadius: 7,
-                            offset: Offset(7, 7), // changes position of shadow
+                            offset: const Offset(7, 7), // changes position of shadow
                           ),
                         ],
 
@@ -147,14 +147,14 @@ class _KonsultanHukumState extends State<KonsultanHukum> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Container(
+                              SizedBox(
                                 height: 70,
                                 width: 250,
                                 child: Padding(
-                                  padding: EdgeInsets.only(left: 15, bottom: 5),
+                                  padding: const EdgeInsets.only(left: 15, bottom: 5),
                                   child: Text(
                                     listKonsultan[index].khName.toString(),
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         color: Colors.black,
                                         fontSize: 27,
                                         fontFamily: 'Raleway',
@@ -197,7 +197,7 @@ class _KonsultanHukumState extends State<KonsultanHukum> {
                 } else {
                   return hasMore == true
                       ? Container()
-                      : Center(
+                      : const Center(
                           child: Loading(),
                         );
                 }

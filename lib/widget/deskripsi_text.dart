@@ -5,7 +5,7 @@ class DescriptionTextWidget extends StatefulWidget {
   final int? size;
   final int length;
   final String? color;
-  DescriptionTextWidget(
+  const DescriptionTextWidget(
       {@required this.text,
       @required this.size,
       required this.length,
@@ -13,7 +13,7 @@ class DescriptionTextWidget extends StatefulWidget {
 
   @override
   _DescriptionTextWidgetState createState() =>
-      new _DescriptionTextWidgetState();
+      _DescriptionTextWidgetState();
 }
 
 class _DescriptionTextWidgetState extends State<DescriptionTextWidget> {
@@ -39,10 +39,10 @@ class _DescriptionTextWidgetState extends State<DescriptionTextWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return new Container(
-      padding: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 5),
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5),
       child: secondHalf.toString().isEmpty
-          ? new Text(firstHalf.toString(),
+          ? Text(firstHalf.toString(),
               style: TextStyle(
                   color: widget.color == null
                       ? Colors.black38
@@ -50,9 +50,9 @@ class _DescriptionTextWidgetState extends State<DescriptionTextWidget> {
                   fontSize: widget.size?.toDouble(),
                   fontFamily: 'Raleway',
                   fontWeight: FontWeight.normal))
-          : new Column(
+          : Column(
               children: <Widget>[
-                new Text(
+                Text(
                     flag
                         ? (firstHalf.toString() + "...")
                         : (firstHalf.toString() + secondHalf.toString()),

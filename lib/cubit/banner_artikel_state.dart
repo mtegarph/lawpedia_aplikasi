@@ -20,7 +20,7 @@ class ArtikelSukses extends BannerArtikelState {
 class ArtikelFailed extends BannerArtikelState {
   final String message;
 
-  ArtikelFailed(this.message);
+  const ArtikelFailed(this.message);
   @override
   @override
   List<Object> get props => [message];

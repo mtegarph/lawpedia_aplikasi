@@ -12,7 +12,7 @@ class HasilSearchArtikel extends StatefulWidget {
 class _HasilSearchArtikelState extends State<HasilSearchArtikel> {
   final String deskripsi =
       "Flutter is Google’s mobile UI framework for crafting high-quality native interfaces on iOS and Android in record time. Flutter works with existing code, is used by developers and organizations around the world, and is free and open source.";
-  TextEditingController _searchQuery = new TextEditingController();
+  final TextEditingController _searchQuery = TextEditingController();
   int page = 1;
   bool hasMore = true;
   bool loading = false;
@@ -32,7 +32,7 @@ class _HasilSearchArtikelState extends State<HasilSearchArtikel> {
     var client = http.Client();
     var apiResult = await client.get(
       Uri.parse(apiUrl),
-      headers: {"auth-token": "$token"},
+      headers: {"auth-token": token},
     );
     if (apiResult.statusCode != 200) {
       print(apiResult.statusCode.toString());
@@ -82,7 +82,7 @@ class _HasilSearchArtikelState extends State<HasilSearchArtikel> {
               SafeArea(
                 child: Container(
                   //margin: EdgeInsets.only(bottom: defaultMargin),
-                  padding: EdgeInsets.symmetric(horizontal: 16),
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
                   width: double.infinity,
                   height: 100,
                   color: Colors.white,
@@ -97,16 +97,16 @@ class _HasilSearchArtikelState extends State<HasilSearchArtikel> {
                           height: 50,
                           width: 50,
                           // margin: EdgeInsets.only(right: 26),
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                               image: DecorationImage(
                                   image: AssetImage('assets/image/Left.png'))),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 110,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10),
+                      const Padding(
+                        padding: EdgeInsets.only(top: 10),
                         child: Text(
                           "Hasil Pencarian",
                           style: TextStyle(
@@ -121,7 +121,7 @@ class _HasilSearchArtikelState extends State<HasilSearchArtikel> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.symmetric(horizontal: 15.0, vertical: 15),
+                margin: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 15),
                 width: MediaQuery.of(context).size.width,
                 height: 50.0,
                 decoration: BoxDecoration(
@@ -134,7 +134,7 @@ class _HasilSearchArtikelState extends State<HasilSearchArtikel> {
                   children: [
                     Padding(
                         padding: const EdgeInsets.only(left: 20),
-                        child: Container(
+                        child: SizedBox(
                             width: MediaQuery.of(context).size.width / 1.3,
                             child: TextField(
                               controller: _searchQuery,
@@ -142,7 +142,7 @@ class _HasilSearchArtikelState extends State<HasilSearchArtikel> {
                               decoration: const InputDecoration(
                                 hintText: 'cari Pertanyaan',
                                 border: InputBorder.none,
-                                hintStyle: const TextStyle(color: Colors.grey),
+                                hintStyle: TextStyle(color: Colors.grey),
                               ),
                               style: const TextStyle(
                                   color: Colors.black, fontSize: 16.0),
@@ -156,8 +156,8 @@ class _HasilSearchArtikelState extends State<HasilSearchArtikel> {
                                     (route) => true);
                               },
                             ))),
-                    Padding(
-                      padding: const EdgeInsets.only(right: 20),
+                    const Padding(
+                      padding: EdgeInsets.only(right: 20),
                       child: Icon(Icons.search),
                     ),
                   ],
@@ -182,7 +182,7 @@ class _HasilSearchArtikelState extends State<HasilSearchArtikel> {
                               Container(
                                 height: 100,
                                 width: 160,
-                                margin: EdgeInsets.only(left: 30),
+                                margin: const EdgeInsets.only(left: 30),
                                 decoration: BoxDecoration(
                                     color: 'C6B69D'.toColor(),
                                     borderRadius: BorderRadius.circular(10.0),
@@ -191,11 +191,11 @@ class _HasilSearchArtikelState extends State<HasilSearchArtikel> {
                                         color: Colors.grey.withOpacity(0.5),
                                         spreadRadius: 2,
                                         blurRadius: 10,
-                                        offset: Offset(
+                                        offset: const Offset(
                                             5, 3), // changes position of shadow
                                       ),
                                     ],
-                                    image: DecorationImage(
+                                    image: const DecorationImage(
                                         image: NetworkImage(
                                             "https://i.pinimg.com/564x/94/17/82/941782f60e16a9d7f9b4cea4ae7025e0.jpg"),
                                         fit: BoxFit.fill)),
@@ -207,7 +207,7 @@ class _HasilSearchArtikelState extends State<HasilSearchArtikel> {
                                   Padding(
                                       padding: const EdgeInsets.only(
                                           left: 10, top: 5),
-                                      child: Container(
+                                      child: SizedBox(
                                         height:
                                             MediaQuery.of(context).size.height /
                                                 15,
@@ -241,7 +241,7 @@ class _HasilSearchArtikelState extends State<HasilSearchArtikel> {
                                               fontFamily: 'Raleway',
                                               fontWeight: FontWeight.w500),
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           width: 30,
                                         ),
                                         Text(
@@ -268,7 +268,7 @@ class _HasilSearchArtikelState extends State<HasilSearchArtikel> {
                             ? Container(
                                 alignment: Alignment.center,
                                 height: 160.0,
-                                child: CircularProgressIndicator(),
+                                child: const CircularProgressIndicator(),
                               )
                             : Container();
                     }

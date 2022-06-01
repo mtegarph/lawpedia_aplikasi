@@ -16,8 +16,8 @@ class _HomePageState extends State<HomePage> {
   bool loading_home = true;
   bool loading_artikel = true;
   String? token;
-  TextEditingController judulController = new TextEditingController();
-  TextEditingController pertanyaanController = new TextEditingController();
+  TextEditingController judulController = TextEditingController();
+  TextEditingController pertanyaanController = TextEditingController();
   bool loading = false;
   int page = 1;
   bool hasMore = true;
@@ -68,7 +68,7 @@ class _HomePageState extends State<HomePage> {
     var client = http.Client();
     var apiResult = await client.get(
       Uri.parse(apiUrl),
-      headers: {"auth-token": "$token"},
+      headers: {"auth-token": token},
     );
     if (apiResult.statusCode != 200) {
       print(apiResult.statusCode.toString());
@@ -145,28 +145,28 @@ class _HomePageState extends State<HomePage> {
             minChildSize: 0.5,
             maxChildSize: 0.90,
             builder: (_, controller) => loading
-                ? Loading()
+                ? const Loading()
                 : Container(
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                         color: Colors.white,
                         borderRadius:
                             BorderRadius.vertical(top: Radius.circular(20))),
-                    padding: EdgeInsets.all(16),
+                    padding: const EdgeInsets.all(16),
                     child: ListView(
                       controller: controller,
                       children: [
                         Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Divider(
+                            const Divider(
                                 indent: 150,
                                 endIndent: 150,
                                 height: 20,
                                 thickness: 5,
                                 color: Colors.black),
                             Container(
-                              padding: EdgeInsets.symmetric(vertical: 30),
-                              child: Text('Kirim Pertanyaan',
+                              padding: const EdgeInsets.symmetric(vertical: 30),
+                              child: const Text('Kirim Pertanyaan',
                                   style: TextStyle(
                                       color: Colors.black,
                                       fontSize: 30,
@@ -175,17 +175,17 @@ class _HomePageState extends State<HomePage> {
                             ),
                             Container(
                               width: double.infinity,
-                              margin: EdgeInsets.symmetric(horizontal: 16),
-                              padding: EdgeInsets.symmetric(
+                              margin: const EdgeInsets.symmetric(horizontal: 16),
+                              padding: const EdgeInsets.symmetric(
                                   horizontal: 10, vertical: 10),
                               decoration: BoxDecoration(
                                 color: 'D7D7D7'.toColor(),
                                 borderRadius: BorderRadius.circular(8),
                               ),
                               child: TextField(
-                                style: TextStyle(fontSize: 18),
+                                style: const TextStyle(fontSize: 18),
                                 controller: judulController,
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                     border: InputBorder.none,
                                     hintStyle: TextStyle(fontSize: 18),
                                     hintText: "Judul Pertanyaan"),
@@ -194,19 +194,19 @@ class _HomePageState extends State<HomePage> {
                             Container(
                                 width: double.infinity,
                                 height: 550,
-                                margin: EdgeInsets.symmetric(
+                                margin: const EdgeInsets.symmetric(
                                     horizontal: 16, vertical: 30),
-                                padding: EdgeInsets.symmetric(horizontal: 10),
+                                padding: const EdgeInsets.symmetric(horizontal: 10),
                                 decoration: BoxDecoration(
                                   color: 'D7D7D7'.toColor(),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 child: TextField(
-                                  style: TextStyle(fontSize: 18),
+                                  style: const TextStyle(fontSize: 18),
                                   controller: pertanyaanController,
                                   keyboardType: TextInputType.multiline,
                                   maxLines: 500,
-                                  decoration: InputDecoration(
+                                  decoration: const InputDecoration(
                                       border: InputBorder.none,
                                       hintStyle: TextStyle(fontSize: 18),
                                       hintText: "Pertanyaan Anda"),
@@ -221,10 +221,10 @@ class _HomePageState extends State<HomePage> {
                                         _switchValue = value;
                                         print(_switchValue);
                                       }),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 10,
                                   ),
-                                  Text(
+                                  const Text(
                                     "Kirim Sebagai Anonim",
                                     style: TextStyle(
                                         fontSize: 18, fontFamily: 'Raleway'),
@@ -328,7 +328,7 @@ class _HomePageState extends State<HomePage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
-                    padding: EdgeInsets.symmetric(
+                    padding: const EdgeInsets.symmetric(
                       vertical: 20,
                     ),
                     color: Colors.white,
@@ -351,11 +351,11 @@ class _HomePageState extends State<HomePage> {
                                     scale: 0.8,
                                   )),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 130,
                             ),
                             Container(
-                              margin: EdgeInsets.only(right: 20, top: 6),
+                              margin: const EdgeInsets.only(right: 20, top: 6),
                               width: 100,
                               height: 30,
                               child: Align(
@@ -375,13 +375,13 @@ class _HomePageState extends State<HomePage> {
                                       Radius.circular(10))),
                             ),
                             Padding(
-                              padding: EdgeInsets.only(
+                              padding: const EdgeInsets.only(
                                 top: 5,
                                 right: 20,
                               ),
                               child: GestureDetector(
                                 onTap: () {
-                                  Get.to(Notif());
+                                  Get.to(const Notif());
                                 },
                                 child: const FaIcon(
                                   FontAwesomeIcons.solidBell,
@@ -409,15 +409,15 @@ class _HomePageState extends State<HomePage> {
                             )
                           ],
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                         GestureDetector(
                           onTap: () {
-                            Get.to(SearchPage());
+                            Get.to(const SearchPage());
                           },
                           child: Container(
-                            margin: EdgeInsets.symmetric(horizontal: 25.0),
+                            margin: const EdgeInsets.symmetric(horizontal: 25.0),
                             width: MediaQuery.of(context).size.width,
                             height: 50.0,
                             decoration: BoxDecoration(
@@ -439,8 +439,8 @@ class _HomePageState extends State<HomePage> {
                                         fontWeight: FontWeight.bold),
                                   ),
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 20),
+                                const Padding(
+                                  padding: EdgeInsets.only(right: 20),
                                   child: Icon(Icons.search),
                                 ),
                               ],
@@ -452,10 +452,10 @@ class _HomePageState extends State<HomePage> {
                 TitleWithMoreBtn(
                   title: "Konsultan Hukum",
                   press: () {
-                    Get.to(KonsultanHukum());
+                    Get.to(const KonsultanHukum());
                   },
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20.0,
                 ),
                 BlocBuilder<KonsultanhukumCubit, KonsultanhukumState>(
@@ -483,7 +483,7 @@ class _HomePageState extends State<HomePage> {
                                   ));
                                 },
                                 child: Container(
-                                  margin: EdgeInsets.all(5.0),
+                                  margin: const EdgeInsets.all(5.0),
                                   decoration: BoxDecoration(
                                     color: 'C6B69D'.toColor(),
                                     borderRadius: BorderRadius.circular(10.0),
@@ -505,11 +505,11 @@ class _HomePageState extends State<HomePage> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.center,
                                         children: [
-                                          Container(
+                                          SizedBox(
                                             height: 65,
                                             width: 290,
                                             child: Padding(
-                                              padding: EdgeInsets.only(
+                                              padding: const EdgeInsets.only(
                                                   left: 15, bottom: 5),
                                               child: Text(
                                                 state
@@ -518,7 +518,7 @@ class _HomePageState extends State<HomePage> {
                                                     .konsultanHukum![index]
                                                     .khName!
                                                     .toString(),
-                                                style: TextStyle(
+                                                style: const TextStyle(
                                                     color: Colors.black,
                                                     fontSize: 25,
                                                     fontFamily: 'Raleway',
@@ -567,8 +567,8 @@ class _HomePageState extends State<HomePage> {
                               );
                             },
                           )
-                        : Loading()),
-                SizedBox(
+                        : const Loading()),
+                const SizedBox(
                   height: 20.0,
                 ),
                 ElevatedButton.icon(
@@ -592,12 +592,12 @@ class _HomePageState extends State<HomePage> {
                     alignment: Alignment.centerLeft,
                     children: [
                       Image(
-                        image: AssetImage("assets/image/Rectangle.png"),
+                        image: const AssetImage("assets/image/Rectangle.png"),
                         height: 100,
                         width: MediaQuery.of(context).size.width / 3,
                         fit: BoxFit.fitWidth,
                       ),
-                      Padding(
+                      const Padding(
                           padding: EdgeInsets.only(top: 10, left: 50),
                           child: Image(
                             image: AssetImage("assets/image/communication.png"),
@@ -621,7 +621,7 @@ class _HomePageState extends State<HomePage> {
                 TitleWithMoreBtn(
                   title: "Arsip Konsultasi",
                   press: () {
-                    Get.to(ArsipKonsultasi());
+                    Get.to(const ArsipKonsultasi());
                   },
                 ),
                 Padding(
@@ -629,7 +629,7 @@ class _HomePageState extends State<HomePage> {
                     child: GridView.builder(
                       shrinkWrap: true,
                       controller: controller2,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 4,
                         crossAxisSpacing: 10.0,
                         mainAxisSpacing: 20.0,
@@ -653,7 +653,7 @@ class _HomePageState extends State<HomePage> {
                                   decoration: BoxDecoration(
                                       color: Colors.white,
                                       borderRadius:
-                                          BorderRadius.all(Radius.circular(10)),
+                                          const BorderRadius.all(Radius.circular(10)),
                                       boxShadow: [
                                         BoxShadow(
                                             color: 'E2E2E2'.toColor(),
@@ -674,7 +674,7 @@ class _HomePageState extends State<HomePage> {
                                 child: Center(
                                   child: Text(
                                     listArsip[index].acCategory.toString(),
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         fontSize: 15,
                                         color: Colors.black,
                                         fontFamily: 'Roboto',
@@ -689,7 +689,7 @@ class _HomePageState extends State<HomePage> {
                           return Container(
                             alignment: Alignment.center,
                             height: 160.0,
-                            child: CircularProgressIndicator(),
+                            child: const CircularProgressIndicator(),
                           );
                         } else {
                           return Container();
@@ -708,19 +708,19 @@ class _HomePageState extends State<HomePage> {
                           Size(MediaQuery.of(context).size.width / 1.1, 100),
                       alignment: Alignment.centerLeft),
                   onPressed: () {
-                    Get.to(KategoriKamusHukum());
+                    Get.to(const KategoriKamusHukum());
                   },
                   icon: Stack(
                     fit: StackFit.passthrough,
                     alignment: Alignment.centerLeft,
                     children: [
                       Image(
-                        image: AssetImage("assets/image/Rectangle2.png"),
+                        image: const AssetImage("assets/image/Rectangle2.png"),
                         height: 100,
                         width: MediaQuery.of(context).size.width / 2.85,
                         fit: BoxFit.fitWidth,
                       ),
-                      Padding(
+                      const Padding(
                           padding: EdgeInsets.only(top: 10, left: 50),
                           child: Image(
                             image: AssetImage("assets/image/kamus.png"),
@@ -744,10 +744,10 @@ class _HomePageState extends State<HomePage> {
                 TitleWithMoreBtn(
                   title: "Artikel",
                   press: () {
-                    Get.to(Artikel());
+                    Get.to(const Artikel());
                   },
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20.0,
                 ),
                 BlocBuilder<BannerArtikelCubit, BannerArtikelState>(
@@ -764,7 +764,7 @@ class _HomePageState extends State<HomePage> {
                                 autoPlayCurve: Curves.fastOutSlowIn,
                                 enableInfiniteScroll: false,
                                 autoPlayAnimationDuration:
-                                    Duration(milliseconds: 3000)),
+                                    const Duration(milliseconds: 3000)),
                             itemBuilder: (BuildContext context, int index,
                                 int realIndex) {
                               return GestureDetector(
@@ -781,7 +781,7 @@ class _HomePageState extends State<HomePage> {
                                 child: Padding(
                                   padding: const EdgeInsets.all(15.0),
                                   child: Container(
-                                    padding: EdgeInsets.only(bottom: 10),
+                                    padding: const EdgeInsets.only(bottom: 10),
                                     child: Stack(
                                       fit: StackFit.loose,
                                       children: [
@@ -789,7 +789,7 @@ class _HomePageState extends State<HomePage> {
                                           decoration: BoxDecoration(
                                               borderRadius:
                                                   BorderRadius.circular(10.0),
-                                              image: DecorationImage(
+                                              image: const DecorationImage(
                                                   scale: 20,
                                                   image: NetworkImage(
                                                       "https://i.pinimg.com/564x/94/17/82/941782f60e16a9d7f9b4cea4ae7025e0.jpg"),
@@ -803,7 +803,7 @@ class _HomePageState extends State<HomePage> {
                                                       .size
                                                       .width /
                                                   1.11,
-                                              decoration: BoxDecoration(
+                                              decoration: const BoxDecoration(
                                                   borderRadius:
                                                       BorderRadius.only(
                                                           bottomRight:
@@ -820,7 +820,7 @@ class _HomePageState extends State<HomePage> {
                                                         spreadRadius: 4)
                                                   ]),
                                               child: Padding(
-                                                padding: EdgeInsets.symmetric(
+                                                padding: const EdgeInsets.symmetric(
                                                     vertical: 25,
                                                     horizontal: 20),
                                                 child: Column(
@@ -849,14 +849,14 @@ class _HomePageState extends State<HomePage> {
                                                       children: [
                                                         Row(
                                                           children: [
-                                                            Image(
+                                                            const Image(
                                                               image: AssetImage(
                                                                   "assets/image/user.png"),
                                                               fit: BoxFit
                                                                   .fitWidth,
                                                               height: 18,
                                                             ),
-                                                            SizedBox(
+                                                            const SizedBox(
                                                               width: 5,
                                                             ),
                                                             Text(
@@ -883,19 +883,19 @@ class _HomePageState extends State<HomePage> {
                                                             ),
                                                           ],
                                                         ),
-                                                        SizedBox(
+                                                        const SizedBox(
                                                           width: 25,
                                                         ),
                                                         Row(
                                                           children: [
-                                                            Image(
+                                                            const Image(
                                                               image: AssetImage(
                                                                   "assets/image/eye.png"),
                                                               fit: BoxFit
                                                                   .fitWidth,
                                                               height: 15,
                                                             ),
-                                                            SizedBox(
+                                                            const SizedBox(
                                                               width: 5,
                                                             ),
                                                             Text(
@@ -925,8 +925,8 @@ class _HomePageState extends State<HomePage> {
                               );
                             },
                           )
-                        : Loading()),
-                SizedBox(
+                        : const Loading()),
+                const SizedBox(
                   height: 20.0,
                 ),
               ],

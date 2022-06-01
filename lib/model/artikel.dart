@@ -280,16 +280,16 @@ class SearchArtikel {
   DataSearchArtikel? data;
 
   factory SearchArtikel.fromJson(Map<String, dynamic> json) => SearchArtikel(
-        status: json["status"] == null ? null : json["status"],
-        message: json["message"] == null ? null : json["message"],
+        status: json["status"],
+        message: json["message"],
         data: json["data"] == null
             ? null
             : DataSearchArtikel.fromJson(json["data"]),
       );
 
   Map<String, dynamic> toJson() => {
-        "status": status == null ? null : status,
-        "message": message == null ? null : message,
+        "status": status,
+        "message": message,
         "data": data == null ? null : data?.toJson(),
       };
 }
@@ -346,34 +346,34 @@ class ArticlesSearch {
   int? to;
 
   factory ArticlesSearch.fromJson(Map<String, dynamic> json) => ArticlesSearch(
-        currentPage: json["current_page"] == null ? null : json["current_page"],
+        currentPage: json["current_page"],
         data: json["data"] == null
             ? null
             : List<PopularArticleSearch>.from(
                 json["data"].map((x) => PopularArticleSearch.fromJson(x))),
         firstPageUrl:
-            json["first_page_url"] == null ? null : json["first_page_url"],
-        from: json["from"] == null ? null : json["from"],
+            json["first_page_url"],
+        from: json["from"],
         nextPageUrl:
-            json["next_page_url"] == null ? null : json["next_page_url"],
-        path: json["path"] == null ? null : json["path"],
-        perPage: json["per_page"] == null ? null : json["per_page"],
+            json["next_page_url"],
+        path: json["path"],
+        perPage: json["per_page"],
         prevPageUrl: json["prev_page_url"],
-        to: json["to"] == null ? null : json["to"],
+        to: json["to"],
       );
 
   Map<String, dynamic> toJson() => {
-        "current_page": currentPage == null ? null : currentPage,
+        "current_page": currentPage,
         "data": data == null
             ? null
             : List<dynamic>.from(data!.map((x) => x.toJson())),
-        "first_page_url": firstPageUrl == null ? null : firstPageUrl,
-        "from": from == null ? null : from,
-        "next_page_url": nextPageUrl == null ? null : nextPageUrl,
-        "path": path == null ? null : path,
-        "per_page": perPage == null ? null : perPage,
+        "first_page_url": firstPageUrl,
+        "from": from,
+        "next_page_url": nextPageUrl,
+        "path": path,
+        "per_page": perPage,
         "prev_page_url": prevPageUrl,
-        "to": to == null ? null : to,
+        "to": to,
       };
 }
 
@@ -398,28 +398,26 @@ class PopularArticleSearch {
 
   factory PopularArticleSearch.fromJson(Map<String, dynamic> json) =>
       PopularArticleSearch(
-        articleId: json["article_id"] == null ? null : json["article_id"],
+        articleId: json["article_id"],
         articleTitle:
-            json["article_title"] == null ? null : json["article_title"],
-        authorId: json["author_id"] == null ? null : json["author_id"],
-        authorFirstName: json["author_first_name"] == null
-            ? null
-            : json["author_first_name"],
+            json["article_title"],
+        authorId: json["author_id"],
+        authorFirstName: json["author_first_name"],
         authorLastName: json["author_last_name"],
         articleViews:
-            json["article_views"] == null ? null : json["article_views"],
+            json["article_views"],
         publishedAt: json["published_at"] == null
             ? null
             : DateTime.parse(json["published_at"]),
       );
 
   Map<String, dynamic> toJson() => {
-        "article_id": articleId == null ? null : articleId,
-        "article_title": articleTitle == null ? null : articleTitle,
-        "author_id": authorId == null ? null : authorId,
-        "author_first_name": authorFirstName == null ? null : authorFirstName,
+        "article_id": articleId,
+        "article_title": articleTitle,
+        "author_id": authorId,
+        "author_first_name": authorFirstName,
         "author_last_name": authorLastName,
-        "article_views": articleViews == null ? null : articleViews,
+        "article_views": articleViews,
         "published_at":
             publishedAt == null ? null : publishedAt?.toIso8601String(),
       };
