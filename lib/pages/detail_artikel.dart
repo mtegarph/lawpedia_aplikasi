@@ -10,9 +10,9 @@ class DetailArtikel extends StatefulWidget {
 
 class _DetailArtikelState extends State<DetailArtikel> {
   bool loading_artikel = true;
-  late WebViewController controller;
+  late WebViewPlusController controller;
   String? desc;
-  
+
   @override
   void initState() {
     super.initState();
@@ -27,13 +27,13 @@ class _DetailArtikelState extends State<DetailArtikel> {
             .detailArtikel!
             .articleBody;
       });
-      // final document = parse(desc);
-      // final String parsedString =
-      //     parse(document.body!.text).documentElement!.text;
-      // setState(() {
-      //   loading_artikel = false;
-      //   desc = parsedString;
-      // });
+      final document = parse(desc);
+      final String parsedString =
+          parse(document.body!.text).documentElement!.text;
+      setState(() {
+        loading_artikel = false;
+        desc = parsedString;
+      });
     });
   }
 
@@ -212,39 +212,77 @@ class _DetailArtikelState extends State<DetailArtikel> {
                                 padding:
                                     const EdgeInsets.only(left: 16, top: 15),
                                 child: SizedBox(
-                                    height:
-                                        MediaQuery.of(context).size.height / 3,
-                                    width: MediaQuery.of(context).size.width /
-                                        1.16,
-                                    child: WebArtikel(web:  state
-                                                      .artikelDetail
-                                                      .data!
-                                                      .detailArtikel!
-                                                      .articleBody
-                                                      .toString())
-                                    // Html(
-                                    //   data: state.artikelDetail.data!
-                                    //       .detailArtikel!.articleBody!,
-                                    //   onLinkTap: (url, context, attributes, element) {
-                                    //    print('Open the url $url......');
-                                    //   },
-                                    //   onImageTap: (url, context, attributes, element) {
-                                    //      print('Image $url');
-                                    //   },
-                                    //   onImageError: (exception, stacktrace) {
-                                    //     print(exception);
-                                    //   },
-                                    // )
-                                    //     Text(
-                                    //   "$desc",
-                                    //   style: TextStyle(
-                                    //       color: Colors.black,
-                                    //       fontSize: 20,
-                                    //       fontFamily: 'Courier',
-                                    //       fontWeight: FontWeight.normal),
-                                    //   textAlign: TextAlign.justify,
-                                    // ),
-                                    )),
+                                  height: MediaQuery.of(context).size.height,
+                                  width:
+                                      MediaQuery.of(context).size.width / 1.16,
+                                  child:
+                                      // WebViewPlus(
+                                      //   javascriptMode:
+                                      //       JavascriptMode.unrestricted,
+                                      //   onWebViewCreated: (controller) async {
+                                      //     this.controller = controller;
+                                      //     void loadLocalHtml() async {
+                                      //       final url = Uri.dataFromString(
+                                      //               '''<!DOCTYPE html>
+                                      //                 <html lang="en">
+                                      //                 <head>
+                                      //                  <link rel="stylesheet" href="https://cdn.quilljs.com/1.3.6/quill.snow.css">
+                                      //                 <title>Load file or HTML string example</title>
+
+                                      //                 </head>
+                                      //                 <body>
+
+                                      //                 ${state.artikelDetail.data!.detailArtikel!.articleBody!}
+                                      //                 </body>
+                                      //                 </html>
+                                      //                 ''',
+                                      //               base64: true,
+                                      //               mimeType: 'text/html',
+                                      //               encoding: Encoding.getByName(
+                                      //                   'utf-8'))
+                                      //           .toString();
+                                      //       controller.loadUrl(url);
+                                      //     }
+
+                                      //     loadLocalHtml();
+                                      //   },
+                                      // )
+
+                                      //     Html(
+                                      //   data: '''<!DOCTYPE html>
+                                      //                 <html lang="en">
+                                      //                 <head>
+                                      //                 <title>Load file or HTML string example</title>
+
+                                      //                 </head>
+                                      //                 <body>
+                                      //                 <link rel="stylesheet" href="https://cdn.quilljs.com/1.3.6/quill.snow.css">
+                                      //                 ${state.artikelDetail.data!.detailArtikel!.articleBody!}
+                                      //                 </body>
+                                      //                 </html>
+                                      //                 ''',
+                                      //   onLinkTap:
+                                      //       (url, context, attributes, element) {
+                                      //     print('Open the url $url......');
+                                      //   },
+                                      //   onImageTap:
+                                      //       (url, context, attributes, element) {
+                                      //     print('Image $url');
+                                      //   },
+                                      //   onImageError: (exception, stacktrace) {
+                                      //     print(exception);
+                                      //   },
+                                      // )
+                                      Text(
+                                    "$desc",
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 20,
+                                        fontFamily: 'Courier',
+                                        fontWeight: FontWeight.normal),
+                                    textAlign: TextAlign.justify,
+                                  ),
+                                )),
                           ],
                         ),
                       )

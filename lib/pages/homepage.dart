@@ -175,7 +175,8 @@ class _HomePageState extends State<HomePage> {
                             ),
                             Container(
                               width: double.infinity,
-                              margin: const EdgeInsets.symmetric(horizontal: 16),
+                              margin:
+                                  const EdgeInsets.symmetric(horizontal: 16),
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 10, vertical: 10),
                               decoration: BoxDecoration(
@@ -196,7 +197,8 @@ class _HomePageState extends State<HomePage> {
                                 height: 550,
                                 margin: const EdgeInsets.symmetric(
                                     horizontal: 16, vertical: 30),
-                                padding: const EdgeInsets.symmetric(horizontal: 10),
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 10),
                                 decoration: BoxDecoration(
                                   color: 'D7D7D7'.toColor(),
                                   borderRadius: BorderRadius.circular(8),
@@ -417,7 +419,8 @@ class _HomePageState extends State<HomePage> {
                             Get.to(const SearchPage());
                           },
                           child: Container(
-                            margin: const EdgeInsets.symmetric(horizontal: 25.0),
+                            margin:
+                                const EdgeInsets.symmetric(horizontal: 25.0),
                             width: MediaQuery.of(context).size.width,
                             height: 50.0,
                             decoration: BoxDecoration(
@@ -629,7 +632,8 @@ class _HomePageState extends State<HomePage> {
                     child: GridView.builder(
                       shrinkWrap: true,
                       controller: controller2,
-                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 4,
                         crossAxisSpacing: 10.0,
                         mainAxisSpacing: 20.0,
@@ -652,8 +656,8 @@ class _HomePageState extends State<HomePage> {
                                   width: 70,
                                   decoration: BoxDecoration(
                                       color: Colors.white,
-                                      borderRadius:
-                                          const BorderRadius.all(Radius.circular(10)),
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(10)),
                                       boxShadow: [
                                         BoxShadow(
                                             color: 'E2E2E2'.toColor(),
@@ -697,6 +701,34 @@ class _HomePageState extends State<HomePage> {
                       },
                       itemCount: 8,
                     )),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 25),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        padding: EdgeInsets.zero,
+                        primary: "FF3232".toColor(),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8)),
+                        onPrimary: Colors.black,
+                        minimumSize:
+                            Size(MediaQuery.of(context).size.width / 1.1, 100),
+                        alignment: Alignment.center),
+                    onPressed: () {
+                    Get.to(const KategoriLayananHukum());
+                  },
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 10),
+                      child: Text(
+                        "Layanan Hukum",
+                        style: TextStyle(
+                            fontSize: 35,
+                            color: 'F2F2F2'.toColor(),
+                            fontFamily: 'Roboto',
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                ),
                 ElevatedButton.icon(
                   style: ElevatedButton.styleFrom(
                       padding: EdgeInsets.zero,
@@ -820,9 +852,10 @@ class _HomePageState extends State<HomePage> {
                                                         spreadRadius: 4)
                                                   ]),
                                               child: Padding(
-                                                padding: const EdgeInsets.symmetric(
-                                                    vertical: 25,
-                                                    horizontal: 20),
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        vertical: 25,
+                                                        horizontal: 20),
                                                 child: Column(
                                                   mainAxisAlignment:
                                                       MainAxisAlignment
