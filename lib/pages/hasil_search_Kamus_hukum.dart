@@ -129,31 +129,6 @@ class _HasilSearchKamusHukumState extends State<HasilSearchKamusHukum> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    padding: const EdgeInsets.all(0.0),
-                    child: DropdownButton<String>(
-                      value: _chosenValue,
-                      elevation: 16,
-                      style: const TextStyle(color: Colors.black),
-                      underline: Container(
-                        height: 2,
-                        color: Colors.deepPurpleAccent,
-                      ),
-                      onChanged: (String? newValue) {
-                        setState(() {
-                          _chosenValue = newValue!;
-                        });
-                        print(_chosenValue);
-                      },
-                      items: <String>['title', 'date-entry', 'keyword']
-                          .map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
-                    ),
-                  ),
-                  Container(
                     margin:
                         EdgeInsets.symmetric(horizontal: 15.0, vertical: 15),
                     width: MediaQuery.of(context).size.width / 1.4,
@@ -199,6 +174,31 @@ class _HasilSearchKamusHukumState extends State<HasilSearchKamusHukum> {
                           child: Icon(Icons.search),
                         ),
                       ],
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.only(right: 15),
+                    child: DropdownButton<String>(
+                      value: _chosenValue,
+                      elevation: 16,
+                      style: const TextStyle(color: Colors.black),
+                      underline: Container(
+                        height: 2,
+                        color: Colors.deepPurpleAccent,
+                      ),
+                      onChanged: (String? newValue) {
+                        setState(() {
+                          _chosenValue = newValue!;
+                        });
+                        print(_chosenValue);
+                      },
+                      items: <String>['title', 'date-entry', 'keyword']
+                          .map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
                     ),
                   ),
                 ],

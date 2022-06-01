@@ -184,65 +184,64 @@ class _ArsipKonsultasiState extends State<ArsipKonsultasi> {
                 ),
               ),
               Padding(
-                  padding: const EdgeInsets.all(35.0),
-                  child: GridView.builder(
+                  padding: const EdgeInsets.all(25.0),
+                  child: ListView.builder(
                     shrinkWrap: true,
                     controller: controller2,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 4,
-                      crossAxisSpacing: 10.0,
-                      mainAxisSpacing: 20.0,
-                    ),
                     itemBuilder: (context, index) {
                       if (index < listArsip.length) {
-                        return Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                Get.to(ListArsip(
-                                  id: listArsip[index].acId,
-                                  title: listArsip[index].acCategory,
-                                ));
-                              },
-                              child: Container(
-                                height: 70,
-                                width: 70,
-                                decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10)),
-                                    boxShadow: [
-                                      BoxShadow(
-                                          color: 'E2E2E2'.toColor(),
-                                          blurRadius: 5)
-                                    ]),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(10.0),
-                                  child: SvgPicture.asset(
-                                    itemsPhoto[index],
-                                    color: Colors.red,
-                                    fit: BoxFit.contain,
-                                  ),
+                        return GestureDetector(
+                          onTap: () {
+                            Get.to(ListArsip(
+                              id: listArsip[index].acId,
+                              title: listArsip[index].acCategory,
+                            ));
+                          },
+                          child: Container(
+                            margin: EdgeInsets.symmetric(
+                                horizontal: 25.0, vertical: 10),
+                            width: MediaQuery.of(context).size.width,
+                            height: 70.0,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10.0),
+                              color: "FFFFFF".toColor(),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.5),
+                                  spreadRadius: 3,
+                                  blurRadius: 5,
+                                  offset: Offset(
+                                      0, 5), // changes position of shadow
                                 ),
-                              ),
+                              ],
                             ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 10),
-                              child: Center(
-                                child: Text(
-                                  listArsip[index].acCategory.toString(),
-                                  style: TextStyle(
-                                      fontSize: 15,
-                                      color: Colors.black,
-                                      fontFamily: 'Roboto',
-                                      fontWeight: FontWeight.w500),
-                                  textAlign: TextAlign.center,
-                                ),
-                              ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Padding(
+                                    padding: const EdgeInsets.only(left: 20),
+                                    child: Container(
+                                      width:
+                                          MediaQuery.of(context).size.width / 3,
+                                      child: Text(
+                                        listArsip[index].acCategory!,
+                                        style: TextStyle(
+                                            fontSize: 20,
+                                            color: '354259'.toColor(),
+                                            fontFamily: 'Roboto',
+                                            fontWeight: FontWeight.w500),
+                                      ),
+                                    )),
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 35.0),
+                                  child: Image(
+                                      image: AssetImage(
+                                          'assets/image/chevron.png')),
+                                )
+                              ],
                             ),
-                          ],
+                          ),
                         );
                       } else {
                         return Container();

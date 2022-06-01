@@ -56,7 +56,7 @@ class _DetailKonsultanState extends State<DetailKonsultan> {
                         style: TextStyle(
                             color: Colors.black,
                             fontSize: 28,
-                            fontFamily: 'Raleway',
+                            fontFamily: 'Courier',
                             fontWeight: FontWeight.bold),
                       ),
                     ),
@@ -83,7 +83,7 @@ class _DetailKonsultanState extends State<DetailKonsultan> {
                         style: TextStyle(
                           color: Colors.black,
                           fontSize: 18,
-                          fontFamily: 'Raleway',
+                          fontFamily: 'Courier',
                         ),
                         textAlign: TextAlign.justify,
                       ),
