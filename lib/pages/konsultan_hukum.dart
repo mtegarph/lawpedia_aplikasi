@@ -13,10 +13,11 @@ class _KonsultanHukumState extends State<KonsultanHukum> {
   int page = 1;
   bool hasMore = true;
   bool loading = false;
-
+  bool full = false;
   Future getListKonsultanHukum() async {
     if (loading) return;
     loading = true;
+
     String apiUrl = baseUrl + 'konsultan-hukum?page=' + page.toString();
     SharedPreferences logindata = await SharedPreferences.getInstance();
     String token = logindata.getString('token').toString();
@@ -37,9 +38,13 @@ class _KonsultanHukumState extends State<KonsultanHukum> {
       page++;
       print(page);
       loading = false;
-      if (list.data!.konsultanHukum!.to! <=
+
+      if (list.data!.konsultanHukum!.to ==
           list.data!.konsultanHukum!.data!.length) {
+        full = true;
         hasMore = false;
+      } else {
+        hasMore = true;
       }
       listKonsultan.addAll(list.data!.konsultanHukum!.data!);
     });
@@ -115,7 +120,8 @@ class _KonsultanHukumState extends State<KonsultanHukum> {
                 if (index < listKonsultan.length) {
                   return GestureDetector(
                     onTap: () {
-                      print("ID KONSULTAN: "+listKonsultan[index].khId!.toString());
+                      print("ID KONSULTAN: " +
+                          listKonsultan[index].khId!.toString());
                       Get.to(DetailKonsultan(
                         id: listKonsultan[index].khId!.toInt(),
                       ));
@@ -130,7 +136,8 @@ class _KonsultanHukumState extends State<KonsultanHukum> {
                             color: Colors.grey.withOpacity(0.5),
                             spreadRadius: 5,
                             blurRadius: 7,
-                            offset: const Offset(7, 7), // changes position of shadow
+                            offset: const Offset(
+                                7, 7), // changes position of shadow
                           ),
                         ],
 
@@ -151,7 +158,8 @@ class _KonsultanHukumState extends State<KonsultanHukum> {
                                 height: 70,
                                 width: 250,
                                 child: Padding(
-                                  padding: const EdgeInsets.only(left: 15, bottom: 5),
+                                  padding: const EdgeInsets.only(
+                                      left: 15, bottom: 5),
                                   child: Text(
                                     listKonsultan[index].khName.toString(),
                                     style: const TextStyle(
@@ -182,8 +190,7 @@ class _KonsultanHukumState extends State<KonsultanHukum> {
                                   listKonsultan[index].khImg.toString(),
                                   height: 150,
                                 )
-                              : 
-                              Padding(
+                              : Padding(
                                   padding: const EdgeInsets.all(20.0),
                                   child: Image.asset(
                                     'assets/image/user_vector.png',
@@ -197,9 +204,11 @@ class _KonsultanHukumState extends State<KonsultanHukum> {
                 } else {
                   return hasMore == true
                       ? Container()
-                      : const Center(
-                          child: Loading(),
-                        );
+                      : full == true
+                          ? Container()
+                          : const Center(
+                              child: Loading(),
+                            );
                 }
               },
             )));

@@ -233,7 +233,7 @@ class DatumKategoriDetail {
         userId: json["user_id"],
         qTitle: json["q_title"],
         qAnonymity: json["q_anonymity"],
-        answeredAt: DateTime.parse(json["answered_at"]),
+        answeredAt: DateTime.parse(json["published_at"]),
         questionedAt: DateTime.parse(json["questioned_at"]),
       );
 

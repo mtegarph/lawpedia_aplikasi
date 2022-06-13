@@ -37,8 +37,8 @@ class _LoginState extends State<Login> {
   Future signInGoogle() async {
     final user = await GoogleSignInApi.login();
     if (user == null) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(const SnackBar(content: Text("Gagal Login Dengan google")));
+      ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("Gagal Login Dengan google")));
     } else {
       await context.read<LoginCubit>().login(user.email, 'google');
       LoginState state = context.read<LoginCubit>().state;
@@ -83,7 +83,7 @@ class _LoginState extends State<Login> {
         //     },
         //   ),
         // );
-       // ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        // ScaffoldMessenger.of(context).showSnackBar(snackBar);
         // print(state.token);
         logindata!.setString('token', state.token.toString());
         Navigator.of(context).pushReplacement(MaterialPageRoute(
@@ -210,6 +210,9 @@ class _LoginState extends State<Login> {
                                         70)),
                                 onPressed: () {
                                   signInGoogle();
+                                  setState(() {
+                                    loading = true;
+                                  });
                                 },
                                 icon: const FaIcon(
                                   FontAwesomeIcons.google,
@@ -252,9 +255,6 @@ class _LoginState extends State<Login> {
                                       // Get.to(MainPage(
                                       //   facebook: _userFaceboook,
                                       // ));
-                                      setState(() {
-                                        loading = false;
-                                      });
                                     });
                                     final AccessToken accessToken =
                                         result.accessToken!;

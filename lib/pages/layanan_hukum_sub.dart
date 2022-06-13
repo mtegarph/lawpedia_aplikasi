@@ -45,7 +45,10 @@ class _LayananHukumSubState extends State<LayananHukumSub> {
       page++;
       print(page);
       loading = false;
-      if (list.data!.layananHukum!.data!.length <
+      if (list.data!.layananHukum!.to == null) {
+        hasMore = false;
+        Get.to(KonsultanHukum());
+      } else if (list.data!.layananHukum!.data!.length <
           list.data!.layananHukum!.to!) {
         hasMore = false;
       } else {
@@ -61,6 +64,7 @@ class _LayananHukumSubState extends State<LayananHukumSub> {
     getListLayananHukum();
     print(listArsip.length);
     print(message);
+
     controller.addListener(() {
       if (controller.position.maxScrollExtent == controller.offset) {
         getListLayananHukum();

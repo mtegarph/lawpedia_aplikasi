@@ -621,86 +621,34 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 ),
-                TitleWithMoreBtn(
-                  title: "Arsip Konsultasi",
-                  press: () {
-                    Get.to(const ArsipKonsultasi());
-                  },
-                ),
                 Padding(
-                    padding: const EdgeInsets.all(35.0),
-                    child: GridView.builder(
-                      shrinkWrap: true,
-                      controller: controller2,
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 4,
-                        crossAxisSpacing: 10.0,
-                        mainAxisSpacing: 20.0,
+                  padding: const EdgeInsets.symmetric(vertical: 25),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        padding: EdgeInsets.zero,
+                        primary: Colors.white,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8)),
+                        onPrimary: Colors.black,
+                        minimumSize:
+                            Size(MediaQuery.of(context).size.width / 1.1, 100),
+                        alignment: Alignment.center),
+                    onPressed: () {
+                      Get.to(const ArsipKonsultasi());
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 10),
+                      child: Text(
+                        'Arsip Konsultasi',
+                        style: TextStyle(
+                            fontSize: 35,
+                            color: 'FF3F3F'.toColor(),
+                            fontFamily: 'Roboto',
+                            fontWeight: FontWeight.bold),
                       ),
-                      itemBuilder: (context, index) {
-                        if (index < listArsip.length) {
-                          return Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              GestureDetector(
-                                onTap: () {
-                                  Get.to(ListArsip(
-                                    id: listArsip[index].acId,
-                                    title: listArsip[index].acCategory,
-                                  ));
-                                },
-                                child: Container(
-                                  height: 70,
-                                  width: 70,
-                                  decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: const BorderRadius.all(
-                                          Radius.circular(10)),
-                                      boxShadow: [
-                                        BoxShadow(
-                                            color: 'E2E2E2'.toColor(),
-                                            blurRadius: 5)
-                                      ]),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(10.0),
-                                    child: SvgPicture.asset(
-                                      itemsPhoto[index],
-                                      color: Colors.red,
-                                      fit: BoxFit.contain,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(top: 10),
-                                child: Center(
-                                  child: Text(
-                                    listArsip[index].acCategory.toString(),
-                                    style: const TextStyle(
-                                        fontSize: 15,
-                                        color: Colors.black,
-                                        fontFamily: 'Roboto',
-                                        fontWeight: FontWeight.w500),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          );
-                        } else if (loading_arsip == true) {
-                          return Container(
-                            alignment: Alignment.center,
-                            height: 160.0,
-                            child: const CircularProgressIndicator(),
-                          );
-                        } else {
-                          return Container();
-                        }
-                      },
-                      itemCount: 8,
-                    )),
+                    ),
+                  ),
+                ),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 25),
                   child: ElevatedButton(
@@ -714,8 +662,8 @@ class _HomePageState extends State<HomePage> {
                             Size(MediaQuery.of(context).size.width / 1.1, 100),
                         alignment: Alignment.center),
                     onPressed: () {
-                    Get.to(const KategoriLayananHukum());
-                  },
+                      Get.to(const KategoriLayananHukum());
+                    },
                     child: Padding(
                       padding: const EdgeInsets.only(left: 10),
                       child: Text(
