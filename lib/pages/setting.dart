@@ -22,7 +22,7 @@ class _SettingState extends State<Setting> {
           SafeArea(
             child: Container(
               //margin: EdgeInsets.only(bottom: defaultMargin),
-              padding: EdgeInsets.symmetric(horizontal: 16),
+              padding: const EdgeInsets.symmetric(horizontal: 16),
               width: double.infinity,
               height: 100,
               color: Colors.white,
@@ -36,17 +36,17 @@ class _SettingState extends State<Setting> {
                     child: Container(
                       height: 50,
                       width: 50,
-                      margin: EdgeInsets.only(right: 26),
-                      decoration: BoxDecoration(
+                      margin: const EdgeInsets.only(right: 26),
+                      decoration: const BoxDecoration(
                           image: DecorationImage(
                               image: AssetImage('assets/image/Left.png'))),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 140,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 10),
+                  const Padding(
+                    padding: EdgeInsets.only(top: 10),
                     child: Text(
                       "Settings",
                       style: TextStyle(
@@ -62,15 +62,32 @@ class _SettingState extends State<Setting> {
           ),
           Row(
             children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 30, top: 20),
-                child: CircleAvatar(
-                    radius: 60,
-                    backgroundImage: NetworkImage(widget.user?.photoUrl
-                            .toString() ??
-                        widget.facebook?["picture"]["data"]["url"] ??
-                        "https://i.pinimg.com/736x/89/90/48/899048ab0cc455154006fdb9676964b3.jpg")),
-              ),
+              BlocBuilder<UserCubit, UserState>(builder: (context, state) {
+                if (state is userSuccess) {
+                  return Padding(
+                    padding: const EdgeInsets.only(left: 30, top: 20),
+                    child: GestureDetector(
+                      onTap: () => Get.to(Setting(
+                        user: widget.user,
+                        facebook: widget.facebook,
+                      )),
+                      child: CircleAvatar(
+                          radius: 60,
+                          backgroundImage: NetworkImage(state
+                                      .userDetail.data!.userProfile!.profilePict
+                                      .toString() ==
+                                  "-"
+                              ? "https://i.pinimg.com/736x/89/90/48/899048ab0cc455154006fdb9676964b3.jpg"
+                              : state.userDetail.data!.userProfile!.profilePict
+                                  .toString())),
+                    ),
+                  );
+                } else {
+                  return const Center(
+                    child: Loading(),
+                  );
+                }
+              }),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -84,7 +101,7 @@ class _SettingState extends State<Setting> {
                       child: Text(
                         widget.user?.displayName.toString() ??
                             widget.facebook?["name"],
-                        style: TextStyle(
+                        style: const TextStyle(
                             color: Colors.black,
                             fontSize: 20,
                             fontFamily: 'Raleway',
@@ -93,7 +110,7 @@ class _SettingState extends State<Setting> {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(left: 20),
+                    margin: const EdgeInsets.only(left: 20),
                     width: 140,
                     height: 30,
                     child: Align(
@@ -124,28 +141,28 @@ class _SettingState extends State<Setting> {
                 child: Container(
                   height: 50,
                   width: 50,
-                  margin: EdgeInsets.only(left: 150),
-                  decoration: BoxDecoration(
+                  margin: const EdgeInsets.only(left: 150),
+                  decoration: const BoxDecoration(
                       image: DecorationImage(
                           image: AssetImage('assets/image/edit.png'))),
                 ),
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 40,
           ),
 
           InkWell(
             splashFactory: InkSplash.splashFactory,
             onTap: () {
-              Get.to(Notifikasi());
+              Get.to(const Notifikasi());
             },
             child: Container(
               // margin: EdgeInsets.only(top: 20),
               //padding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-              padding: EdgeInsets.only(top: 5),
-              decoration: BoxDecoration(
+              padding: const EdgeInsets.only(top: 5),
+              decoration: const BoxDecoration(
                   border: Border.symmetric(
                       horizontal: BorderSide(color: Colors.black38))),
               height: 60,
@@ -154,12 +171,12 @@ class _SettingState extends State<Setting> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Padding(
-                    padding: EdgeInsets.only(top: 10),
+                    padding: const EdgeInsets.only(top: 10),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
+                      children: const [
                         Padding(
-                          padding: const EdgeInsets.only(left: 35.0),
+                          padding: EdgeInsets.only(left: 35.0),
                           child: Text(
                             'Notifikasi',
                             style: TextStyle(
@@ -170,7 +187,7 @@ class _SettingState extends State<Setting> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(right: 35.0),
+                          padding: EdgeInsets.only(right: 35.0),
                           child: Image(
                               image: AssetImage('assets/image/chevron.png')),
                         )
@@ -230,18 +247,18 @@ class _SettingState extends State<Setting> {
           GestureDetector(
             onTap: () {},
             child: Container(
-              padding: EdgeInsets.only(top: 5),
+              padding: const EdgeInsets.only(top: 5),
               height: 55,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: EdgeInsets.only(top: 10),
+                    padding: const EdgeInsets.only(top: 10),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
+                      children: const [
                         Padding(
-                          padding: const EdgeInsets.only(left: 35.0),
+                          padding: EdgeInsets.only(left: 35.0),
                           child: Text(
                             'Versi',
                             style: TextStyle(
@@ -252,7 +269,7 @@ class _SettingState extends State<Setting> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(right: 35.0),
+                          padding: EdgeInsets.only(right: 35.0),
                           child: Text(
                             'V.1.0.0',
                             style: TextStyle(
@@ -265,7 +282,7 @@ class _SettingState extends State<Setting> {
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 15,
                   ),
                 ],
@@ -282,11 +299,11 @@ class _SettingState extends State<Setting> {
                   ? await FacebookAuth.i.logOut()
                   : await GoogleSignInApi.logout();
               Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => Login()));
+                  MaterialPageRoute(builder: (context) => const Login()));
             },
             child: Container(
-              padding: EdgeInsets.only(top: 5),
-              decoration: BoxDecoration(
+              padding: const EdgeInsets.only(top: 5),
+              decoration: const BoxDecoration(
                   border: Border.symmetric(
                       horizontal: BorderSide(color: Colors.black38))),
               height: 60,
@@ -295,7 +312,7 @@ class _SettingState extends State<Setting> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: EdgeInsets.only(top: 10),
+                    padding: const EdgeInsets.only(top: 10),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -310,15 +327,15 @@ class _SettingState extends State<Setting> {
                                 fontWeight: FontWeight.bold),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(right: 35.0),
+                        const Padding(
+                          padding: EdgeInsets.only(right: 35.0),
                           child:
                               Image(image: AssetImage('assets/image/sign.png')),
                         )
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 15,
                   ),
                 ],

@@ -22,7 +22,7 @@ class _ListArsipState extends State<ListArsip> {
   final controller = ScrollController();
   final controller2 = ScrollController();
   List<DatumKategoriDetail> listArsip = [];
-  TextEditingController _searchQuery = new TextEditingController();
+  final TextEditingController _searchQuery = TextEditingController();
   Future getListArsip() async {
     if (loading) return;
     loading = true;
@@ -35,7 +35,7 @@ class _ListArsipState extends State<ListArsip> {
     var client = http.Client();
     var apiResult = await client.get(
       Uri.parse(apiUrl),
-      headers: {"auth-token": "$token"},
+      headers: {"auth-token": token},
     );
     if (apiResult.statusCode != 200) {
       print(apiResult.statusCode.toString());
@@ -86,7 +86,7 @@ class _ListArsipState extends State<ListArsip> {
               SafeArea(
                 child: Container(
                   //margin: EdgeInsets.only(bottom: defaultMargin),
-                  padding: EdgeInsets.symmetric(horizontal: 16),
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
                   width: double.infinity,
                   height: 150,
                   color: Colors.white,
@@ -109,13 +109,13 @@ class _ListArsipState extends State<ListArsip> {
                                 height: 50,
                                 width: 50,
                                 // margin: EdgeInsets.only(right: 26),
-                                decoration: BoxDecoration(
+                                decoration: const BoxDecoration(
                                     image: DecorationImage(
                                         image: AssetImage(
                                             'assets/image/Left.png'))),
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 100,
                             ),
                             Padding(
@@ -123,7 +123,7 @@ class _ListArsipState extends State<ListArsip> {
                                   top: 10, left: 70, right: 70),
                               child: Text(
                                 '${widget.title}',
-                                style: TextStyle(
+                                style: const TextStyle(
                                     color: Colors.black,
                                     fontSize: 26.4,
                                     fontFamily: 'Raleway',
@@ -138,7 +138,7 @@ class _ListArsipState extends State<ListArsip> {
                           print("Tap");
                         },
                         child: Container(
-                          margin: EdgeInsets.symmetric(
+                          margin: const EdgeInsets.symmetric(
                               horizontal: 15.0, vertical: 15),
                           width: MediaQuery.of(context).size.width,
                           height: 50.0,
@@ -152,7 +152,7 @@ class _ListArsipState extends State<ListArsip> {
                             children: [
                               Padding(
                                   padding: const EdgeInsets.only(left: 20),
-                                  child: Container(
+                                  child: SizedBox(
                                       width: MediaQuery.of(context).size.width /
                                           1.3,
                                       child: TextField(
@@ -161,7 +161,7 @@ class _ListArsipState extends State<ListArsip> {
                                         decoration: const InputDecoration(
                                           hintText: 'cari Pertanyaan',
                                           border: InputBorder.none,
-                                          hintStyle: const TextStyle(
+                                          hintStyle: TextStyle(
                                               color: Colors.grey),
                                         ),
                                         style: const TextStyle(
@@ -172,8 +172,8 @@ class _ListArsipState extends State<ListArsip> {
                                           Get.to(HasilSearch(cari: data));
                                         },
                                       ))),
-                              Padding(
-                                padding: const EdgeInsets.only(right: 20),
+                              const Padding(
+                                padding: EdgeInsets.only(right: 20),
                                 child: Icon(Icons.search),
                               ),
                             ],
@@ -184,7 +184,7 @@ class _ListArsipState extends State<ListArsip> {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 25,
               ),
               ListView.builder(
@@ -204,7 +204,7 @@ class _ListArsipState extends State<ListArsip> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Container(
-                              margin: EdgeInsets.only(top: 20, left: 30),
+                              margin: const EdgeInsets.only(top: 20, left: 30),
                               color: 'FF0000'.toColor(),
                               width: 5,
                               height: 110,
@@ -218,7 +218,7 @@ class _ListArsipState extends State<ListArsip> {
                                       left: 10, top: 20, bottom: 10),
                                   child: Text(
                                     listArsip[index].qTitle.toString(),
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         color: Colors.black,
                                         fontSize: 22,
                                         fontFamily: 'Raleway',
@@ -243,7 +243,7 @@ class _ListArsipState extends State<ListArsip> {
                                             fontFamily: 'Raleway',
                                             fontWeight: FontWeight.w500),
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         width: 30,
                                       ),
                                       Text(
@@ -269,7 +269,7 @@ class _ListArsipState extends State<ListArsip> {
                             ? Container(
                                 alignment: Alignment.center,
                                 height: 160.0,
-                                child: CircularProgressIndicator(),
+                                child: const CircularProgressIndicator(),
                               )
                             : Container(),
               )

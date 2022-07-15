@@ -37,8 +37,8 @@ class _LoginState extends State<Login> {
   Future signInGoogle() async {
     final user = await GoogleSignInApi.login();
     if (user == null) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text("Gagal Login Dengan google")));
+      ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("Gagal Login Dengan google")));
     } else {
       await context.read<LoginCubit>().login(user.email, 'google');
       LoginState state = context.read<LoginCubit>().state;
@@ -83,7 +83,7 @@ class _LoginState extends State<Login> {
         //     },
         //   ),
         // );
-       // ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        // ScaffoldMessenger.of(context).showSnackBar(snackBar);
         // print(state.token);
         logindata!.setString('token', state.token.toString());
         Navigator.of(context).pushReplacement(MaterialPageRoute(
@@ -142,10 +142,11 @@ class _LoginState extends State<Login> {
         });
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: loading
-            ? Loading()
+            ? const Loading()
             : Stack(
                 children: [
                   const Image(
@@ -173,7 +174,7 @@ class _LoginState extends State<Login> {
                   Align(
                     alignment: Alignment.center,
                     child: Container(
-                      decoration: BoxDecoration(boxShadow: [
+                      decoration: const BoxDecoration(boxShadow: [
                         BoxShadow(color: Colors.black38, blurRadius: 30.0)
                       ]),
                       child: Card(
@@ -209,8 +210,11 @@ class _LoginState extends State<Login> {
                                         70)),
                                 onPressed: () {
                                   signInGoogle();
+                                  setState(() {
+                                    loading = true;
+                                  });
                                 },
-                                icon: FaIcon(
+                                icon: const FaIcon(
                                   FontAwesomeIcons.google,
                                   color: Colors.red,
                                 ),
@@ -251,9 +255,6 @@ class _LoginState extends State<Login> {
                                       // Get.to(MainPage(
                                       //   facebook: _userFaceboook,
                                       // ));
-                                      setState(() {
-                                        loading = false;
-                                      });
                                     });
                                     final AccessToken accessToken =
                                         result.accessToken!;
@@ -354,7 +355,7 @@ class _LoginState extends State<Login> {
                                   //   print(_userObj);
                                   // });
                                 },
-                                icon: FaIcon(
+                                icon: const FaIcon(
                                   FontAwesomeIcons.facebook,
                                   color: Colors.blue,
                                 ),

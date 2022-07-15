@@ -12,7 +12,7 @@ class HasilSearch extends StatefulWidget {
 class _HasilSearchState extends State<HasilSearch> {
   final String deskripsi =
       "Flutter is Google’s mobile UI framework for crafting high-quality native interfaces on iOS and Android in record time. Flutter works with existing code, is used by developers and organizations around the world, and is free and open source.";
-  TextEditingController _searchQuery = new TextEditingController();
+  final TextEditingController _searchQuery = TextEditingController();
   int page = 1;
   bool hasMore = true;
   bool loading = false;
@@ -32,7 +32,7 @@ class _HasilSearchState extends State<HasilSearch> {
     var client = http.Client();
     var apiResult = await client.get(
       Uri.parse(apiUrl),
-      headers: {"auth-token": "$token"},
+      headers: {"auth-token": token},
     );
     if (apiResult.statusCode != 200) {
       print(apiResult.statusCode.toString());
@@ -83,7 +83,7 @@ class _HasilSearchState extends State<HasilSearch> {
               SafeArea(
                 child: Container(
                   //margin: EdgeInsets.only(bottom: defaultMargin),
-                  padding: EdgeInsets.symmetric(horizontal: 16),
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
                   width: double.infinity,
                   height: 100,
                   color: Colors.white,
@@ -98,16 +98,16 @@ class _HasilSearchState extends State<HasilSearch> {
                           height: 50,
                           width: 50,
                           // margin: EdgeInsets.only(right: 26),
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                               image: DecorationImage(
                                   image: AssetImage('assets/image/Left.png'))),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 110,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10),
+                      const Padding(
+                        padding: EdgeInsets.only(top: 10),
                         child: Text(
                           "Hasil Pencarian",
                           style: TextStyle(
@@ -122,7 +122,7 @@ class _HasilSearchState extends State<HasilSearch> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.symmetric(horizontal: 15.0, vertical: 15),
+                margin: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 15),
                 width: MediaQuery.of(context).size.width,
                 height: 50.0,
                 decoration: BoxDecoration(
@@ -135,7 +135,7 @@ class _HasilSearchState extends State<HasilSearch> {
                   children: [
                     Padding(
                         padding: const EdgeInsets.only(left: 20),
-                        child: Container(
+                        child: SizedBox(
                             width: MediaQuery.of(context).size.width / 1.3,
                             child: TextField(
                               controller: _searchQuery,
@@ -143,7 +143,7 @@ class _HasilSearchState extends State<HasilSearch> {
                               decoration: const InputDecoration(
                                 hintText: 'cari Pertanyaan',
                                 border: InputBorder.none,
-                                hintStyle: const TextStyle(color: Colors.grey),
+                                hintStyle: TextStyle(color: Colors.grey),
                               ),
                               style: const TextStyle(
                                   color: Colors.black, fontSize: 16.0),
@@ -157,8 +157,8 @@ class _HasilSearchState extends State<HasilSearch> {
                                     (route) => true);
                               },
                             ))),
-                    Padding(
-                      padding: const EdgeInsets.only(right: 20),
+                    const Padding(
+                      padding: EdgeInsets.only(right: 20),
                       child: Icon(Icons.search),
                     ),
                   ],
@@ -181,7 +181,7 @@ class _HasilSearchState extends State<HasilSearch> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Container(
-                              margin: EdgeInsets.only(top: 20, left: 30),
+                              margin: const EdgeInsets.only(top: 20, left: 30),
                               color: 'FF0000'.toColor(),
                               width: 5,
                               height: 110,
@@ -195,7 +195,7 @@ class _HasilSearchState extends State<HasilSearch> {
                                       left: 10, top: 20, bottom: 10),
                                   child: Text(
                                     listArsip[index].qTitle.toString(),
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         color: Colors.black,
                                         fontSize: 22,
                                         fontFamily: 'Raleway',
@@ -220,7 +220,7 @@ class _HasilSearchState extends State<HasilSearch> {
                                             fontFamily: 'Raleway',
                                             fontWeight: FontWeight.w500),
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         width: 30,
                                       ),
                                       Text(
@@ -246,7 +246,7 @@ class _HasilSearchState extends State<HasilSearch> {
                             ? Container(
                                 alignment: Alignment.center,
                                 height: 160.0,
-                                child: CircularProgressIndicator(),
+                                child: const CircularProgressIndicator(),
                               )
                             : Container(),
               )

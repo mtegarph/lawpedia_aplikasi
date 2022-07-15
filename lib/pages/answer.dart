@@ -59,7 +59,7 @@ class _AnswerState extends State<Answer> {
                         child: Text(
                           state.questionDetail.data!.questions!.qTitle
                               .toString(),
-                          style: TextStyle(
+                          style: const TextStyle(
                               color: Colors.black,
                               fontSize: 28,
                               fontFamily: 'Raleway',
@@ -69,7 +69,7 @@ class _AnswerState extends State<Answer> {
                       Padding(
                           padding: const EdgeInsets.only(
                               top: 10, right: 10, left: 10),
-                          child: Container(
+                          child: SizedBox(
                             height: 100,
                             width: 490,
                             child: Text(
@@ -98,8 +98,8 @@ class _AnswerState extends State<Answer> {
                                   //mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(
+                                    const Padding(
+                                      padding: EdgeInsets.only(
                                           top: 25, bottom: 10, left: 25),
                                       child: Text(
                                         "Jawab",
@@ -111,13 +111,13 @@ class _AnswerState extends State<Answer> {
                                       ),
                                     ),
                                     Container(
-                                      margin: EdgeInsets.only(
+                                      margin: const EdgeInsets.only(
                                           top: 8, bottom: 10, left: 25),
                                       width: 440,
                                       height: 400,
                                       child: Text(
                                         '$desc',
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           color: Colors.white,
                                           fontSize: 18,
                                           fontFamily: 'Raleway',
@@ -137,7 +137,7 @@ class _AnswerState extends State<Answer> {
                     ],
                   ),
                 )
-              : Center(child: Loading()),
+              : const Center(child: Loading()),
         ));
   }
 }

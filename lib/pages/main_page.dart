@@ -45,11 +45,11 @@ class _MainPageState extends State<MainPage> {
             children: [
               Center(
                   child: HomePage(
-                facebook: widget.facebook ?? null,
-                user: widget.google ?? null,
+                facebook: widget.facebook,
+                user: widget.google,
               )),
               Center(child: Inbox()),
-              Center(child: Chat()),
+              const Center(child: Chat()),
             ],
           )),
         ],

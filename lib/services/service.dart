@@ -11,4 +11,4 @@ part 'artikel.dart';
 part 'question.dart';
 part 'QA_service.dart';
 part 'konsultanHukum.dart';
-String baseUrl = "http://lawpedia.farzcentrix.com/api/";
+String baseUrl = "https://development.lawpedia.id/api/";

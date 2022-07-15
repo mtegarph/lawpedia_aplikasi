@@ -17,9 +17,9 @@ class LoginCubit extends Cubit<LoginState> {
   }
 
   Future<void> register(String email, String account, String profile,
-      String first_name, String last_name, String tgl_lahir) async {
+      String firstName, String lastName, String tglLahir) async {
     ApiReturnValue result = await UserService.register(
-        email, account, profile, first_name, last_name, tgl_lahir);
+        email, account, profile, firstName, lastName, tglLahir);
     if (result.success == "error") {
       emit(gagalLoginState(result.success.toString()));
       print(" salah: ${result.message}");
@@ -29,10 +29,10 @@ class LoginCubit extends Cubit<LoginState> {
     }
   }
 
-  Future<void> editUsesr(String first_name, String last_name,
-      String tgl_lahir, String no_telp) async {
-    ApiReturnValue result = await UserService.editUsesr(first_name, last_name,
-        tgl_lahir, no_telp);
+  Future<void> editUsesr(String firstName, String lastName,
+      String tglLahir, String noTelp) async {
+    ApiReturnValue result = await UserService.editUsesr(firstName, lastName,
+        tglLahir, noTelp);
     if (result.success == "error") {
       emit(gagalLoginState(result.success.toString()));
       print(" salah: ${result.message}");

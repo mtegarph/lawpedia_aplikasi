@@ -107,7 +107,7 @@ class DatumKonsultanHukum {
         khId: json["kh_id"],
         khName: json["kh_name"],
      
-        khImg: json["kh_img"] == null ? null : json["kh_img"],
+        khImg: json["kh_img"],
         createdAt: DateTime.parse(json["created_at"]),
       );
 
@@ -304,14 +304,14 @@ class DatumRekomendasi {
       DatumRekomendasi(
         khId: json["kh_id"],
         khName: json["kh_name"],
-        khImg: json["kh_img"] == null ? null : json["kh_img"],
+        khImg: json["kh_img"],
         createdAt: DateTime.parse(json["created_at"]),
       );
 
   Map<String, dynamic> toJson() => {
         "kh_id": khId,
         "kh_name": khName,
-        "kh_img": khImg == null ? null : khImg,
+        "kh_img": khImg,
         "created_at": createdAt?.toIso8601String(),
       };
 }

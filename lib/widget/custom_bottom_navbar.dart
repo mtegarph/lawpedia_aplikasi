@@ -17,14 +17,12 @@ class CustomBottomNavbar extends StatelessWidget {
         children: [
           GestureDetector(
             onTap: () {
-              if (onTap != null) {
-                onTap(0);
-              }
+              onTap(0);
             },
             child: Container(
               width: 46,
               height: 46,
-              margin: EdgeInsets.only(left: 70.0),
+              margin: const EdgeInsets.only(left: 70.0),
               decoration: BoxDecoration(
                   image: DecorationImage(
                       image: AssetImage('assets/image/home' +
@@ -34,9 +32,7 @@ class CustomBottomNavbar extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () {
-              if (onTap != null) {
-                onTap(1);
-              }
+              onTap(1);
             },
             child: Container(
               width: 46,
@@ -51,15 +47,13 @@ class CustomBottomNavbar extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () {
-              if (onTap != null) {
-                onTap(2);
-              }
+              onTap(2);
             },
             child: Container(
               width: 46,
               height: 46,
               //margin: EdgeInsets.only(left:20.0,right: 40.0),
-               margin: EdgeInsets.only(right: 70.0),
+               margin: const EdgeInsets.only(right: 70.0),
               decoration: BoxDecoration(
                   image: DecorationImage(
                       image: AssetImage('assets/image/chat' +

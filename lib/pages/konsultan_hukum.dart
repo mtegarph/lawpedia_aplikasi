@@ -1,7 +1,8 @@
 part of 'page.dart';
 
 class KonsultanHukum extends StatefulWidget {
-  const KonsultanHukum({Key? key}) : super(key: key);
+  final String? judul;
+  const KonsultanHukum({Key? key, @required this.judul}) : super(key: key);
 
   @override
   State<KonsultanHukum> createState() => _KonsultanHukumState();
@@ -13,10 +14,11 @@ class _KonsultanHukumState extends State<KonsultanHukum> {
   int page = 1;
   bool hasMore = true;
   bool loading = false;
-
+  bool full = false;
   Future getListKonsultanHukum() async {
     if (loading) return;
     loading = true;
+
     String apiUrl = baseUrl + 'konsultan-hukum?page=' + page.toString();
     SharedPreferences logindata = await SharedPreferences.getInstance();
     String token = logindata.getString('token').toString();
@@ -24,7 +26,7 @@ class _KonsultanHukumState extends State<KonsultanHukum> {
     var client = http.Client();
     var apiResult = await client.get(
       Uri.parse(apiUrl),
-      headers: {"auth-token": "$token"},
+      headers: {"auth-token": token},
     );
     if (apiResult.statusCode != 200) {
       print(apiResult.statusCode.toString());
@@ -37,9 +39,13 @@ class _KonsultanHukumState extends State<KonsultanHukum> {
       page++;
       print(page);
       loading = false;
-      if (list.data!.konsultanHukum!.to! <=
+
+      if (list.data!.konsultanHukum!.to ==
           list.data!.konsultanHukum!.data!.length) {
+        full = true;
         hasMore = false;
+      } else {
+        hasMore = true;
       }
       listKonsultan.addAll(list.data!.konsultanHukum!.data!);
     });
@@ -67,7 +73,7 @@ class _KonsultanHukumState extends State<KonsultanHukum> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(70.0),
+          preferredSize: const Size.fromHeight(70.0),
           child: AppBar(
             elevation: 0,
             automaticallyImplyLeading: false,
@@ -78,11 +84,11 @@ class _KonsultanHukumState extends State<KonsultanHukum> {
               child: Container(
                 height: 100,
                 width: 100,
-                margin: EdgeInsets.only(
+                margin: const EdgeInsets.only(
                   top: 20,
                   left: 16,
                 ),
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                     image: DecorationImage(
                         fit: BoxFit.cover,
                         image: AssetImage('assets/image/Left.png'))),
@@ -92,9 +98,11 @@ class _KonsultanHukumState extends State<KonsultanHukum> {
             backgroundColor: Colors.white,
             //  iconTheme: IconThemeData(color: Colors.black),
             title: Padding(
-              padding: const EdgeInsets.only(top: 30, right: 20),
+              padding: EdgeInsets.only(top: 30, right: 20),
               child: Text(
-                "Konsultan Hukum",
+                widget.judul != null
+                    ? widget.judul.toString()
+                    : "Konsultan Hukum",
                 style: TextStyle(
                     color: Colors.black,
                     fontSize: 23.4,
@@ -115,22 +123,24 @@ class _KonsultanHukumState extends State<KonsultanHukum> {
                 if (index < listKonsultan.length) {
                   return GestureDetector(
                     onTap: () {
-                      print("ID KONSULTAN: "+listKonsultan[index].khId!.toString());
+                      print("ID KONSULTAN: " +
+                          listKonsultan[index].khId!.toString());
                       Get.to(DetailKonsultan(
                         id: listKonsultan[index].khId!.toInt(),
                       ));
                     },
                     child: Container(
-                      margin: EdgeInsets.all(5.0),
+                      margin: const EdgeInsets.all(5.0),
                       decoration: BoxDecoration(
-                        color: 'C6B69D'.toColor(),
+                        color: 'FF3232'.toColor(),
                         borderRadius: BorderRadius.circular(10.0),
                         boxShadow: [
                           BoxShadow(
                             color: Colors.grey.withOpacity(0.5),
                             spreadRadius: 5,
                             blurRadius: 7,
-                            offset: Offset(7, 7), // changes position of shadow
+                            offset: const Offset(
+                                7, 7), // changes position of shadow
                           ),
                         ],
 
@@ -147,15 +157,16 @@ class _KonsultanHukumState extends State<KonsultanHukum> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Container(
+                              SizedBox(
                                 height: 70,
                                 width: 250,
                                 child: Padding(
-                                  padding: EdgeInsets.only(left: 15, bottom: 5),
+                                  padding: const EdgeInsets.only(
+                                      left: 15, bottom: 5),
                                   child: Text(
                                     listKonsultan[index].khName.toString(),
-                                    style: TextStyle(
-                                        color: Colors.black,
+                                    style: const TextStyle(
+                                        color: Colors.white,
                                         fontSize: 27,
                                         fontFamily: 'Raleway',
                                         fontWeight: FontWeight.bold),
@@ -182,8 +193,7 @@ class _KonsultanHukumState extends State<KonsultanHukum> {
                                   listKonsultan[index].khImg.toString(),
                                   height: 150,
                                 )
-                              : 
-                              Padding(
+                              : Padding(
                                   padding: const EdgeInsets.all(20.0),
                                   child: Image.asset(
                                     'assets/image/user_vector.png',
@@ -197,9 +207,11 @@ class _KonsultanHukumState extends State<KonsultanHukum> {
                 } else {
                   return hasMore == true
                       ? Container()
-                      : Center(
-                          child: Loading(),
-                        );
+                      : full == true
+                          ? Container()
+                          : const Center(
+                              child: Loading(),
+                            );
                 }
               },
             )));

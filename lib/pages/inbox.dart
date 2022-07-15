@@ -23,7 +23,7 @@ class _InboxState extends State<Inbox> {
     var client = http.Client();
     var apiResult = await client.get(
       Uri.parse(apiUrl),
-      headers: {"auth-token": "$token"},
+      headers: {"auth-token": token},
     );
     if (apiResult.statusCode != 200) {
       print(apiResult.statusCode.toString());
@@ -46,7 +46,7 @@ class _InboxState extends State<Inbox> {
     var client = http.Client();
     var apiResult = await client.get(
       Uri.parse(apiUrl),
-      headers: {"auth-token": "$token"},
+      headers: {"auth-token": token},
     );
     if (apiResult.statusCode != 200) {
       print(apiResult.statusCode.toString());
@@ -70,7 +70,7 @@ class _InboxState extends State<Inbox> {
           Get.to(Answer(id: questionList.questionId.toString()));
         },
         child: Container(
-          padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
           width: double.infinity,
           height: 100,
           color: Colors.white,
@@ -83,7 +83,7 @@ class _InboxState extends State<Inbox> {
                 children: [
                   Padding(
                     padding:
-                        new EdgeInsets.symmetric(horizontal: 10.0, vertical: 5),
+                        const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5),
                     child: Text(questionList.qTitle.toString(),
                         style: TextStyle(
                             color: '4F4F4F'.toColor(),
@@ -117,7 +117,7 @@ class _InboxState extends State<Inbox> {
     return Container(
       alignment: Alignment.center,
       height: 160.0,
-      child: CircularProgressIndicator(),
+      child: const CircularProgressIndicator(),
     );
   }
 
@@ -126,13 +126,13 @@ class _InboxState extends State<Inbox> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.all(16.0),
+        const Padding(
+          padding: EdgeInsets.all(16.0),
           child: Text("error"),
         ),
         FlatButton(
           onPressed: retryListener,
-          child: Text('Retry'),
+          child: const Text('Retry'),
         )
       ],
     );
@@ -162,7 +162,7 @@ class _InboxState extends State<Inbox> {
       length: 2,
       child: Scaffold(
           appBar: PreferredSize(
-            preferredSize: Size.fromHeight(130.0),
+            preferredSize: const Size.fromHeight(130.0),
             child: AppBar(
               elevation: 0,
               automaticallyImplyLeading: false,
@@ -175,7 +175,7 @@ class _InboxState extends State<Inbox> {
                   print(index);
                 },
                 indicatorColor: 'FF5E5E'.toColor(),
-                tabs: [
+                tabs: const [
                   Tab(
                     child: Text(
                       "Terkirim",
@@ -198,9 +198,9 @@ class _InboxState extends State<Inbox> {
                   ),
                 ],
               ),
-              title: Center(
+              title: const Center(
                 child: Padding(
-                  padding: const EdgeInsets.only(top: 30),
+                  padding: EdgeInsets.only(top: 30),
                   child: Text(
                     "Pertanyaan Kamu",
                     style: TextStyle(
@@ -223,7 +223,7 @@ class _InboxState extends State<Inbox> {
               },
               listItemBuilder: listItemBuilder,
               pageLoadFuture: getQuestionDetail,
-              scrollPhysics: BouncingScrollPhysics(),
+              scrollPhysics: const BouncingScrollPhysics(),
               loadingWidgetBuilder: loadingWidgetMaker,
               errorWidgetBuilder: errorWidgetMaker,
               pageErrorChecker: (QuestionList pageData) {
@@ -239,7 +239,7 @@ class _InboxState extends State<Inbox> {
               },
               listItemBuilder: listItemBuilder,
               pageLoadFuture: getQuestionDetailAnswered,
-              scrollPhysics: BouncingScrollPhysics(),
+              scrollPhysics: const BouncingScrollPhysics(),
               loadingWidgetBuilder: loadingWidgetMaker,
               errorWidgetBuilder: errorWidgetMaker,
               pageErrorChecker: (QuestionList pageData) {

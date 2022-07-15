@@ -32,10 +32,10 @@ class _NotifState extends State<Notif> {
                         const EdgeInsets.only(top: 15, bottom: 10, left: 25),
                     child: GestureDetector(
                       onTap: () {
-                        Get.to(Answer(visible: true));
+                        Get.to(const Answer(visible: true));
                       },
                       child: Container(
-                        margin: EdgeInsets.only(right: 20, top: 6),
+                        margin: const EdgeInsets.only(right: 20, top: 6),
                         width: 100,
                         height: 30,
                         child: Align(
@@ -57,10 +57,10 @@ class _NotifState extends State<Notif> {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(bottom: 10, left: 27),
+                    margin: const EdgeInsets.only(bottom: 10, left: 27),
                     width: 440,
                     //height: 100,
-                    child: Text(
+                    child: const Text(
                       "Lorem ipsum dolor sit amet, consectetur.",
                       style: TextStyle(
                         color: Colors.white,
@@ -72,10 +72,10 @@ class _NotifState extends State<Notif> {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(bottom: 10, left: 27),
+                    margin: const EdgeInsets.only(bottom: 10, left: 27),
                     width: 440,
                     // height: 100,
-                    child: Text(
+                    child: const Text(
                       "1 hour ago",
                       style: TextStyle(
                         color: Colors.white,
@@ -107,7 +107,7 @@ class _NotifState extends State<Notif> {
                     padding:
                         const EdgeInsets.only(top: 15, bottom: 10, left: 25),
                     child: Container(
-                      margin: EdgeInsets.only(right: 20, top: 6),
+                      margin: const EdgeInsets.only(right: 20, top: 6),
                       width: 100,
                       height: 30,
                       child: Align(
@@ -128,10 +128,10 @@ class _NotifState extends State<Notif> {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(bottom: 10, left: 27),
+                    margin: const EdgeInsets.only(bottom: 10, left: 27),
                     width: 440,
                     //height: 100,
-                    child: Text(
+                    child: const Text(
                       "Lorem ipsum dolor sit amet, consectetur.",
                       style: TextStyle(
                         color: Colors.white,
@@ -143,10 +143,10 @@ class _NotifState extends State<Notif> {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(bottom: 10, left: 27),
+                    margin: const EdgeInsets.only(bottom: 10, left: 27),
                     width: 440,
                     // height: 100,
-                    child: Text(
+                    child: const Text(
                       "1 hour ago",
                       style: TextStyle(
                         color: Colors.white,
@@ -178,7 +178,7 @@ class _NotifState extends State<Notif> {
                     padding:
                         const EdgeInsets.only(top: 15, bottom: 10, left: 25),
                     child: Container(
-                      margin: EdgeInsets.only(right: 20, top: 6),
+                      margin: const EdgeInsets.only(right: 20, top: 6),
                       width: 100,
                       height: 30,
                       child: Align(
@@ -199,10 +199,10 @@ class _NotifState extends State<Notif> {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(bottom: 10, left: 27),
+                    margin: const EdgeInsets.only(bottom: 10, left: 27),
                     width: 440,
                     //height: 100,
-                    child: Text(
+                    child: const Text(
                       "Lorem ipsum dolor sit amet, consectetur.",
                       style: TextStyle(
                         color: Colors.white,
@@ -214,10 +214,10 @@ class _NotifState extends State<Notif> {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(bottom: 10, left: 27),
+                    margin: const EdgeInsets.only(bottom: 10, left: 27),
                     width: 440,
                     // height: 100,
-                    child: Text(
+                    child: const Text(
                       "1 hour ago",
                       style: TextStyle(
                         color: Colors.white,

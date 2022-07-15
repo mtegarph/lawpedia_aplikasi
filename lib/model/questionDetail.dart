@@ -115,8 +115,8 @@ class Answer {
   DateTime? editedAt;
 
   factory Answer.fromJson(Map<String, dynamic> json) => Answer(
-        answerId: json["answer_id"] == null ? null : json["answer_id"],
-        answer: json["answer"] == null ? null : json["answer"],
+        answerId: json["answer_id"],
+        answer: json["answer"],
         answeredBy: json["answered_by"] == null
             ? null
             : EdBy.fromJson(json["answered_by"]),
@@ -150,7 +150,7 @@ class EdBy {
   dynamic? lastName;
 
   factory EdBy.fromJson(Map<String, dynamic> json) => EdBy(
-        firstName: json["first_name"] == null ? null : json["first_name"],
+        firstName: json["first_name"],
         lastName: json["last_name"] == null ? null : json["first_name"],
       );
 

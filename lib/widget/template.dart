@@ -41,7 +41,7 @@ class _TemplateState extends State<Template> {
                   SafeArea(
                     child: Container(
                       //margin: EdgeInsets.only(bottom: defaultMargin),
-                      padding: EdgeInsets.symmetric(horizontal: 16),
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
                       width: double.infinity,
                       height: 100,
                       color: Colors.white,
@@ -57,7 +57,7 @@ class _TemplateState extends State<Template> {
                               height: 50,
                               width: 50,
                               // margin: EdgeInsets.only(right: 26),
-                              decoration: BoxDecoration(
+                              decoration: const BoxDecoration(
                                   image: DecorationImage(
                                       image:
                                           AssetImage('assets/image/Left.png'))),
@@ -71,7 +71,7 @@ class _TemplateState extends State<Template> {
                             padding: const EdgeInsets.only(top: 10),
                             child: Text(
                               widget.page,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   color: Colors.black,
                                   fontSize: 26.4,
                                   fontFamily: 'Raleway',

@@ -1,50 +1,30 @@
 part of 'page.dart';
 
-class ArsipKonsultasi extends StatefulWidget {
-  const ArsipKonsultasi({Key? key}) : super(key: key);
+class LayananHukumSub extends StatefulWidget {
+  final String? judul;
+  final int? id;
+  const LayananHukumSub({Key? key, this.judul, this.id}) : super(key: key);
 
   @override
-  _ArsipKonsultasiState createState() => _ArsipKonsultasiState();
+  State<LayananHukumSub> createState() => _LayananHukumSubState();
 }
 
-class _ArsipKonsultasiState extends State<ArsipKonsultasi> {
+class _LayananHukumSubState extends State<LayananHukumSub> {
   int page = 1;
+
   bool hasMore = true;
   bool loading = false;
   String message = "";
   final controller = ScrollController();
   final controller2 = ScrollController();
-  List<DatumKategori> listArsip = [];
-  List<String> itemsPhoto = [
-    'assets/image/book-solid.svg',
-    'assets/image/building-solid.svg',
-    'assets/image/copyright-solid.svg',
-    'assets/image/book-open-solid.svg',
-    'assets/image/ring-solid.svg',
-    'assets/image/file-contract-solid.svg',
-    'assets/image/book-solid.svg',
-    'assets/image/building-solid.svg',
-    'assets/image/copyright-solid.svg',
-    'assets/image/book-open-solid.svg',
-    'assets/image/ring-solid.svg',
-    'assets/image/file-contract-solid.svg',
-  ];
-  List<String> nama = [
-    'Notaris & PPAT',
-    'Pendirian & Perubaran',
-    'Hak Kekayaan Intelektual',
-    'Legal Drafting',
-    'Percerairan',
-    'LDD Legal Due Dilligent',
-  ];
-
-  Future getListArsip() async {
+  List<DatumSub> listArsip = [];
+  Future getListLayananHukum() async {
     if (loading) return;
     loading = true;
 
-    String apiUrl =
-        'http://lawpedia.farzcentrix.com/api/consulting-archive/categories?page=' +
-            page.toString();
+    String apiUrl = baseUrl +
+        'layanan-hukum/detail-list?id=${widget.id}&page=' +
+        page.toString();
     SharedPreferences logindata = await SharedPreferences.getInstance();
     String token = logindata.getString('token').toString();
     print(token);
@@ -57,34 +37,42 @@ class _ArsipKonsultasiState extends State<ArsipKonsultasi> {
       print(apiResult.statusCode.toString());
     }
     var data = jsonDecode(apiResult.body);
-    print(data['message']);
-    ArsipKonsultasiKategori list =
-        ArsipKonsultasiKategori.fromJson(jsonDecode(apiResult.body));
+    print(data['data']);
+    LayananHukumSubKategori list =
+        LayananHukumSubKategori.fromJson(jsonDecode(apiResult.body));
 
     setState(() {
       message = list.message.toString();
       page++;
       print(page);
       loading = false;
-      if (list.data!.archiveCategories!.data!.length <
-          list.data!.archiveCategories!.to!) {
+      if (list.data!.layananHukum!.to == null) {
+        hasMore = false;
+        if (id.toString() == id.toString()) {
+          Get.to(KonsultanHukum(
+            judul: id.toString(),
+          ));
+        }
+      } else if (list.data!.layananHukum!.data!.length <
+          list.data!.layananHukum!.to!) {
         hasMore = false;
       } else {
         hasMore = true;
       }
-      listArsip.addAll(list.data!.archiveCategories!.data!);
+      listArsip.addAll(list.data!.layananHukum!.data!);
     });
   }
 
   @override
   void initState() {
     super.initState();
-    getListArsip();
+    getListLayananHukum();
     print(listArsip.length);
     print(message);
+    print("Judul layanan hukum : " + id.toString());
     controller.addListener(() {
       if (controller.position.maxScrollExtent == controller.offset) {
-        getListArsip();
+        getListLayananHukum();
       }
     });
   }
@@ -122,62 +110,17 @@ class _ArsipKonsultasiState extends State<ArsipKonsultasi> {
                         ),
                       ),
                       const SizedBox(
-                        width: 100,
+                        width: 55,
                       ),
-                      const Padding(
-                        padding: EdgeInsets.only(top: 10, left: 15),
-                        child: Text(
-                          "Arsip Konsultasi",
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 26.4,
-                              fontFamily: 'Raleway',
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  print("Tap");
-                },
-                child: Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 25.0),
-                  width: MediaQuery.of(context).size.width,
-                  height: 50.0,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10.0),
-                    color: "e3e3e3".toColor(),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Padding(
-                          padding: const EdgeInsets.only(left: 20),
-                          child: SizedBox(
-                              width: MediaQuery.of(context).size.width / 1.3,
-                              child: TextField(
-                                controller: _searchQuery,
-                                autofocus: true,
-                                decoration: const InputDecoration(
-                                  hintText: 'cari Pertanyaan',
-                                  border: InputBorder.none,
-                                  hintStyle:
-                                      TextStyle(color: Colors.grey),
-                                ),
-                                style: const TextStyle(
-                                    color: Colors.black, fontSize: 16.0),
-                                // onChanged: updateSearchQuery,
-                                onSubmitted: (data) {
-                                  Get.to(HasilSearch(cari: data));
-                                },
-                              ))),
-                      const Padding(
-                        padding: EdgeInsets.only(right: 20),
-                        child: Icon(Icons.search),
+                      SizedBox(
+                        width: 300,
+                        child: Text(' ${widget.judul}',
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 26.4,
+                                fontFamily: 'Raleway',
+                                fontWeight: FontWeight.bold),
+                            textAlign: TextAlign.center),
                       ),
                     ],
                   ),
@@ -192,10 +135,18 @@ class _ArsipKonsultasiState extends State<ArsipKonsultasi> {
                       if (index < listArsip.length) {
                         return GestureDetector(
                           onTap: () {
-                            Get.to(ListArsip(
-                              id: listArsip[index].acId,
-                              title: listArsip[index].acCategory,
-                            ));
+                            if (listArsip.isNotEmpty) {
+                              Get.offUntil(
+                                  MaterialPageRoute(
+                                      builder: (context) => LayananHukumSub(
+                                            id: listArsip[index].idLayananHukum,
+                                            judul:
+                                                listArsip[index].detailLayanan,
+                                          )),
+                                  (route) => true);
+                            } else {
+                              Get.to(KonsultanHukum());
+                            }
                           },
                           child: Container(
                             margin: const EdgeInsets.symmetric(
@@ -222,10 +173,10 @@ class _ArsipKonsultasiState extends State<ArsipKonsultasi> {
                                 Padding(
                                     padding: const EdgeInsets.only(left: 20),
                                     child: SizedBox(
-                                      width:
-                                          MediaQuery.of(context).size.width / 3,
+                                      width: MediaQuery.of(context).size.width /
+                                          1.5,
                                       child: Text(
-                                        listArsip[index].acCategory!,
+                                        listArsip[index].detailLayanan!,
                                         style: TextStyle(
                                             fontSize: 20,
                                             color: '354259'.toColor(),

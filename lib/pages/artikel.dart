@@ -26,7 +26,7 @@ class _ArtikelState extends State<Artikel> {
     var client = http.Client();
     var apiResult = await client.get(
       Uri.parse(apiUrl),
-      headers: {"auth-token": "$token"},
+      headers: {"auth-token": token},
     );
     if (apiResult.statusCode != 200) {
       print(apiResult.statusCode.toString());
@@ -61,7 +61,7 @@ class _ArtikelState extends State<Artikel> {
     });
   }
 
-  TextEditingController _searchQuery = new TextEditingController();
+  final TextEditingController _searchQuery = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,7 +76,7 @@ class _ArtikelState extends State<Artikel> {
               SafeArea(
                 child: Container(
                   //margin: EdgeInsets.only(bottom: defaultMargin),
-                  padding: EdgeInsets.symmetric(horizontal: 16),
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
                   width: double.infinity,
                   height: 150,
                   color: Colors.white,
@@ -99,17 +99,17 @@ class _ArtikelState extends State<Artikel> {
                                 height: 50,
                                 width: 50,
                                 // margin: EdgeInsets.only(right: 26),
-                                decoration: BoxDecoration(
+                                decoration: const BoxDecoration(
                                     image: DecorationImage(
                                         image: AssetImage(
                                             'assets/image/Left.png'))),
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 100,
                             ),
-                            Padding(
-                              padding: const EdgeInsets.only(
+                            const Padding(
+                              padding: EdgeInsets.only(
                                   top: 10, left: 70, right: 70),
                               child: Text(
                                 'Artikel',
@@ -128,7 +128,7 @@ class _ArtikelState extends State<Artikel> {
                           print("Tap");
                         },
                         child: Container(
-                          margin: EdgeInsets.symmetric(
+                          margin: const EdgeInsets.symmetric(
                               horizontal: 15.0, vertical: 15),
                           width: MediaQuery.of(context).size.width,
                           height: 50.0,
@@ -142,7 +142,7 @@ class _ArtikelState extends State<Artikel> {
                             children: [
                               Padding(
                                   padding: const EdgeInsets.only(left: 20),
-                                  child: Container(
+                                  child: SizedBox(
                                       width: MediaQuery.of(context).size.width /
                                           1.3,
                                       child: TextField(
@@ -151,7 +151,7 @@ class _ArtikelState extends State<Artikel> {
                                         decoration: const InputDecoration(
                                           hintText: 'cari Artikel',
                                           border: InputBorder.none,
-                                          hintStyle: const TextStyle(
+                                          hintStyle: TextStyle(
                                               color: Colors.grey),
                                         ),
                                         style: const TextStyle(
@@ -163,8 +163,8 @@ class _ArtikelState extends State<Artikel> {
                                               HasilSearchArtikel(cari: data));
                                         },
                                       ))),
-                              Padding(
-                                padding: const EdgeInsets.only(right: 20),
+                              const Padding(
+                                padding: EdgeInsets.only(right: 20),
                                 child: Icon(Icons.search),
                               ),
                             ],
@@ -175,8 +175,8 @@ class _ArtikelState extends State<Artikel> {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 30, left: 30, bottom: 5),
+              const Padding(
+                padding: EdgeInsets.only(top: 30, left: 30, bottom: 5),
                 child: Text(
                   "Popular",
                   style: TextStyle(
@@ -190,7 +190,7 @@ class _ArtikelState extends State<Artikel> {
                   ? Container(
                       alignment: Alignment.center,
                       height: 160.0,
-                      child: CircularProgressIndicator(),
+                      child: const CircularProgressIndicator(),
                     )
                   : CarouselSlider.builder(
                       itemCount: listArtikelPopular.length,
@@ -203,7 +203,7 @@ class _ArtikelState extends State<Artikel> {
                           autoPlayCurve: Curves.fastOutSlowIn,
                           enableInfiniteScroll: false,
                           autoPlayAnimationDuration:
-                              Duration(milliseconds: 3000)),
+                              const Duration(milliseconds: 3000)),
                       itemBuilder:
                           (BuildContext context, int index, int realIndex) {
                         return GestureDetector(
@@ -214,7 +214,7 @@ class _ArtikelState extends State<Artikel> {
                           child: Padding(
                             padding: const EdgeInsets.all(15.0),
                             child: Container(
-                              padding: EdgeInsets.only(bottom: 10),
+                              padding: const EdgeInsets.only(bottom: 10),
                               child: Stack(
                                 fit: StackFit.loose,
                                 children: [
@@ -222,7 +222,7 @@ class _ArtikelState extends State<Artikel> {
                                     decoration: BoxDecoration(
                                         borderRadius:
                                             BorderRadius.circular(10.0),
-                                        image: DecorationImage(
+                                        image: const DecorationImage(
                                             scale: 20,
                                             image: NetworkImage(
                                                 "https://i.pinimg.com/564x/94/17/82/941782f60e16a9d7f9b4cea4ae7025e0.jpg"),
@@ -237,7 +237,7 @@ class _ArtikelState extends State<Artikel> {
                                         width:
                                             MediaQuery.of(context).size.width /
                                                 1.11,
-                                        decoration: BoxDecoration(
+                                        decoration: const BoxDecoration(
                                             borderRadius: BorderRadius.only(
                                                 bottomRight:
                                                     Radius.circular(10),
@@ -251,8 +251,8 @@ class _ArtikelState extends State<Artikel> {
                                                   spreadRadius: 4)
                                             ]),
                                         child: Padding(
-                                          padding: EdgeInsets.symmetric(
-                                              vertical: 20, horizontal: 20),
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 15, horizontal: 20),
                                           child: Column(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
@@ -264,7 +264,7 @@ class _ArtikelState extends State<Artikel> {
                                                 child: DescriptionTextWidget(
                                                   color: "DA2323",
                                                   size: 23,
-                                                  length: 30,
+                                                  length: 28,
                                                   text: listArtikelPopular[
                                                               index] !=
                                                           null
@@ -282,13 +282,13 @@ class _ArtikelState extends State<Artikel> {
                                                   children: [
                                                     Row(
                                                       children: [
-                                                        Image(
+                                                        const Image(
                                                           image: AssetImage(
                                                               "assets/image/user.png"),
                                                           fit: BoxFit.fitWidth,
                                                           height: 18,
                                                         ),
-                                                        SizedBox(
+                                                        const SizedBox(
                                                           width: 5,
                                                         ),
                                                         Text(
@@ -312,18 +312,18 @@ class _ArtikelState extends State<Artikel> {
                                                         ),
                                                       ],
                                                     ),
-                                                    SizedBox(
+                                                    const SizedBox(
                                                       width: 25,
                                                     ),
                                                     Row(
                                                       children: [
-                                                        Image(
+                                                        const Image(
                                                           image: AssetImage(
                                                               "assets/image/eye.png"),
                                                           fit: BoxFit.fitWidth,
                                                           height: 15,
                                                         ),
-                                                        SizedBox(
+                                                        const SizedBox(
                                                           width: 5,
                                                         ),
                                                         Text(
@@ -354,8 +354,8 @@ class _ArtikelState extends State<Artikel> {
                         );
                       },
                     ),
-              Padding(
-                padding: const EdgeInsets.only(top: 30, left: 30, bottom: 5),
+              const Padding(
+                padding: EdgeInsets.only(top: 30, left: 30, bottom: 5),
                 child: Text(
                   "Lainnya",
                   style: TextStyle(
@@ -384,7 +384,7 @@ class _ArtikelState extends State<Artikel> {
                               Container(
                                 height: 100,
                                 width: 160,
-                                margin: EdgeInsets.only(left: 30),
+                                margin: const EdgeInsets.only(left: 30),
                                 decoration: BoxDecoration(
                                     color: 'C6B69D'.toColor(),
                                     borderRadius: BorderRadius.circular(10.0),
@@ -393,11 +393,11 @@ class _ArtikelState extends State<Artikel> {
                                         color: Colors.grey.withOpacity(0.5),
                                         spreadRadius: 2,
                                         blurRadius: 10,
-                                        offset: Offset(
+                                        offset: const Offset(
                                             5, 3), // changes position of shadow
                                       ),
                                     ],
-                                    image: DecorationImage(
+                                    image: const DecorationImage(
                                         image: NetworkImage(
                                             "https://i.pinimg.com/564x/94/17/82/941782f60e16a9d7f9b4cea4ae7025e0.jpg"),
                                         fit: BoxFit.fill)),
@@ -409,7 +409,7 @@ class _ArtikelState extends State<Artikel> {
                                   Padding(
                                       padding: const EdgeInsets.only(
                                           left: 10, top: 5),
-                                      child: Container(
+                                      child: SizedBox(
                                         height:
                                             MediaQuery.of(context).size.height /
                                                 15,
@@ -423,7 +423,7 @@ class _ArtikelState extends State<Artikel> {
                                                 .articleTitle
                                                 .toString(),
                                             size: 22,
-                                            length: 28,
+                                            length: 24,
                                             color: '383838',
                                           ),
                                         ),
@@ -443,7 +443,7 @@ class _ArtikelState extends State<Artikel> {
                                               fontFamily: 'Raleway',
                                               fontWeight: FontWeight.w500),
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           width: 30,
                                         ),
                                         Text(
@@ -465,10 +465,10 @@ class _ArtikelState extends State<Artikel> {
                       );
                     } else {
                       return hasMore == true
-                          ? Center(
+                          ? const Center(
                               child: Loading(),
                             )
-                          : Text("TIdak ada Data Lagi");
+                          : const Text("TIdak ada Data Lagi");
                     }
                   })
             ]),

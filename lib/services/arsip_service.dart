@@ -9,8 +9,8 @@ class ArsipApi {
       final List cari = jsonDecode(respone.body);
       return cari.map((json) => Cari.fromJson(json)).where((element) {
         final title = element.title.toLowerCase();
-        final query_title = query.toLowerCase();
-        return title.contains(query_title);
+        final queryTitle = query.toLowerCase();
+        return title.contains(queryTitle);
       }).toList();
     } else {
       throw Exception();
@@ -30,7 +30,7 @@ class ArsipApi {
     var client = http.Client();
     var apiResult = await client.get(
       Uri.parse(apiUrl),
-      headers: {"auth-token": "$token"},
+      headers: {"auth-token": token},
     );
     if (apiResult.statusCode != 200) {
       print(apiResult.statusCode.toString());

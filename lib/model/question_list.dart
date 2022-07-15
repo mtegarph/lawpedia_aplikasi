@@ -139,14 +139,14 @@ class SearchPertanyaan {
 
   factory SearchPertanyaan.fromJson(Map<String, dynamic> json) =>
       SearchPertanyaan(
-        status: json["status"] == null ? null : json["status"],
-        message: json["message"] == null ? null : json["message"],
+        status: json["status"],
+        message: json["message"],
         data: json["data"] == null ? null : DataSearch.fromJson(json["data"]),
       );
 
   Map<String, dynamic> toJson() => {
-        "status": status == null ? null : status,
-        "message": message == null ? null : message,
+        "status": status,
+        "message": message,
         "data": data == null ? null : data?.toJson(),
       };
 }
@@ -194,33 +194,33 @@ class QuestionsSearch {
 
   factory QuestionsSearch.fromJson(Map<String, dynamic> json) =>
       QuestionsSearch(
-        currentPage: json["current_page"] == null ? null : json["current_page"],
+        currentPage: json["current_page"],
         data: json["data"] == null
             ? null
             : List<DatumSearch>.from(
                 json["data"].map((x) => DatumSearch.fromJson(x))),
         firstPageUrl:
-            json["first_page_url"] == null ? null : json["first_page_url"],
-        from: json["from"] == null ? null : json["from"],
+            json["first_page_url"],
+        from: json["from"],
         nextPageUrl: json["next_page_url"],
-        path: json["path"] == null ? null : json["path"],
-        perPage: json["per_page"] == null ? null : json["per_page"],
+        path: json["path"],
+        perPage: json["per_page"],
         prevPageUrl: json["prev_page_url"],
-        to: json["to"] == null ? null : json["to"],
+        to: json["to"],
       );
 
   Map<String, dynamic> toJson() => {
-        "current_page": currentPage == null ? null : currentPage,
+        "current_page": currentPage,
         "data": data == null
             ? null
             : List<dynamic>.from(data!.map((x) => x.toJson())),
-        "first_page_url": firstPageUrl == null ? null : firstPageUrl,
-        "from": from == null ? null : from,
+        "first_page_url": firstPageUrl,
+        "from": from,
         "next_page_url": nextPageUrl,
-        "path": path == null ? null : path,
-        "per_page": perPage == null ? null : perPage,
+        "path": path,
+        "per_page": perPage,
         "prev_page_url": prevPageUrl,
-        "to": to == null ? null : to,
+        "to": to,
       };
 }
 
@@ -242,10 +242,10 @@ class DatumSearch {
   DateTime? questionedAt;
 
   factory DatumSearch.fromJson(Map<String, dynamic> json) => DatumSearch(
-        questionId: json["question_id"] == null ? null : json["question_id"],
-        userId: json["user_id"] == null ? null : json["user_id"],
-        qTitle: json["q_title"] == null ? null : json["q_title"],
-        qAnonymity: json["q_anonymity"] == null ? null : json["q_anonymity"],
+        questionId: json["question_id"],
+        userId: json["user_id"],
+        qTitle: json["q_title"],
+        qAnonymity: json["q_anonymity"],
         answeredAt: json["answered_at"] == null
             ? null
             : DateTime.parse(json["answered_at"]),
@@ -255,10 +255,10 @@ class DatumSearch {
       );
 
   Map<String, dynamic> toJson() => {
-        "question_id": questionId == null ? null : questionId,
-        "user_id": userId == null ? null : userId,
-        "q_title": qTitle == null ? null : qTitle,
-        "q_anonymity": qAnonymity == null ? null : qAnonymity,
+        "question_id": questionId,
+        "user_id": userId,
+        "q_title": qTitle,
+        "q_anonymity": qAnonymity,
         "answered_at":
             answeredAt == null ? null : answeredAt?.toIso8601String(),
         "questioned_at":

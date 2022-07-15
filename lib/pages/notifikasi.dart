@@ -21,7 +21,7 @@ class _NotifikasiState extends State<Notifikasi> {
             SafeArea(
               child: Container(
                 //margin: EdgeInsets.only(bottom: defaultMargin),
-                padding: EdgeInsets.symmetric(horizontal: 16),
+                padding: const EdgeInsets.symmetric(horizontal: 16),
                 width: double.infinity,
                 height: 100,
                 color: Colors.white,
@@ -35,17 +35,17 @@ class _NotifikasiState extends State<Notifikasi> {
                       child: Container(
                         height: 50,
                         width: 50,
-                        margin: EdgeInsets.only(right: 26),
-                        decoration: BoxDecoration(
+                        margin: const EdgeInsets.only(right: 26),
+                        decoration: const BoxDecoration(
                             image: DecorationImage(
                                 image: AssetImage('assets/image/Left.png'))),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 130,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 10),
+                    const Padding(
+                      padding: EdgeInsets.only(top: 10),
                       child: Text(
                         "Notifikasi",
                         style: TextStyle(
@@ -59,8 +59,8 @@ class _NotifikasiState extends State<Notifikasi> {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 15.0),
+            const Padding(
+              padding: EdgeInsets.only(top: 15.0),
               child: Text(
                 "Atur bagaimana kamu menerima notifikasi Lawpedia.",
                 style: TextStyle(fontSize: 20, fontFamily: 'Raleway'),
@@ -79,12 +79,12 @@ class _NotifikasiState extends State<Notifikasi> {
                     //   endIndent: 0.0,
                     // ),
                     Padding(
-                      padding: EdgeInsets.only(top: 10),
+                      padding: const EdgeInsets.only(top: 10),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 20.0),
+                          const Padding(
+                            padding: EdgeInsets.only(left: 20.0),
                             child: Text(
                               'Email',
                               style: TextStyle(
@@ -109,10 +109,10 @@ class _NotifikasiState extends State<Notifikasi> {
                         ],
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
-                    Divider(
+                    const Divider(
                       thickness: 0.5,
                       color: Colors.black,
                       indent: 0.0,
@@ -131,8 +131,8 @@ class _NotifikasiState extends State<Notifikasi> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.only(left: 20.0),
+                        const Padding(
+                          padding: EdgeInsets.only(left: 20.0),
                           child: Text(
                             'Push Notification',
                             style: TextStyle(
@@ -152,10 +152,10 @@ class _NotifikasiState extends State<Notifikasi> {
                         )
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 5,
                     ),
-                    Divider(
+                    const Divider(
                       thickness: 0.5,
                       color: Colors.black,
                       indent: 0.0,
@@ -174,8 +174,8 @@ class _NotifikasiState extends State<Notifikasi> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.only(left: 20.0),
+                        const Padding(
+                          padding: EdgeInsets.only(left: 20.0),
                           child: Text(
                             'Getar',
                             style: TextStyle(
@@ -199,10 +199,10 @@ class _NotifikasiState extends State<Notifikasi> {
                         )
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
-                    Divider(
+                    const Divider(
                       thickness: 0.8,
                       color: Colors.black,
                       indent: 0.0,
@@ -221,8 +221,8 @@ class _NotifikasiState extends State<Notifikasi> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.only(left: 20.0),
+                        const Padding(
+                          padding: EdgeInsets.only(left: 20.0),
                           child: Text(
                             'Suara',
                             style: TextStyle(
@@ -246,10 +246,10 @@ class _NotifikasiState extends State<Notifikasi> {
                         )
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
-                    Divider(
+                    const Divider(
                       thickness: 0.3,
                       color: Colors.black,
                       indent: 0.0,

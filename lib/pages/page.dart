@@ -2,6 +2,10 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
+<<<<<<< HEAD
+=======
+import 'package:webview_flutter_plus/webview_flutter_plus.dart';
+>>>>>>> main
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:floating_pullup_card/floating_pullup_card.dart';
@@ -33,6 +37,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:twitter_login/twitter_login.dart';
 import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
+
 part 'hasil_search_artikel.dart';
 part 'konsultan_hukum.dart';
 part 'search_page.dart';
@@ -56,3 +61,7 @@ part 'web_artikel.dart';
 part 'user-edit.dart';
 part 'hasil_search_Kamus_hukum.dart';
 part 'detail_konsultan.dart';
+part 'kategori_layanan_hukum.dart';
+part 'layanan_hukum_sub.dart';
+
+String id = "";

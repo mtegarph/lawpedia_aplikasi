@@ -21,7 +21,7 @@ class _KamusHukumState extends State<KamusHukum> {
     var client = http.Client();
     var apiResult = await client.get(
       Uri.parse(apiUrl),
-      headers: {"auth-token": "$token"},
+      headers: {"auth-token": token},
     );
     if (apiResult.statusCode != 200) {
       print(apiResult.statusCode.toString());
@@ -55,7 +55,7 @@ class _KamusHukumState extends State<KamusHukum> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Container(
-              margin: EdgeInsets.only(top: 20, left: 30),
+              margin: const EdgeInsets.only(top: 20, left: 30),
               color: 'FF0000'.toColor(),
               width: 5,
               height: 140,
@@ -78,7 +78,7 @@ class _KamusHukumState extends State<KamusHukum> {
                 // ),
                 Padding(
                   padding: const EdgeInsets.only(top: 25),
-                  child: Container(
+                  child: SizedBox(
                     height: 150,
                     width: 500,
                     child: DescriptionTextWidget(
@@ -101,13 +101,13 @@ class _KamusHukumState extends State<KamusHukum> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.all(16.0),
+        const Padding(
+          padding: EdgeInsets.all(16.0),
           child: Text("error"),
         ),
         FlatButton(
           onPressed: retryListener,
-          child: Text('Retry'),
+          child: const Text('Retry'),
         )
       ],
     );
@@ -129,7 +129,7 @@ class _KamusHukumState extends State<KamusHukum> {
     return list;
   }
 
-  TextEditingController _searchQuery = new TextEditingController();
+  final TextEditingController _searchQuery = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -141,7 +141,7 @@ class _KamusHukumState extends State<KamusHukum> {
               SafeArea(
                 child: Container(
                   //margin: EdgeInsets.only(bottom: defaultMargin),
-                  padding: EdgeInsets.symmetric(horizontal: 16),
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
                   width: double.infinity,
                   height: 100,
                   color: Colors.white,
@@ -156,16 +156,16 @@ class _KamusHukumState extends State<KamusHukum> {
                           height: 50,
                           width: 50,
                           // margin: EdgeInsets.only(right: 26),
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                               image: DecorationImage(
                                   image: AssetImage('assets/image/Left.png'))),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 110,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10),
+                      const Padding(
+                        padding: EdgeInsets.only(top: 10),
                         child: Text(
                           "Kamus Hukum",
                           style: TextStyle(
@@ -190,7 +190,7 @@ class _KamusHukumState extends State<KamusHukum> {
                         print("Tap");
                       },
                       child: Container(
-                        margin: EdgeInsets.symmetric(horizontal: 20.0),
+                        margin: const EdgeInsets.symmetric(horizontal: 20.0),
                         width: MediaQuery.of(context).size.width / 1.45,
                         height: 50.0,
                         decoration: BoxDecoration(
@@ -203,7 +203,7 @@ class _KamusHukumState extends State<KamusHukum> {
                           children: [
                             Padding(
                                 padding: const EdgeInsets.only(left: 20),
-                                child: Container(
+                                child: SizedBox(
                                     width: MediaQuery.of(context).size.width / 3,
                                     child: TextField(
                                       controller: _searchQuery,
@@ -212,7 +212,7 @@ class _KamusHukumState extends State<KamusHukum> {
                                         hintText: 'cari Kamus Hukum',
                                         border: InputBorder.none,
                                         hintStyle:
-                                            const TextStyle(color: Colors.grey),
+                                            TextStyle(color: Colors.grey),
                                       ),
                                       style: const TextStyle(
                                           color: Colors.black, fontSize: 16.0),
@@ -225,8 +225,8 @@ class _KamusHukumState extends State<KamusHukum> {
                                         ));
                                       },
                                     ))),
-                            Padding(
-                              padding: const EdgeInsets.only(right: 20),
+                            const Padding(
+                              padding: EdgeInsets.only(right: 20),
                               child: Icon(Icons.search),
                             ),
                           ],
@@ -261,7 +261,7 @@ class _KamusHukumState extends State<KamusHukum> {
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 25,
               ),
               Paginator.listView(
@@ -273,12 +273,12 @@ class _KamusHukumState extends State<KamusHukum> {
                 },
                 listItemBuilder: listItemBuilder,
                 pageLoadFuture: getQuestionDetail,
-                scrollPhysics: BouncingScrollPhysics(),
+                scrollPhysics: const BouncingScrollPhysics(),
                 loadingWidgetBuilder: () {
                   return Container(
                     alignment: Alignment.center,
                     height: 160.0,
-                    child: CircularProgressIndicator(),
+                    child: const CircularProgressIndicator(),
                   );
                 },
                 errorWidgetBuilder: errorWidgetMaker,

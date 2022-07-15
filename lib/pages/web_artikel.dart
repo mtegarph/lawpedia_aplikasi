@@ -9,10 +9,10 @@ class WebArtikel extends StatefulWidget {
 }
 
 class _WebArtikelState extends State<WebArtikel> {
-  late WebViewController controller;
+  late WebViewPlusController controller;
   @override
   Widget build(BuildContext context) {
-    return WebView(
+    return WebViewPlus(
       javascriptMode: JavascriptMode.unrestricted,
       onWebViewCreated: (controller) async {
         this.controller = controller;

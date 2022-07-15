@@ -68,21 +68,14 @@ class _UserEditState extends State<UserEdit> {
               widget.facebook?['email']);
       noHp = TextEditingController(
           text: (context.bloc<UserCubit>().state as userSuccess)
-                      .userDetail
-                      .data
-                      ?.userProfile
-                      ?.noTelp !=
-                  null
-              ? (context.bloc<UserCubit>().state as userSuccess)
                   .userDetail
                   .data
                   ?.userProfile
-                  ?.noTelp
-              : "");
+                  ?.noTelp ?? "");
     });
     // UserState state = context.read<UserCubit>().state;
 
-    imagePicker = new ImagePicker();
+    imagePicker = ImagePicker();
     // nama = TextEditingController(
     //     text: (state as userSuccess).userDetail.data?.userProfile?.firstName ??
     //         widget.user?.displayName ??
@@ -110,7 +103,7 @@ class _UserEditState extends State<UserEdit> {
                   SafeArea(
                     child: Container(
                       //margin: EdgeInsets.only(bottom: defaultMargin),
-                      padding: EdgeInsets.symmetric(horizontal: 16),
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
                       width: double.infinity,
                       height: 100,
                       color: Colors.white,
@@ -124,16 +117,16 @@ class _UserEditState extends State<UserEdit> {
                             child: Container(
                               height: 50,
                               width: 50,
-                              margin: EdgeInsets.only(right: 40),
-                              decoration: BoxDecoration(
+                              margin: const EdgeInsets.only(right: 40),
+                              decoration: const BoxDecoration(
                                   image: DecorationImage(
                                       image:
                                           AssetImage('assets/image/Left.png'))),
                             ),
                           ),
-                          SizedBox(width: 140),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 10),
+                          const SizedBox(width: 140),
+                          const Padding(
+                            padding: EdgeInsets.only(top: 10),
                             child: Text(
                               "Profil",
                               style: TextStyle(
@@ -177,8 +170,8 @@ class _UserEditState extends State<UserEdit> {
                               child: Wrap(
                                 children: [
                                   ListTile(
-                                      leading: Icon(Icons.photo_library),
-                                      title: Text('Photo Library'),
+                                      leading: const Icon(Icons.photo_library),
+                                      title: const Text('Photo Library'),
                                       onTap: () async {
                                         XFile? image =
                                             await imagePicker.pickImage(
@@ -202,8 +195,8 @@ class _UserEditState extends State<UserEdit> {
                                         // Navigator.of(context).pop();
                                       }),
                                   ListTile(
-                                    leading: Icon(Icons.photo_camera),
-                                    title: Text('Camera'),
+                                    leading: const Icon(Icons.photo_camera),
+                                    title: const Text('Camera'),
                                     onTap: () async {
                                       XFile? image =
                                           await imagePicker.pickImage(
@@ -239,7 +232,7 @@ class _UserEditState extends State<UserEdit> {
                       child: Text(
                         widget.user?.displayName.toString() ??
                             widget.facebook?['name'],
-                        style: TextStyle(
+                        style: const TextStyle(
                             color: Colors.black,
                             fontSize: 24,
                             fontFamily: 'Raleway',
@@ -248,7 +241,7 @@ class _UserEditState extends State<UserEdit> {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(left: 20, top: 10, right: 20),
+                    margin: const EdgeInsets.only(left: 20, top: 10, right: 20),
                     width: 140,
                     height: 30,
                     child: Align(
@@ -273,7 +266,7 @@ class _UserEditState extends State<UserEdit> {
                     child: Container(
                       child: Column(
                         children: [
-                          Container(
+                          const SizedBox(
                             width: double.infinity,
                             child: Text(
                               "First Name",
@@ -285,9 +278,9 @@ class _UserEditState extends State<UserEdit> {
                             ),
                           ),
                           TextField(
-                            style: TextStyle(fontSize: 18),
+                            style: const TextStyle(fontSize: 18),
                             maxLength: 70,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               alignLabelWithHint: true,
                               hintStyle: TextStyle(fontSize: 18),
                               hintText: "First Name",
@@ -310,7 +303,7 @@ class _UserEditState extends State<UserEdit> {
                     child: Container(
                       child: Column(
                         children: [
-                          Container(
+                          const SizedBox(
                             width: double.infinity,
                             child: Text(
                               "Last Name",
@@ -322,9 +315,9 @@ class _UserEditState extends State<UserEdit> {
                             ),
                           ),
                           TextField(
-                            style: TextStyle(fontSize: 18),
+                            style: const TextStyle(fontSize: 18),
                             maxLength: 70,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               alignLabelWithHint: true,
                               hintStyle: TextStyle(fontSize: 18),
                               hintText: "last Name",
@@ -344,7 +337,7 @@ class _UserEditState extends State<UserEdit> {
                     child: Container(
                       child: Column(
                         children: [
-                          Container(
+                          const SizedBox(
                             width: double.infinity,
                             child: Text(
                               "Email",
@@ -357,9 +350,9 @@ class _UserEditState extends State<UserEdit> {
                           ),
                           TextField(
                             enabled: false,
-                            style: TextStyle(fontSize: 18),
+                            style: const TextStyle(fontSize: 18),
                             maxLength: 70,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               alignLabelWithHint: true,
                               hintStyle: TextStyle(fontSize: 18),
                               hintText: "Nama",
@@ -379,7 +372,7 @@ class _UserEditState extends State<UserEdit> {
                     child: Container(
                       child: Column(
                         children: [
-                          Container(
+                          const SizedBox(
                             width: double.infinity,
                             child: Text(
                               "No.Hp",
@@ -391,9 +384,9 @@ class _UserEditState extends State<UserEdit> {
                             ),
                           ),
                           TextField(
-                            style: TextStyle(fontSize: 18),
+                            style: const TextStyle(fontSize: 18),
                             maxLength: 70,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               alignLabelWithHint: true,
                               hintStyle: TextStyle(fontSize: 18),
                               hintText: "Nomor Handphone",
@@ -414,7 +407,7 @@ class _UserEditState extends State<UserEdit> {
                     child: Container(
                       child: Column(
                         children: [
-                          Container(
+                          const SizedBox(
                             width: double.infinity,
                             child: Text(
                               "Tanggal Lahir",
@@ -430,14 +423,14 @@ class _UserEditState extends State<UserEdit> {
                             children: [
                               Container(
                                 alignment: Alignment.centerLeft,
-                                padding: EdgeInsets.only(top: 15, left: 3),
+                                padding: const EdgeInsets.only(top: 15, left: 3),
                                 child: Text(
                                   state.userDetail.data?.userProfile
                                               ?.tnglLahir !=
                                           null
                                       ? "${state.userDetail.data?.userProfile?.tnglLahir?.year}/${state.userDetail.data?.userProfile?.tnglLahir?.month}/${state.userDetail.data?.userProfile?.tnglLahir?.day}"
                                       : "${date.year}/${date.month}/${date.day}",
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       color: Colors.black,
                                       fontSize: 25,
                                       fontFamily: 'Raleway',
@@ -460,18 +453,18 @@ class _UserEditState extends State<UserEdit> {
                                     });
                                   }
                                 },
-                                child: Padding(
+                                child: const Padding(
                                   padding:
-                                      const EdgeInsets.only(right: 2, top: 15),
+                                      EdgeInsets.only(right: 2, top: 15),
                                   child: FaIcon(CupertinoIcons.calendar),
                                 ),
                               )
                             ],
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 5,
                           ),
-                          Divider(
+                          const Divider(
                             color: Colors.black,
                             thickness: 0.8,
                           ),
@@ -495,22 +488,22 @@ class _UserEditState extends State<UserEdit> {
                                   MediaQuery.of(context).size.width / 2, 75),
                               alignment: Alignment.centerLeft),
                           onPressed: () async {
-                            DateTime? tgl_lhr;
+                            DateTime? tglLhr;
                             if (date != null) {
-                              tgl_lhr = date;
+                              tglLhr = date;
                             } else {
-                              tgl_lhr =
+                              tglLhr =
                                   state.userDetail.data?.userProfile?.tnglLahir;
                             }
                             await context.read<LoginCubit>().editUsesr(
                                 nama!.text.toString(),
                                 lastNama!.text.toString(),
-                                "${tgl_lhr!.day}/${tgl_lhr.month}/${tgl_lhr.year}",
+                                "${tglLhr!.day}/${tglLhr.month}/${tglLhr.year}",
                                 noHp!.text.toString());
                             LoginState state1 =
                                 context.read<LoginCubit>().state;
                             print(
-                                "${tgl_lhr.day}/${tgl_lhr.month}/${tgl_lhr.year}");
+                                "${tglLhr.day}/${tglLhr.month}/${tglLhr.year}");
                             if (state1 is gagalLoginState) {
                               print(state1.message);
                               return alertDialog(
@@ -547,7 +540,7 @@ class _UserEditState extends State<UserEdit> {
               ),
             );
           } else {
-            return Center(
+            return const Center(
               child: Loading(),
             );
           }

@@ -1,7 +1,7 @@
 part of 'widget.dart';
 
 class BottomSheetSwitch extends StatefulWidget {
-  BottomSheetSwitch({@required this.switchValue, @required this.valueChanged});
+  const BottomSheetSwitch({@required this.switchValue, @required this.valueChanged});
 
   final bool? switchValue;
   final ValueChanged? valueChanged;

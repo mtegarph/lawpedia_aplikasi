@@ -35,10 +35,10 @@ class _KategoriKamusHukumState extends State<KategoriKamusHukum> {
               ? Container(
                   alignment: Alignment.center,
                   height: 160.0,
-                  child: CircularProgressIndicator(),
+                  child: const CircularProgressIndicator(),
                 )
               : Padding(
-                  padding: EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(20),
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                         padding: EdgeInsets.zero,

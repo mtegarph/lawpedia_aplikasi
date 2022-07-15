@@ -8,17 +8,17 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
-  TextEditingController _searchQuery = new TextEditingController();
+  TextEditingController _searchQuery = TextEditingController();
   @override
   void initState() {
     super.initState();
 
-    _searchQuery = new TextEditingController();
+    _searchQuery = TextEditingController();
   }
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController search = new TextEditingController();
+    TextEditingController search = TextEditingController();
     bool show = false;
     var data = {};
     return Scaffold(
@@ -30,7 +30,7 @@ class _SearchPageState extends State<SearchPage> {
             SafeArea(
               child: Container(
                 //margin: EdgeInsets.only(bottom: defaultMargin),
-                padding: EdgeInsets.symmetric(horizontal: 16),
+                padding: const EdgeInsets.symmetric(horizontal: 16),
                 width: double.infinity,
                 height: 100,
                 color: Colors.white,
@@ -45,16 +45,16 @@ class _SearchPageState extends State<SearchPage> {
                         height: 50,
                         width: 50,
                         // margin: EdgeInsets.only(right: 26),
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                             image: DecorationImage(
                                 image: AssetImage('assets/image/Left.png'))),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 100,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 10),
+                    const Padding(
+                      padding: EdgeInsets.only(top: 10),
                       child: Text(
                         "Cari Pertanyaan",
                         style: TextStyle(
@@ -73,7 +73,7 @@ class _SearchPageState extends State<SearchPage> {
                 print("Tap");
               },
               child: Container(
-                margin: EdgeInsets.symmetric(horizontal: 25.0),
+                margin: const EdgeInsets.symmetric(horizontal: 25.0),
                 width: MediaQuery.of(context).size.width,
                 height: 50.0,
                 decoration: BoxDecoration(
@@ -86,7 +86,7 @@ class _SearchPageState extends State<SearchPage> {
                   children: [
                     Padding(
                         padding: const EdgeInsets.only(left: 20),
-                        child: Container(
+                        child: SizedBox(
                             width: MediaQuery.of(context).size.width / 1.3,
                             child: TextField(
                               controller: _searchQuery,
@@ -94,7 +94,7 @@ class _SearchPageState extends State<SearchPage> {
                               decoration: const InputDecoration(
                                 hintText: 'cari Pertanyaan',
                                 border: InputBorder.none,
-                                hintStyle: const TextStyle(color: Colors.grey),
+                                hintStyle: TextStyle(color: Colors.grey),
                               ),
                               style: const TextStyle(
                                   color: Colors.black, fontSize: 16.0),
@@ -144,8 +144,8 @@ class _SearchPageState extends State<SearchPage> {
                             //   ),
                             // ),
                             )),
-                    Padding(
-                      padding: const EdgeInsets.only(right: 20),
+                    const Padding(
+                      padding: EdgeInsets.only(right: 20),
                       child: Icon(Icons.search),
                     ),
                   ],

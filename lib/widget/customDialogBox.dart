@@ -47,7 +47,7 @@ class _CustomDialogBoxState extends State<CustomDialogBox> {
               shape: BoxShape.rectangle,
               color: Colors.white,
               borderRadius: BorderRadius.circular(padding),
-              boxShadow: [
+              boxShadow: const [
                 BoxShadow(color: Colors.black38, blurRadius: 30.0),
               ]),
           child: Column(
@@ -55,20 +55,20 @@ class _CustomDialogBoxState extends State<CustomDialogBox> {
             children: <Widget>[
               Text(
                 widget.title,
-                style: TextStyle(
+                style: const TextStyle(
                     fontSize: 36,
                     color: Colors.black,
                     fontFamily: 'Raleway',
                     fontWeight: FontWeight.bold),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 20),
                 child: Text(
                   widget.descriptions,
-                  style: TextStyle(
+                  style: const TextStyle(
                      // letterSpacing: 2.5,
                       fontSize: 23,
                       color: Colors.black,
@@ -77,7 +77,7 @@ class _CustomDialogBoxState extends State<CustomDialogBox> {
                   textAlign: TextAlign.center,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Padding(
@@ -112,7 +112,7 @@ class _CustomDialogBoxState extends State<CustomDialogBox> {
                       )),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 60,
               )
             ],

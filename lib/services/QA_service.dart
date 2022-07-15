@@ -10,7 +10,7 @@ class QAService {
     print(token);
     var client = http.Client();
     var apiResult = await client.post(Uri.parse(apiUrl),
-        headers: {"auth-token": "$token"},
+        headers: {"auth-token": token},
         body: {'title': title, 'body': body, 'anonym': anonim.toString()});
     if (apiResult.statusCode != 200) {
       print(apiResult.statusCode.toString());
