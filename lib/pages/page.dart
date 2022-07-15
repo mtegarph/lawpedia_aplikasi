@@ -2,10 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
-<<<<<<< HEAD
-=======
-import 'package:webview_flutter_plus/webview_flutter_plus.dart';
->>>>>>> main
+//import 'package:webview_flutter_plus/webview_flutter_plus.dart';
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:floating_pullup_card/floating_pullup_card.dart';
@@ -57,7 +54,7 @@ part 'notif.dart';
 part 'kamus_hukum.dart';
 part 'arsip_konsultasi.dart';
 part 'kategori_kamus_hukum.dart';
-part 'web_artikel.dart';
+//part 'web_artikel.dart';
 part 'user-edit.dart';
 part 'hasil_search_Kamus_hukum.dart';
 part 'detail_konsultan.dart';

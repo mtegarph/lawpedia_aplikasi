@@ -195,8 +195,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.0+1"
-<<<<<<< HEAD
-=======
   flutter_html:
     dependency: "direct main"
     description:
@@ -204,7 +202,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.0-alpha.3"
->>>>>>> main
   flutter_keyboard_visibility:
     dependency: transitive
     description:
@@ -488,6 +485,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.7.0"
+  mime:
+    dependency: transitive
+    description:
+      name: mime
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.2"
   nested:
     dependency: transitive
     description:
@@ -857,8 +861,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.0"
-<<<<<<< HEAD
-=======
   uuid:
     dependency: transitive
     description:
@@ -866,7 +868,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.6"
->>>>>>> main
   vector_math:
     dependency: transitive
     description:
@@ -874,10 +875,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.1"
-<<<<<<< HEAD
-  webview_flutter:
-    dependency: "direct main"
-=======
   video_player:
     dependency: transitive
     description:
@@ -915,7 +912,6 @@ packages:
     version: "2.0.10"
   wakelock:
     dependency: transitive
->>>>>>> main
     description:
       name: wakelock
       url: "https://pub.dartlang.org"
@@ -970,8 +966,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.9.0"
-<<<<<<< HEAD
-=======
   webview_flutter_plus:
     dependency: "direct main"
     description:
@@ -979,7 +973,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.2.4"
->>>>>>> main
   webview_flutter_wkwebview:
     dependency: transitive
     description:
