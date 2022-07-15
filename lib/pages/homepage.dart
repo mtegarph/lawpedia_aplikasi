@@ -60,7 +60,7 @@ class _HomePageState extends State<HomePage> {
     if (loading_arsip) return;
     loading_arsip = true;
     String apiUrl =
-        'http://lawpedia.farzcentrix.com/api/consulting-archive/categories?page=' +
+        'https://development.lawpedia.id/api/consulting-archive/categories?page=' +
             page.toString();
     SharedPreferences logindata = await SharedPreferences.getInstance();
     String token = logindata.getString('token').toString();
@@ -98,6 +98,7 @@ class _HomePageState extends State<HomePage> {
     // TODO: implement initState
     super.initState();
     _data();
+    context.read<UserCubit>().getUser();
     context.read<KonsultanhukumCubit>().getBannerKonsultan().then((value) {
       setState(() {
         loading_home = false;
@@ -392,23 +393,37 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.only(right: 5),
-                              child: GestureDetector(
-                                onTap: () => Get.to(Setting(
-                                  user: widget.user,
-                                  facebook: widget.facebook,
-                                )),
-                                child: CircleAvatar(
-                                    radius: 20,
-                                    backgroundImage: NetworkImage(widget
-                                            .user?.photoUrl
-                                            .toString() ??
-                                        widget.facebook?["picture"]["data"]
-                                            ["url"] ??
-                                        "https://i.pinimg.com/736x/89/90/48/899048ab0cc455154006fdb9676964b3.jpg")),
-                              ),
-                            )
+                            BlocBuilder<UserCubit, UserState>(
+                                builder: (context, state) {
+                              if (state is userSuccess) {
+                                return Padding(
+                                  padding: const EdgeInsets.only(right: 5),
+                                  child: GestureDetector(
+                                    onTap: () => Get.to(Setting(
+                                      user: widget.user,
+                                      facebook: widget.facebook,
+                                    )),
+                                    child: CircleAvatar(
+                                        radius: 20,
+                                        backgroundImage: NetworkImage(state
+                                                    .userDetail
+                                                    .data!
+                                                    .userProfile!
+                                                    .profilePict
+                                                    .toString() ==
+                                                "-"
+                                            ? "https://i.pinimg.com/736x/89/90/48/899048ab0cc455154006fdb9676964b3.jpg"
+                                            : state.userDetail.data!
+                                                .userProfile!.profilePict
+                                                .toString() )),
+                                  ),
+                                );
+                              } else {
+                                return const Center(
+                                  child: Loading(),
+                                );
+                              }
+                            })
                           ],
                         ),
                         const SizedBox(
@@ -467,7 +482,7 @@ class _HomePageState extends State<HomePage> {
                             itemCount: state
                                 .bannerKonsultan.data?.konsultanHukum?.length,
                             options: CarouselOptions(
-                              //  autoPlay: true,
+                              autoPlay: true,
                               enlargeCenterPage: true,
                               viewportFraction: 0.9,
                               height: 190.0,
@@ -488,7 +503,7 @@ class _HomePageState extends State<HomePage> {
                                 child: Container(
                                   margin: const EdgeInsets.all(5.0),
                                   decoration: BoxDecoration(
-                                    color: 'C6B69D'.toColor(),
+                                    color: 'FF3232'.toColor(),
                                     borderRadius: BorderRadius.circular(10.0),
 
                                     // image: DecorationImage(
@@ -522,7 +537,7 @@ class _HomePageState extends State<HomePage> {
                                                     .khName!
                                                     .toString(),
                                                 style: const TextStyle(
-                                                    color: Colors.black,
+                                                    color: Colors.white,
                                                     fontSize: 25,
                                                     fontFamily: 'Raleway',
                                                     fontWeight:
@@ -539,7 +554,7 @@ class _HomePageState extends State<HomePage> {
                                                   .toString(),
                                               size: 15,
                                               length: 35,
-                                              color: Colors.black.toString())
+                                              color: 'FFFFFF')
                                         ],
                                       ),
                                       state
@@ -677,47 +692,31 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 ),
-                ElevatedButton.icon(
-                  style: ElevatedButton.styleFrom(
-                      padding: EdgeInsets.zero,
-                      primary: Colors.white,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8)),
-                      onPrimary: Colors.black,
-                      minimumSize:
-                          Size(MediaQuery.of(context).size.width / 1.1, 100),
-                      alignment: Alignment.centerLeft),
-                  onPressed: () {
-                    Get.to(const KategoriKamusHukum());
-                  },
-                  icon: Stack(
-                    fit: StackFit.passthrough,
-                    alignment: Alignment.centerLeft,
-                    children: [
-                      Image(
-                        image: const AssetImage("assets/image/Rectangle2.png"),
-                        height: 100,
-                        width: MediaQuery.of(context).size.width / 2.85,
-                        fit: BoxFit.fitWidth,
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 5),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        padding: EdgeInsets.zero,
+                        primary: Colors.white,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8)),
+                        onPrimary: Colors.black,
+                        minimumSize:
+                            Size(MediaQuery.of(context).size.width / 1.1, 100),
+                        alignment: Alignment.center),
+                    onPressed: () {
+                      Get.to(const KategoriKamusHukum());
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 10),
+                      child: Text(
+                        'Kamus Hukum',
+                        style: TextStyle(
+                            fontSize: 35,
+                            color: 'FF3F3F'.toColor(),
+                            fontFamily: 'Roboto',
+                            fontWeight: FontWeight.bold),
                       ),
-                      const Padding(
-                          padding: EdgeInsets.only(top: 10, left: 50),
-                          child: Image(
-                            image: AssetImage("assets/image/kamus.png"),
-                            height: 75,
-                            fit: BoxFit.cover,
-                          )),
-                    ],
-                  ),
-                  label: Padding(
-                    padding: const EdgeInsets.only(left: 10),
-                    child: Text(
-                      'Kamus Hukum',
-                      style: TextStyle(
-                          fontSize: 35,
-                          color: 'FF3F3F'.toColor(),
-                          fontFamily: 'Roboto',
-                          fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),
@@ -736,7 +735,7 @@ class _HomePageState extends State<HomePage> {
                             itemCount:
                                 state.bannerArtikel.data?.articles?.length,
                             options: CarouselOptions(
-                                //  autoPlay: true,
+                                autoPlay: true,
                                 enlargeCenterPage: false,
                                 viewportFraction: 0.95,
                                 height: 300.0,
@@ -814,7 +813,7 @@ class _HomePageState extends State<HomePage> {
                                                     DescriptionTextWidget(
                                                       color: "DA2323",
                                                       size: 27,
-                                                      length: 30,
+                                                      length: 27,
                                                       text: state.bannerArtikel
                                                                   .data !=
                                                               null

@@ -62,15 +62,32 @@ class _SettingState extends State<Setting> {
           ),
           Row(
             children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 30, top: 20),
-                child: CircleAvatar(
-                    radius: 60,
-                    backgroundImage: NetworkImage(widget.user?.photoUrl
-                            .toString() ??
-                        widget.facebook?["picture"]["data"]["url"] ??
-                        "https://i.pinimg.com/736x/89/90/48/899048ab0cc455154006fdb9676964b3.jpg")),
-              ),
+              BlocBuilder<UserCubit, UserState>(builder: (context, state) {
+                if (state is userSuccess) {
+                  return Padding(
+                    padding: const EdgeInsets.only(left: 30, top: 20),
+                    child: GestureDetector(
+                      onTap: () => Get.to(Setting(
+                        user: widget.user,
+                        facebook: widget.facebook,
+                      )),
+                      child: CircleAvatar(
+                          radius: 60,
+                          backgroundImage: NetworkImage(state
+                                      .userDetail.data!.userProfile!.profilePict
+                                      .toString() ==
+                                  "-"
+                              ? "https://i.pinimg.com/736x/89/90/48/899048ab0cc455154006fdb9676964b3.jpg"
+                              : state.userDetail.data!.userProfile!.profilePict
+                                  .toString())),
+                    ),
+                  );
+                } else {
+                  return const Center(
+                    child: Loading(),
+                  );
+                }
+              }),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,

@@ -225,15 +225,15 @@ class LayananHukumClassSub {
 }
 
 class DatumSub {
-  DatumSub({
-    this.detailLayanan,
-  });
-
+  DatumSub({this.detailLayanan, this.idLayananHukum});
+  int? idLayananHukum;
   String? detailLayanan;
 
   factory DatumSub.fromJson(Map<String, dynamic> json) => DatumSub(
         detailLayanan:
             json["detail_layanan"] == null ? null : json["detail_layanan"],
+        idLayananHukum:
+            json["id_layanan_hukum"] == null ? null : json["id_layanan_hukum"],
       );
 
   Map<String, dynamic> toJson() => {

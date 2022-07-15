@@ -1,7 +1,8 @@
 part of 'page.dart';
 
 class KonsultanHukum extends StatefulWidget {
-  const KonsultanHukum({Key? key}) : super(key: key);
+  final String? judul;
+  const KonsultanHukum({Key? key, @required this.judul}) : super(key: key);
 
   @override
   State<KonsultanHukum> createState() => _KonsultanHukumState();
@@ -96,10 +97,12 @@ class _KonsultanHukumState extends State<KonsultanHukum> {
             centerTitle: true,
             backgroundColor: Colors.white,
             //  iconTheme: IconThemeData(color: Colors.black),
-            title: const Padding(
+            title: Padding(
               padding: EdgeInsets.only(top: 30, right: 20),
               child: Text(
-                "Konsultan Hukum",
+                widget.judul != null
+                    ? widget.judul.toString()
+                    : "Konsultan Hukum",
                 style: TextStyle(
                     color: Colors.black,
                     fontSize: 23.4,
@@ -129,7 +132,7 @@ class _KonsultanHukumState extends State<KonsultanHukum> {
                     child: Container(
                       margin: const EdgeInsets.all(5.0),
                       decoration: BoxDecoration(
-                        color: 'C6B69D'.toColor(),
+                        color: 'FF3232'.toColor(),
                         borderRadius: BorderRadius.circular(10.0),
                         boxShadow: [
                           BoxShadow(
@@ -163,7 +166,7 @@ class _KonsultanHukumState extends State<KonsultanHukum> {
                                   child: Text(
                                     listKonsultan[index].khName.toString(),
                                     style: const TextStyle(
-                                        color: Colors.black,
+                                        color: Colors.white,
                                         fontSize: 27,
                                         fontFamily: 'Raleway',
                                         fontWeight: FontWeight.bold),

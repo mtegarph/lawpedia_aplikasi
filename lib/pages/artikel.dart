@@ -252,7 +252,7 @@ class _ArtikelState extends State<Artikel> {
                                             ]),
                                         child: Padding(
                                           padding: const EdgeInsets.symmetric(
-                                              vertical: 20, horizontal: 20),
+                                              vertical: 15, horizontal: 20),
                                           child: Column(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
@@ -264,7 +264,7 @@ class _ArtikelState extends State<Artikel> {
                                                 child: DescriptionTextWidget(
                                                   color: "DA2323",
                                                   size: 23,
-                                                  length: 30,
+                                                  length: 28,
                                                   text: listArtikelPopular[
                                                               index] !=
                                                           null
@@ -423,7 +423,7 @@ class _ArtikelState extends State<Artikel> {
                                                 .articleTitle
                                                 .toString(),
                                             size: 22,
-                                            length: 28,
+                                            length: 24,
                                             color: '383838',
                                           ),
                                         ),

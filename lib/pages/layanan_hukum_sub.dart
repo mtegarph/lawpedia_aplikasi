@@ -11,6 +11,7 @@ class LayananHukumSub extends StatefulWidget {
 
 class _LayananHukumSubState extends State<LayananHukumSub> {
   int page = 1;
+
   bool hasMore = true;
   bool loading = false;
   String message = "";
@@ -47,7 +48,11 @@ class _LayananHukumSubState extends State<LayananHukumSub> {
       loading = false;
       if (list.data!.layananHukum!.to == null) {
         hasMore = false;
-        Get.to(KonsultanHukum());
+        if (id.toString() == id.toString()) {
+          Get.to(KonsultanHukum(
+            judul: id.toString(),
+          ));
+        }
       } else if (list.data!.layananHukum!.data!.length <
           list.data!.layananHukum!.to!) {
         hasMore = false;
@@ -64,7 +69,7 @@ class _LayananHukumSubState extends State<LayananHukumSub> {
     getListLayananHukum();
     print(listArsip.length);
     print(message);
-
+    print("Judul layanan hukum : " + id.toString());
     controller.addListener(() {
       if (controller.position.maxScrollExtent == controller.offset) {
         getListLayananHukum();
@@ -130,7 +135,18 @@ class _LayananHukumSubState extends State<LayananHukumSub> {
                       if (index < listArsip.length) {
                         return GestureDetector(
                           onTap: () {
-                            Get.to(KonsultanHukum());
+                            if (listArsip.isNotEmpty) {
+                              Get.offUntil(
+                                  MaterialPageRoute(
+                                      builder: (context) => LayananHukumSub(
+                                            id: listArsip[index].idLayananHukum,
+                                            judul:
+                                                listArsip[index].detailLayanan,
+                                          )),
+                                  (route) => true);
+                            } else {
+                              Get.to(KonsultanHukum());
+                            }
                           },
                           child: Container(
                             margin: const EdgeInsets.symmetric(

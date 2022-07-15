@@ -121,7 +121,14 @@ class _KategoriLayananHukumState extends State<KategoriLayananHukum> {
                     itemBuilder: (context, index) {
                       if (index < listArsip.length) {
                         return GestureDetector(
-                          onTap: () {
+                          onTap: () async {
+                            setState(() {
+                              if (listArsip[index].idLayananHukum == 1) {
+                                id = "Notaris";
+                              } else {
+                                id = "Konsultan Hukum";
+                              }
+                            });
                             Get.to(LayananHukumSub(
                               id: listArsip[index].idLayananHukum,
                               judul: listArsip[index].layananHukum,

@@ -60,3 +60,5 @@ part 'hasil_search_Kamus_hukum.dart';
 part 'detail_konsultan.dart';
 part 'kategori_layanan_hukum.dart';
 part 'layanan_hukum_sub.dart';
+
+String id = "";
