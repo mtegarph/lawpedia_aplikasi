@@ -52,6 +52,7 @@ part 'chat.dart';
 part 'hasil_search.dart';
 part 'notif.dart';
 part 'kamus_hukum.dart';
+part 'splash_screen.dart';
 part 'arsip_konsultasi.dart';
 part 'kategori_kamus_hukum.dart';
 //part 'web_artikel.dart';

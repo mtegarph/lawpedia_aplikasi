@@ -86,6 +86,8 @@ class _LoginState extends State<Login> {
         // ScaffoldMessenger.of(context).showSnackBar(snackBar);
         // print(state.token);
         logindata!.setString('token', state.token.toString());
+        logindata!.setBool('login', false);
+        logindata!.setBool('google', true);
         Navigator.of(context).pushReplacement(MaterialPageRoute(
             builder: (context) => MainPage(
                   //google: user,
@@ -291,8 +293,11 @@ class _LoginState extends State<Login> {
                                           LoginState state1 =
                                               context.read<LoginCubit>().state;
                                           if (state1 is berhasilLogin) {
+                                            logindata!.setBool('google', false);
+                                            logindata!.setBool('login', false);
                                             logindata!.setString('token',
                                                 state1.token.toString());
+
                                             Navigator.of(context)
                                                 .pushReplacement(
                                                     MaterialPageRoute(
@@ -322,6 +327,8 @@ class _LoginState extends State<Login> {
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(snackBar);
                                       // print(state.token);
+                                      logindata!.setBool('login', false);
+                                      logindata!.setBool('google', false);
                                       logindata!.setString(
                                           'token', state.token.toString());
                                       Navigator.of(context)

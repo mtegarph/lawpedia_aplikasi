@@ -520,6 +520,7 @@ class _UserEditState extends State<UserEdit> {
                                   'assets/image/checklist.png',
                                   "Ok", () {
                                 Navigator.of(context).pop();
+                                context.read<UserCubit>().getUser();
                               });
                             }
                           },

@@ -12,6 +12,14 @@ class Setting extends StatefulWidget {
 
 class _SettingState extends State<Setting> {
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    context.read<UserCubit>().getUser();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
@@ -92,23 +100,32 @@ class _SettingState extends State<Setting> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 25),
-                    child: Container(
-                      alignment: Alignment.centerLeft,
-                      width: 150,
-                      height: 50,
-                      child: Text(
-                        widget.user?.displayName.toString() ??
-                            widget.facebook?["name"],
-                        style: const TextStyle(
-                            color: Colors.black,
-                            fontSize: 20,
-                            fontFamily: 'Raleway',
-                            fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                  ),
+                  BlocBuilder<UserCubit, UserState>(builder: (context, state) {
+                    if (state is userSuccess) {
+                      return Padding(
+                        padding: const EdgeInsets.only(left: 25),
+                        child: Container(
+                          alignment: Alignment.centerLeft,
+                          width: 150,
+                          height: 50,
+                          child: Text(
+                            '${state.userDetail.data!.userProfile!.firstName} ' +
+                                '${state.userDetail.data!.userProfile!.lastName}'
+                                    .toString(),
+                            style: const TextStyle(
+                                color: Colors.black,
+                                fontSize: 20,
+                                fontFamily: 'Raleway',
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      );
+                    } else {
+                      return const Center(
+                        child: Loading(),
+                      );
+                    }
+                  }),
                   Container(
                     margin: const EdgeInsets.only(left: 20),
                     width: 140,
@@ -295,7 +312,8 @@ class _SettingState extends State<Setting> {
               SharedPreferences logindata =
                   await SharedPreferences.getInstance();
               logindata.setString('token', '');
-              widget.facebook != null
+              logindata.setBool('login', true);
+              logindata.getBool('google') == false
                   ? await FacebookAuth.i.logOut()
                   : await GoogleSignInApi.logout();
               Navigator.of(context).pushReplacement(
