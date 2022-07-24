@@ -69,6 +69,17 @@ class _KonsultanHukumState extends State<KonsultanHukum> {
     super.dispose();
   }
 
+  Future refresh() async {
+    await Future.delayed(Duration(milliseconds: 2000));
+    getListKonsultanHukum();
+    controller.addListener(() {
+      print(listKonsultan.length);
+      if (controller.position.maxScrollExtent == controller.offset) {
+        getListKonsultanHukum();
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -112,108 +123,111 @@ class _KonsultanHukumState extends State<KonsultanHukum> {
             ),
           ),
         ),
-        body: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: ListView.builder(
-              scrollDirection: Axis.vertical,
-              shrinkWrap: true,
-              controller: controller,
-              itemCount: listKonsultan.length + 1,
-              itemBuilder: (context, index) {
-                if (index < listKonsultan.length) {
-                  return GestureDetector(
-                    onTap: () {
-                      print("ID KONSULTAN: " +
-                          listKonsultan[index].khId!.toString());
-                      Get.to(DetailKonsultan(
-                        id: listKonsultan[index].khId!.toInt(),
-                      ));
-                    },
-                    child: Container(
-                      margin: const EdgeInsets.all(5.0),
-                      decoration: BoxDecoration(
-                        color: 'FF3232'.toColor(),
-                        borderRadius: BorderRadius.circular(10.0),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            spreadRadius: 5,
-                            blurRadius: 7,
-                            offset: const Offset(
-                                7, 7), // changes position of shadow
-                          ),
-                        ],
+        body: RefreshIndicator(
+          onRefresh: refresh,
+          child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: ListView.builder(
+                scrollDirection: Axis.vertical,
+                shrinkWrap: true,
+                controller: controller,
+                itemCount: listKonsultan.length + 1,
+                itemBuilder: (context, index) {
+                  if (index < listKonsultan.length) {
+                    return GestureDetector(
+                      onTap: () {
+                        print("ID KONSULTAN: " +
+                            listKonsultan[index].khId!.toString());
+                        Get.to(DetailKonsultan(
+                          id: listKonsultan[index].khId!.toInt(),
+                        ));
+                      },
+                      child: Container(
+                        margin: const EdgeInsets.all(5.0),
+                        decoration: BoxDecoration(
+                          color: 'FF3232'.toColor(),
+                          borderRadius: BorderRadius.circular(10.0),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.5),
+                              spreadRadius: 5,
+                              blurRadius: 7,
+                              offset: const Offset(
+                                  7, 7), // changes position of shadow
+                            ),
+                          ],
 
-                        // image: DecorationImage(
-                        //     image: NetworkImage(
-                        //         "https://i.pinimg.com/564x/94/17/82/941782f60e16a9d7f9b4cea4ae7025e0.jpg"),
-                        //     fit: BoxFit.cover)
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                                height: 70,
-                                width: 250,
-                                child: Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 15, bottom: 5),
-                                  child: Text(
-                                    listKonsultan[index].khName.toString(),
-                                    style: const TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 27,
-                                        fontFamily: 'Raleway',
-                                        fontWeight: FontWeight.bold),
+                          // image: DecorationImage(
+                          //     image: NetworkImage(
+                          //         "https://i.pinimg.com/564x/94/17/82/941782f60e16a9d7f9b4cea4ae7025e0.jpg"),
+                          //     fit: BoxFit.cover)
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                SizedBox(
+                                  height: 70,
+                                  width: 250,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 15, bottom: 5),
+                                    child: Text(
+                                      listKonsultan[index].khName.toString(),
+                                      style: const TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 27,
+                                          fontFamily: 'Raleway',
+                                          fontWeight: FontWeight.bold),
+                                    ),
                                   ),
                                 ),
-                              ),
-                              // DescriptionTextWidget(
-                              //     text: listKonsultan[index].khDesc!.toString(),
-                              //     size: 15,
-                              //     length: 35,
-                              //     color: Colors.black.toString())
-                              // Text(
-                              //   "Pengalaman 10 tahun",
-                              //   style: TextStyle(
-                              //     color: Colors.black,
-                              //     fontSize: 15,
-                              //     fontFamily: 'Raleway',
-                              //   ),
-                              // ),
-                            ],
-                          ),
-                          listKonsultan[index].khImg != null
-                              ? Image.network(
-                                  listKonsultan[index].khImg.toString(),
-                                  height: 150,
-                                )
-                              : Padding(
-                                  padding: const EdgeInsets.all(20.0),
-                                  child: Image.asset(
-                                    'assets/image/user_vector.png',
+                                // DescriptionTextWidget(
+                                //     text: listKonsultan[index].khDesc!.toString(),
+                                //     size: 15,
+                                //     length: 35,
+                                //     color: Colors.black.toString())
+                                // Text(
+                                //   "Pengalaman 10 tahun",
+                                //   style: TextStyle(
+                                //     color: Colors.black,
+                                //     fontSize: 15,
+                                //     fontFamily: 'Raleway',
+                                //   ),
+                                // ),
+                              ],
+                            ),
+                            listKonsultan[index].khImg != null
+                                ? Image.network(
+                                    listKonsultan[index].khImg.toString(),
                                     height: 150,
-                                  ),
-                                )
-                        ],
+                                  )
+                                : Padding(
+                                    padding: const EdgeInsets.all(20.0),
+                                    child: Image.asset(
+                                      'assets/image/user_vector.png',
+                                      height: 150,
+                                    ),
+                                  )
+                          ],
+                        ),
                       ),
-                    ),
-                  );
-                } else {
-                  return hasMore == true
-                      ? Container()
-                      : full == true
-                          ? Container()
-                          : const Center(
-                              child: Loading(),
-                            );
-                }
-              },
-            )));
+                    );
+                  } else {
+                    return hasMore == true
+                        ? Container()
+                        : full == true
+                            ? Container()
+                            : const Center(
+                                child: Loading(),
+                              );
+                  }
+                },
+              )),
+        ));
   }
 }

@@ -25,12 +25,12 @@ class _ChatState extends State<Chat> {
               padding: const EdgeInsets.only(left: 20),
               child: SizedBox(
                 child: Text(
-                  "Fitur ini masih dalam tahap maintenance",
+                  "Coming Soon",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       fontSize: 35,
                       color: '354259'.toColor(),
-                      fontFamily: 'Roboto',
+                      fontFamily: 'Raleway',
                       fontWeight: FontWeight.w500),
                 ),
               )),

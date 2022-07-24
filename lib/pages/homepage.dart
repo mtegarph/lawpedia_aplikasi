@@ -25,7 +25,7 @@ class _HomePageState extends State<HomePage> {
   String message = "";
   final controller = ScrollController();
   final controller2 = ScrollController();
-  List<DatumKategori> listArsip = [];
+  //List<DatumKategori> listArsip = [];
   Widget makeDismissable({required Widget child}) => GestureDetector(
         behavior: HitTestBehavior.opaque,
         onTap: () => Navigator.of(context).pop(),
@@ -56,42 +56,42 @@ class _HomePageState extends State<HomePage> {
     'Percerairan',
     'LDD Legal Due Dilligent',
   ];
-  Future getListArsip() async {
-    if (loading_arsip) return;
-    loading_arsip = true;
-    String apiUrl =
-        'https://development.lawpedia.id/api/consulting-archive/categories?page=' +
-            page.toString();
-    SharedPreferences logindata = await SharedPreferences.getInstance();
-    String token = logindata.getString('token').toString();
-    print(token);
-    var client = http.Client();
-    var apiResult = await client.get(
-      Uri.parse(apiUrl),
-      headers: {"auth-token": token},
-    );
-    if (apiResult.statusCode != 200) {
-      print(apiResult.statusCode.toString());
-    }
-    var data = jsonDecode(apiResult.body);
-    print(data['message']);
-    ArsipKonsultasiKategori list =
-        ArsipKonsultasiKategori.fromJson(jsonDecode(apiResult.body));
+  // Future getListArsip() async {
+  //   if (loading_arsip) return;
+  //   loading_arsip = true;
+  //   String apiUrl =
+  //       'https://development.lawpedia.id/api/consulting-archive/categories?page=' +
+  //           page.toString();
+  //   SharedPreferences logindata = await SharedPreferences.getInstance();
+  //   String token = logindata.getString('token').toString();
+  //   print(token);
+  //   var client = http.Client();
+  //   var apiResult = await client.get(
+  //     Uri.parse(apiUrl),
+  //     headers: {"auth-token": token},
+  //   );
+  //   if (apiResult.statusCode != 200) {
+  //     print(apiResult.statusCode.toString());
+  //   }
+  //   var data = jsonDecode(apiResult.body);
+  //   print(data['message']);
+  //   ArsipKonsultasiKategori list =
+  //       ArsipKonsultasiKategori.fromJson(jsonDecode(apiResult.body));
 
-    setState(() {
-      message = list.message.toString();
-      page++;
-      print(page);
-      loading_arsip = false;
-      if (list.data!.archiveCategories!.data!.length <
-          list.data!.archiveCategories!.to!) {
-        hasMore = false;
-      } else {
-        hasMore = true;
-      }
-      listArsip.addAll(list.data!.archiveCategories!.data!);
-    });
-  }
+  //   setState(() {
+  //     message = list.message.toString();
+  //     page++;
+  //     print(page);
+  //     loading_arsip = false;
+  //     if (list.data!.archiveCategories!.data!.length <
+  //         list.data!.archiveCategories!.to!) {
+  //       hasMore = false;
+  //     } else {
+  //       hasMore = true;
+  //     }
+  //     listArsip.addAll(list.data!.archiveCategories!.data!);
+  //   });
+  // }
 
   @override
   void initState() {
@@ -109,14 +109,14 @@ class _HomePageState extends State<HomePage> {
         loading_artikel = false;
       });
     });
-    getListArsip();
-    print(listArsip.length);
+    // getListArsip();
+    // print(listArsip.length);
     print(message);
-    controller.addListener(() {
-      if (controller.position.maxScrollExtent == controller.offset) {
-        getListArsip();
-      }
-    });
+    // controller.addListener(() {
+    //   if (controller.position.maxScrollExtent == controller.offset) {
+    //     getListArsip();
+    //   }
+    // });
   }
 
   void _data() async {
@@ -138,6 +138,31 @@ class _HomePageState extends State<HomePage> {
             goTo: goTo,
           );
         });
+  }
+
+  Future refresh() async {
+    await Future.delayed(Duration(milliseconds: 2000));
+    _data();
+    context.read<UserCubit>().getUser();
+    context.read<KonsultanhukumCubit>().getBannerKonsultan().then((value) {
+      setState(() {
+        loading_home = false;
+      });
+      print("data baru konsultan");
+    });
+    context.read<BannerArtikelCubit>().getArtikelBanner().then((value) {
+      setState(() {
+        loading_artikel = false;
+      });
+    });
+    // getListArsip();
+    // print(listArsip.length);
+    // print(message);
+    // controller.addListener(() {
+    //   if (controller.position.maxScrollExtent == controller.offset) {
+    //     getListArsip();
+    //   }
+    // });
   }
 
   Widget buildSheet() => makeDismissable(
@@ -321,11 +346,11 @@ class _HomePageState extends State<HomePage> {
       );
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      color: 'F2F2F2'.toColor(),
-      child: Scaffold(
-        body: ListView(
+    return Scaffold(
+      backgroundColor: 'F2F2F2'.toColor(),
+      body: RefreshIndicator(
+        onRefresh: refresh,
+        child: ListView(
           children: [
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -384,7 +409,7 @@ class _HomePageState extends State<HomePage> {
                               ),
                               child: GestureDetector(
                                 onTap: () {
-                                  Get.to(const Notif());
+                                  //  Get.to(const Notif());
                                 },
                                 child: const FaIcon(
                                   FontAwesomeIcons.solidBell,
@@ -415,7 +440,7 @@ class _HomePageState extends State<HomePage> {
                                             ? "https://i.pinimg.com/736x/89/90/48/899048ab0cc455154006fdb9676964b3.jpg"
                                             : state.userDetail.data!
                                                 .userProfile!.profilePict
-                                                .toString() )),
+                                                .toString())),
                                   ),
                                 );
                               } else {
@@ -524,11 +549,11 @@ class _HomePageState extends State<HomePage> {
                                             CrossAxisAlignment.center,
                                         children: [
                                           SizedBox(
-                                            height: 65,
+                                            height: 35,
                                             width: 290,
                                             child: Padding(
                                               padding: const EdgeInsets.only(
-                                                  left: 15, bottom: 5),
+                                                  left: 15),
                                               child: Text(
                                                 state
                                                     .bannerKonsultan
@@ -545,16 +570,19 @@ class _HomePageState extends State<HomePage> {
                                               ),
                                             ),
                                           ),
-                                          DescriptionTextWidget(
-                                              text: state
-                                                  .bannerKonsultan
-                                                  .data!
-                                                  .konsultanHukum![index]
-                                                  .khDesc!
-                                                  .toString(),
-                                              size: 15,
-                                              length: 35,
-                                              color: 'FFFFFF')
+                                          Container(
+                                            width: 270,
+                                            child: DescriptionTextWidget(
+                                                text: state
+                                                    .bannerKonsultan
+                                                    .data!
+                                                    .konsultanHukum![index]
+                                                    .khDesc!
+                                                    .toString(),
+                                                size: 17,
+                                                length: 40,
+                                                color: 'FFFFFF'),
+                                          ),
                                         ],
                                       ),
                                       state
@@ -748,13 +776,26 @@ class _HomePageState extends State<HomePage> {
                                 int realIndex) {
                               return GestureDetector(
                                 onTap: () {
-                                  Get.to(DetailArtikel(
-                                          id: state.bannerArtikel.data!
-                                              .articles![index].articleId))!
+                                  context
+                                      .read<ArtikelCubit>()
+                                      .getDetailArtikel(state.bannerArtikel
+                                          .data!.articles![index].articleId!)
                                       .then((value) {
-                                    context
-                                        .read<BannerArtikelCubit>()
-                                        .getArtikelBanner();
+                                    String? desc;
+                                    print("data baru detail artikel : $desc");
+                                    setState(() {
+                                      desc = (context.bloc<ArtikelCubit>().state
+                                              as DetailArtikelSukses)
+                                          .artikelDetail
+                                          .data!
+                                          .detailArtikel!
+                                          .articleBody;
+                                    });
+                                    Get.to(DetailArtikel(
+                                      id: state.bannerArtikel.data!
+                                          .articles![index].articleId,
+                                      body: desc,
+                                    ));
                                   });
                                 },
                                 child: Padding(
@@ -768,10 +809,21 @@ class _HomePageState extends State<HomePage> {
                                           decoration: BoxDecoration(
                                               borderRadius:
                                                   BorderRadius.circular(10.0),
-                                              image: const DecorationImage(
+                                              image: DecorationImage(
                                                   scale: 20,
-                                                  image: NetworkImage(
-                                                      "https://i.pinimg.com/564x/94/17/82/941782f60e16a9d7f9b4cea4ae7025e0.jpg"),
+                                                  image: NetworkImage(state
+                                                              .bannerArtikel
+                                                              .data!
+                                                              .articles![index]
+                                                              .articleThumbnail ==
+                                                          null
+                                                      ? "https://i.pinimg.com/564x/94/17/82/941782f60e16a9d7f9b4cea4ae7025e0.jpg"
+                                                      : state
+                                                          .bannerArtikel
+                                                          .data!
+                                                          .articles![index]
+                                                          .articleThumbnail
+                                                          .toString()),
                                                   fit: BoxFit.cover)),
                                         ),
                                         Align(

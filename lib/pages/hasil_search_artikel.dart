@@ -121,7 +121,8 @@ class _HasilSearchArtikelState extends State<HasilSearchArtikel> {
                 ),
               ),
               Container(
-                margin: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 15),
+                margin:
+                    const EdgeInsets.symmetric(horizontal: 15.0, vertical: 15),
                 width: MediaQuery.of(context).size.width,
                 height: 50.0,
                 decoration: BoxDecoration(
@@ -150,7 +151,8 @@ class _HasilSearchArtikelState extends State<HasilSearchArtikel> {
                               onSubmitted: (data) {
                                 Get.offUntil(
                                     MaterialPageRoute(
-                                        builder: (context) => HasilSearchArtikel(
+                                        builder: (context) =>
+                                            HasilSearchArtikel(
                                               cari: data,
                                             )),
                                     (route) => true);
@@ -172,7 +174,25 @@ class _HasilSearchArtikelState extends State<HasilSearchArtikel> {
                     if (i < listArtikel.length) {
                       return GestureDetector(
                         onTap: () {
-                          Get.to(DetailArtikel(id: listArtikel[i].articleId));
+                          context
+                              .read<ArtikelCubit>()
+                              .getDetailArtikel(listArtikel[i].articleId!)
+                              .then((value) {
+                            String? desc;
+                            print("data baru detail artikel : $desc");
+                            setState(() {
+                              desc = (context.bloc<ArtikelCubit>().state
+                                      as DetailArtikelSukses)
+                                  .artikelDetail
+                                  .data!
+                                  .detailArtikel!
+                                  .articleBody;
+                            });
+                            Get.to(DetailArtikel(
+                              id: listArtikel[i].articleId,
+                              body: desc,
+                            ));
+                          });
                         },
                         child: Padding(
                           padding: const EdgeInsets.symmetric(vertical: 10),
@@ -263,14 +283,14 @@ class _HasilSearchArtikelState extends State<HasilSearchArtikel> {
                       );
                     } else {
                       return kosong == true
-                        ? Container()
-                        : hasMore == true
-                            ? Container(
-                                alignment: Alignment.center,
-                                height: 160.0,
-                                child: const CircularProgressIndicator(),
-                              )
-                            : Container();
+                          ? Container()
+                          : hasMore == true
+                              ? Container(
+                                  alignment: Alignment.center,
+                                  height: 160.0,
+                                  child: const CircularProgressIndicator(),
+                                )
+                              : Container();
                     }
                   })
             ],

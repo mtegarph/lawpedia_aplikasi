@@ -7,3 +7,4 @@ export 'artikel_cubit.dart';
 export 'banner_artikel_cubit.dart';
 export 'konstultanhukumdetail_cubit.dart';
 export 'rekomendasi_cubit.dart';
+export 'layanan_hukum_cubit.dart';

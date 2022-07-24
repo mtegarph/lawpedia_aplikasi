@@ -99,4 +99,32 @@ class KonsultanHukumServices {
         success: konsultan.status,
         value: konsultan);
   }
+
+  static Future<ApiReturnValue<LayananHukumSubKategori>> getListLayananHukumSub(
+      int id) async {
+    print("id : $id");
+    String apiUrlsub =
+        'https://development.lawpedia.id/api/layanan-hukum/detail-list?id=${id.toString()}';
+    SharedPreferences logindata = await SharedPreferences.getInstance();
+    String token = logindata.getString('token').toString();
+    print(token);
+    var client = http.Client();
+    var apiResult = await http.get(
+      Uri.parse(apiUrlsub),
+      headers: {"auth-token": token},
+    );
+    if (apiResult.statusCode != 200) {
+      print(apiResult.statusCode.toString());
+    }
+    // var data = jsonDecode(apiResult.body);
+    LayananHukumSubKategori list =
+        LayananHukumSubKategori.fromJson(jsonDecode(apiResult.body));
+
+    // print(data['auth_token']);
+    bool kosong = false;
+    print(list.data!.layananHukum!.toJson());
+    return ApiReturnValue(
+        message: list.message, success: list.status, value: list);
+    ;
+  }
 }

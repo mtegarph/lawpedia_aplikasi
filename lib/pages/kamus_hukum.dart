@@ -11,6 +11,16 @@ class KamusHukum extends StatefulWidget {
 class _KamusHukumState extends State<KamusHukum> {
   GlobalKey<PaginatorState> paginatorGlobalKey = GlobalKey();
   String _chosenValue = 'title';
+
+  List<DropdownMenuItem<String>> get dropdownItems {
+    List<DropdownMenuItem<String>> menuItems = [
+      DropdownMenuItem(child: Text("Judul"), value: "title"),
+     
+      DropdownMenuItem(child: Text("Kata Kunci"), value: "keyword"),
+    ];
+    return menuItems;
+  }
+
   Future<KamusHukumData> getQuestionDetail(int? page) async {
     String apiUrl =
         baseUrl + 'kamus-hukum?page=' + page.toString() + "&cat=${widget.id}";
@@ -129,167 +139,172 @@ class _KamusHukumState extends State<KamusHukum> {
     return list;
   }
 
+  Future refresh() async {
+    await Future.delayed(Duration(milliseconds: 2000));
+    getQuestionDetail;
+  }
+
   final TextEditingController _searchQuery = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: paginatorGlobalKey,
-      body: ListView(
-        children: [
-          Column(
-            children: [
-              SafeArea(
-                child: Container(
-                  //margin: EdgeInsets.only(bottom: defaultMargin),
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  width: double.infinity,
-                  height: 100,
-                  color: Colors.white,
+      body: RefreshIndicator(
+        onRefresh: refresh,
+        child: ListView(
+          children: [
+            Column(
+              children: [
+                SafeArea(
+                  child: Container(
+                    //margin: EdgeInsets.only(bottom: defaultMargin),
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    width: double.infinity,
+                    height: 100,
+                    color: Colors.white,
+                    child: Row(
+                      children: [
+                        //inisialisasi back button
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: Container(
+                            height: 50,
+                            width: 50,
+                            // margin: EdgeInsets.only(right: 26),
+                            decoration: const BoxDecoration(
+                                image: DecorationImage(
+                                    image:
+                                        AssetImage('assets/image/Left.png'))),
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 110,
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.only(top: 10),
+                          child: Text(
+                            "Kamus Hukum",
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 26.4,
+                                fontFamily: 'Raleway',
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 20),
                   child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      //inisialisasi back button
                       GestureDetector(
                         onTap: () {
-                          Navigator.of(context).pop();
+                          print("Tap");
                         },
                         child: Container(
-                          height: 50,
-                          width: 50,
-                          // margin: EdgeInsets.only(right: 26),
-                          decoration: const BoxDecoration(
-                              image: DecorationImage(
-                                  image: AssetImage('assets/image/Left.png'))),
+                          margin: const EdgeInsets.symmetric(horizontal: 20.0),
+                          width: MediaQuery.of(context).size.width / 1.45,
+                          height: 50.0,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10.0),
+                            color: "e3e3e3".toColor(),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Padding(
+                                  padding: const EdgeInsets.only(left: 20),
+                                  child: SizedBox(
+                                      width:
+                                          MediaQuery.of(context).size.width / 3,
+                                      child: TextField(
+                                        controller: _searchQuery,
+                                        autofocus: true,
+                                        decoration: const InputDecoration(
+                                          hintText: 'cari Kamus Hukum',
+                                          border: InputBorder.none,
+                                          hintStyle:
+                                              TextStyle(color: Colors.grey),
+                                        ),
+                                        style: const TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 16.0),
+                                        // onChanged: updateSearchQuery,
+                                        onSubmitted: (data) {
+                                          Get.to(HasilSearchKamusHukum(
+                                            cari: data,
+                                            filter: _chosenValue,
+                                            kat: widget.id,
+                                          ));
+                                        },
+                                      ))),
+                              const Padding(
+                                padding: EdgeInsets.only(right: 20),
+                                child: Icon(Icons.search),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                      const SizedBox(
-                        width: 110,
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.only(top: 10),
-                        child: Text(
-                          "Kamus Hukum",
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 26.4,
-                              fontFamily: 'Raleway',
-                              fontWeight: FontWeight.bold),
+                      Container(
+                        padding: const EdgeInsets.only(right: 15),
+                        child: DropdownButton<String>(
+                          value: _chosenValue,
+                          elevation: 16,
+                          style: const TextStyle(color: Colors.black),
+                          underline: Container(
+                            height: 2,
+                            color: Colors.deepPurpleAccent,
+                          ),
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              _chosenValue = newValue!;
+                            });
+                            print(_chosenValue);
+                          },
+                          items: dropdownItems,
                         ),
                       ),
                     ],
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 20),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        print("Tap");
-                      },
-                      child: Container(
-                        margin: const EdgeInsets.symmetric(horizontal: 20.0),
-                        width: MediaQuery.of(context).size.width / 1.45,
-                        height: 50.0,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10.0),
-                          color: "e3e3e3".toColor(),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Padding(
-                                padding: const EdgeInsets.only(left: 20),
-                                child: SizedBox(
-                                    width: MediaQuery.of(context).size.width / 3,
-                                    child: TextField(
-                                      controller: _searchQuery,
-                                      autofocus: true,
-                                      decoration: const InputDecoration(
-                                        hintText: 'cari Kamus Hukum',
-                                        border: InputBorder.none,
-                                        hintStyle:
-                                            TextStyle(color: Colors.grey),
-                                      ),
-                                      style: const TextStyle(
-                                          color: Colors.black, fontSize: 16.0),
-                                      // onChanged: updateSearchQuery,
-                                      onSubmitted: (data) {
-                                        Get.to(HasilSearchKamusHukum(
-                                          cari: data,
-                                          filter: _chosenValue,
-                                          kat: widget.id,
-                                        ));
-                                      },
-                                    ))),
-                            const Padding(
-                              padding: EdgeInsets.only(right: 20),
-                              child: Icon(Icons.search),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Container(
-                      padding: const EdgeInsets.only(right: 15),
-                      child: DropdownButton<String>(
-                        value: _chosenValue,
-                        elevation: 16,
-                        style: const TextStyle(color: Colors.black),
-                        underline: Container(
-                          height: 2,
-                          color: Colors.deepPurpleAccent,
-                        ),
-                        onChanged: (String? newValue) {
-                          setState(() {
-                            _chosenValue = newValue!;
-                          });
-                          print(_chosenValue);
-                        },
-                        items: <String>['title', 'date-entry', 'keyword']
-                            .map<DropdownMenuItem<String>>((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(value),
-                          );
-                        }).toList(),
-                      ),
-                    ),
-                  ],
+                const SizedBox(
+                  height: 25,
                 ),
-              ),
-              const SizedBox(
-                height: 25,
-              ),
-              Paginator.listView(
-                scrollDirection: Axis.vertical,
-                shrinkWrap: true,
-                totalItemsGetter: totalPagesGetter,
-                emptyListWidgetBuilder: (pageData) {
-                  return Container();
-                },
-                listItemBuilder: listItemBuilder,
-                pageLoadFuture: getQuestionDetail,
-                scrollPhysics: const BouncingScrollPhysics(),
-                loadingWidgetBuilder: () {
-                  return Container(
-                    alignment: Alignment.center,
-                    height: 160.0,
-                    child: const CircularProgressIndicator(),
-                  );
-                },
-                errorWidgetBuilder: errorWidgetMaker,
-                pageErrorChecker: (KamusHukumData pageData) {
-                  return false;
-                },
-                pageItemsGetter: listItemsGetterPages,
-              ),
-            ],
-          ),
-        ],
+                Paginator.listView(
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: true,
+                  totalItemsGetter: totalPagesGetter,
+                  emptyListWidgetBuilder: (pageData) {
+                    return Container();
+                  },
+                  listItemBuilder: listItemBuilder,
+                  pageLoadFuture: getQuestionDetail,
+                  scrollPhysics: const BouncingScrollPhysics(),
+                  loadingWidgetBuilder: () {
+                    return Container(
+                      alignment: Alignment.center,
+                      height: 160.0,
+                      child: const CircularProgressIndicator(),
+                    );
+                  },
+                  errorWidgetBuilder: errorWidgetMaker,
+                  pageErrorChecker: (KamusHukumData pageData) {
+                    return false;
+                  },
+                  pageItemsGetter: listItemsGetterPages,
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

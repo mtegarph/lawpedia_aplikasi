@@ -23,11 +23,20 @@ class _HasilSearchKamusHukumState extends State<HasilSearchKamusHukum> {
   final controller = ScrollController();
   final controller2 = ScrollController();
   List<DatumKamusHukum> dataKamusHukum = [];
+  List<DropdownMenuItem<String>> get dropdownItems {
+    List<DropdownMenuItem<String>> menuItems = [
+      DropdownMenuItem(child: Text("Judul"), value: "title"),
+   
+      DropdownMenuItem(child: Text("Kata Kunci"), value: "keyword"),
+    ];
+    return menuItems;
+  }
+
   Future getListArsip() async {
     if (loading) return;
     loading = true;
     String apiUrl = baseUrl +
-        'kamus-hukum?keyword=${widget.cari}&page=' +
+        'kamus-hukum?q=${widget.cari}&page=' +
         page.toString() +
         '&filter=${widget.filter}&cat=${widget.kat}';
     SharedPreferences logindata = await SharedPreferences.getInstance();
@@ -129,8 +138,8 @@ class _HasilSearchKamusHukumState extends State<HasilSearchKamusHukum> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    margin:
-                        const EdgeInsets.symmetric(horizontal: 15.0, vertical: 15),
+                    margin: const EdgeInsets.symmetric(
+                        horizontal: 15.0, vertical: 15),
                     width: MediaQuery.of(context).size.width / 1.4,
                     height: 50.0,
                     decoration: BoxDecoration(
@@ -151,8 +160,7 @@ class _HasilSearchKamusHukumState extends State<HasilSearchKamusHukum> {
                                   decoration: const InputDecoration(
                                     hintText: 'cari Kamus Hukum',
                                     border: InputBorder.none,
-                                    hintStyle:
-                                        TextStyle(color: Colors.grey),
+                                    hintStyle: TextStyle(color: Colors.grey),
                                   ),
                                   style: const TextStyle(
                                       color: Colors.black, fontSize: 16.0),
@@ -192,13 +200,7 @@ class _HasilSearchKamusHukumState extends State<HasilSearchKamusHukum> {
                         });
                         print(_chosenValue);
                       },
-                      items: <String>['title', 'date-entry', 'keyword']
-                          .map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
+                      items: dropdownItems,
                     ),
                   ),
                 ],
@@ -227,7 +229,8 @@ class _HasilSearchKamusHukumState extends State<HasilSearchKamusHukum> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               Container(
-                                margin: const EdgeInsets.only(top: 20, left: 30),
+                                margin:
+                                    const EdgeInsets.only(top: 20, left: 30),
                                 color: 'FF0000'.toColor(),
                                 width: 5,
                                 height: 140,

@@ -65,12 +65,14 @@ class _SplashScreenState extends State<SplashScreen> {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: Center(
-        child: Image.asset(
-          "assets/image/logo.png",
-          height: size.height * 0.35,
-          width: size.width,
-        ),
-      ),
+          child: Text(
+        "LawPedia",
+        style: TextStyle(
+            color: 'DA2323'.toColor(),
+            fontSize: 50,
+            fontFamily: 'Tms',
+            fontWeight: FontWeight.bold),
+      )),
     );
   }
 }

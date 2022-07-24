@@ -71,7 +71,8 @@ class _UserEditState extends State<UserEdit> {
                   .userDetail
                   .data
                   ?.userProfile
-                  ?.noTelp ?? "");
+                  ?.noTelp ??
+              "");
     });
     // UserState state = context.read<UserCubit>().state;
 
@@ -230,8 +231,8 @@ class _UserEditState extends State<UserEdit> {
                     child: Padding(
                       padding: const EdgeInsets.only(top: 30),
                       child: Text(
-                        widget.user?.displayName.toString() ??
-                            widget.facebook?['name'],
+                        state.userDetail.data!.userProfile!.firstName
+                            .toString(),
                         style: const TextStyle(
                             color: Colors.black,
                             fontSize: 24,
@@ -423,7 +424,8 @@ class _UserEditState extends State<UserEdit> {
                             children: [
                               Container(
                                 alignment: Alignment.centerLeft,
-                                padding: const EdgeInsets.only(top: 15, left: 3),
+                                padding:
+                                    const EdgeInsets.only(top: 15, left: 3),
                                 child: Text(
                                   state.userDetail.data?.userProfile
                                               ?.tnglLahir !=
@@ -454,8 +456,7 @@ class _UserEditState extends State<UserEdit> {
                                   }
                                 },
                                 child: const Padding(
-                                  padding:
-                                      EdgeInsets.only(right: 2, top: 15),
+                                  padding: EdgeInsets.only(right: 2, top: 15),
                                   child: FaIcon(CupertinoIcons.calendar),
                                 ),
                               )

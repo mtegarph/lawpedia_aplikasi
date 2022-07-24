@@ -39,12 +39,14 @@ class Article {
     this.authorId,
     this.authorFirstName,
     this.authorLastName,
+    this.articleThumbnail,
     this.publishedAt,
   });
 
   int? articleId;
   String? articleTitle;
   int? authorId;
+  String? articleThumbnail;
   String? authorFirstName;
   dynamic? authorLastName;
   DateTime? publishedAt;
@@ -52,6 +54,9 @@ class Article {
   factory Article.fromJson(Map<String, dynamic> json) => Article(
         articleId: json["article_id"],
         articleTitle: json["article_title"],
+        articleThumbnail: json["article_thumbnail"] == null
+            ? null
+            : json["article_thumbnail"],
         authorId: json["author_id"],
         authorFirstName: json["author_first_name"],
         authorLastName: json["author_last_name"],
@@ -144,20 +149,21 @@ class Articles {
 }
 
 class PopularArticle {
-  PopularArticle({
-    this.articleId,
-    this.articleTitle,
-    this.authorId,
-    this.authorFirstName,
-    this.authorLastName,
-    this.articleViews,
-    this.publishedAt,
-  });
+  PopularArticle(
+      {this.articleId,
+      this.articleTitle,
+      this.authorId,
+      this.authorFirstName,
+      this.authorLastName,
+      this.articleViews,
+      this.publishedAt,
+      this.articleThumbnail});
 
   int? articleId;
   String? articleTitle;
   int? authorId;
   String? authorFirstName;
+  String? articleThumbnail;
   dynamic? authorLastName;
   int? articleViews;
   DateTime? publishedAt;
@@ -165,6 +171,9 @@ class PopularArticle {
   factory PopularArticle.fromJson(Map<String, dynamic> json) => PopularArticle(
         articleId: json["article_id"],
         articleTitle: json["article_title"],
+        articleThumbnail: json["article_thumbnail"] == null
+            ? null
+            : json["article_thumbnail"],
         authorId: json["author_id"],
         authorFirstName: json["author_first_name"],
         authorLastName: json["author_last_name"],
@@ -225,22 +234,23 @@ class DataDetailArtikel {
 }
 
 class DetailArtikel {
-  DetailArtikel({
-    this.articleId,
-    this.articleTitle,
-    this.articleBody,
-    this.authorId,
-    this.authorFirstName,
-    this.authorLastName,
-    this.articleViews,
-    this.publishedAt,
-  });
+  DetailArtikel(
+      {this.articleId,
+      this.articleTitle,
+      this.articleBody,
+      this.authorId,
+      this.authorFirstName,
+      this.authorLastName,
+      this.articleViews,
+      this.publishedAt,
+      this.articleThumbnail});
 
   int? articleId;
   String? articleTitle;
   String? articleBody;
   int? authorId;
   String? authorFirstName;
+  String? articleThumbnail;
   dynamic? authorLastName;
   int? articleViews;
   DateTime? publishedAt;
@@ -251,6 +261,9 @@ class DetailArtikel {
         articleBody: json["article_body"],
         authorId: json["author_id"],
         authorFirstName: json["author_first_name"],
+        articleThumbnail: json["article_thumbnail"] == null
+            ? null
+            : json["article_thumbnail"],
         authorLastName: json["author_last_name"],
         articleViews: json["article_views"],
         publishedAt: DateTime.parse(json["published_at"]),
@@ -351,11 +364,9 @@ class ArticlesSearch {
             ? null
             : List<PopularArticleSearch>.from(
                 json["data"].map((x) => PopularArticleSearch.fromJson(x))),
-        firstPageUrl:
-            json["first_page_url"],
+        firstPageUrl: json["first_page_url"],
         from: json["from"],
-        nextPageUrl:
-            json["next_page_url"],
+        nextPageUrl: json["next_page_url"],
         path: json["path"],
         perPage: json["per_page"],
         prevPageUrl: json["prev_page_url"],
@@ -399,13 +410,11 @@ class PopularArticleSearch {
   factory PopularArticleSearch.fromJson(Map<String, dynamic> json) =>
       PopularArticleSearch(
         articleId: json["article_id"],
-        articleTitle:
-            json["article_title"],
+        articleTitle: json["article_title"],
         authorId: json["author_id"],
         authorFirstName: json["author_first_name"],
         authorLastName: json["author_last_name"],
-        articleViews:
-            json["article_views"],
+        articleViews: json["article_views"],
         publishedAt: json["published_at"] == null
             ? null
             : DateTime.parse(json["published_at"]),

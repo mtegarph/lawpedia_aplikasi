@@ -68,6 +68,8 @@ class _InboxState extends State<Inbox> {
       child: InkWell(
         onTap: () {
           Get.to(Answer(id: questionList.questionId.toString()));
+          print("date utc : " + questionList.createdAt!.toString());
+          print("date local : " + questionList.createdAt!.toLocal().toString());
         },
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
@@ -82,8 +84,8 @@ class _InboxState extends State<Inbox> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 10.0, vertical: 5),
                     child: Text(questionList.qTitle.toString(),
                         style: TextStyle(
                             color: '4F4F4F'.toColor(),
@@ -95,7 +97,7 @@ class _InboxState extends State<Inbox> {
                     padding:
                         const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                     child: Text(
-                      questionList.createdAt.toString(),
+                      convertDateTime(questionList.createdAt!.toLocal()),
                       style: TextStyle(
                           color: 'A1A1A1'.toColor(),
                           fontSize: 14,
@@ -119,6 +121,14 @@ class _InboxState extends State<Inbox> {
       height: 160.0,
       child: const CircularProgressIndicator(),
     );
+  }
+
+  Future refresh() async {
+    if (index == 0) {
+      await getQuestionDetail;
+    } else {
+      await getQuestionDetailAnswered;
+    }
   }
 
   //jika ada error
@@ -214,40 +224,44 @@ class _InboxState extends State<Inbox> {
             ),
           ),
           backgroundColor: 'F2F2F2'.toColor(),
-          body: TabBarView(children: [
-            Paginator.listView(
-              key: paginatorGlobalKey,
-              totalItemsGetter: totalPagesGetter,
-              emptyListWidgetBuilder: (pageData) {
-                return Container();
-              },
-              listItemBuilder: listItemBuilder,
-              pageLoadFuture: getQuestionDetail,
-              scrollPhysics: const BouncingScrollPhysics(),
-              loadingWidgetBuilder: loadingWidgetMaker,
-              errorWidgetBuilder: errorWidgetMaker,
-              pageErrorChecker: (QuestionList pageData) {
-                return false;
-              },
-              pageItemsGetter: listItemsGetterPages,
-            ),
-            Paginator.listView(
-              key: paginatorGlobalKey2,
-              totalItemsGetter: totalPagesGetter,
-              emptyListWidgetBuilder: (pageData) {
-                return Container();
-              },
-              listItemBuilder: listItemBuilder,
-              pageLoadFuture: getQuestionDetailAnswered,
-              scrollPhysics: const BouncingScrollPhysics(),
-              loadingWidgetBuilder: loadingWidgetMaker,
-              errorWidgetBuilder: errorWidgetMaker,
-              pageErrorChecker: (QuestionList pageData) {
-                return false;
-              },
-              pageItemsGetter: listItemsGetterPages,
-            ),
-          ])),
+          body: RefreshIndicator(
+            triggerMode: RefreshIndicatorTriggerMode.anywhere,
+            onRefresh: refresh,
+            child: TabBarView(children: [
+              Paginator.listView(
+                key: paginatorGlobalKey,
+                totalItemsGetter: totalPagesGetter,
+                emptyListWidgetBuilder: (pageData) {
+                  return Container();
+                },
+                listItemBuilder: listItemBuilder,
+                pageLoadFuture: getQuestionDetail,
+                scrollPhysics: const BouncingScrollPhysics(),
+                loadingWidgetBuilder: loadingWidgetMaker,
+                errorWidgetBuilder: errorWidgetMaker,
+                pageErrorChecker: (QuestionList pageData) {
+                  return false;
+                },
+                pageItemsGetter: listItemsGetterPages,
+              ),
+              Paginator.listView(
+                key: paginatorGlobalKey2,
+                totalItemsGetter: totalPagesGetter,
+                emptyListWidgetBuilder: (pageData) {
+                  return Container();
+                },
+                listItemBuilder: listItemBuilder,
+                pageLoadFuture: getQuestionDetailAnswered,
+                scrollPhysics: const BouncingScrollPhysics(),
+                loadingWidgetBuilder: loadingWidgetMaker,
+                errorWidgetBuilder: errorWidgetMaker,
+                pageErrorChecker: (QuestionList pageData) {
+                  return false;
+                },
+                pageItemsGetter: listItemsGetterPages,
+              ),
+            ]),
+          )),
     );
   }
 }

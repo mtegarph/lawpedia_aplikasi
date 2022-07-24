@@ -40,7 +40,7 @@ class _DescriptionTextWidgetState extends State<DescriptionTextWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5),
+      padding: const EdgeInsets.symmetric(horizontal: 10.0),
       child: secondHalf.toString().isEmpty
           ? Text(firstHalf.toString(),
               style: TextStyle(

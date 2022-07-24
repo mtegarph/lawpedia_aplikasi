@@ -191,7 +191,7 @@ class _LoginState extends State<Login> {
                             children: [
                               Container(
                                 child: Text(
-                                  "LAWPEDIA",
+                                  "LawPedia",
                                   style: TextStyle(
                                       color: 'DA2323'.toColor(),
                                       fontSize: 50,
