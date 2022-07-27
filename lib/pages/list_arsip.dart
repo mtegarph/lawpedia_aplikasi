@@ -91,14 +91,14 @@ class _ListArsipState extends State<ListArsip> {
       backgroundColor: Colors.white,
       body: RefreshIndicator(
         onRefresh: refresh,
-        child: ListView(controller: controller, children: [
+        child: ListView(children: [
           Column(mainAxisAlignment: MainAxisAlignment.start,
               //crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SafeArea(
                   child: Container(
                     //margin: EdgeInsets.only(bottom: defaultMargin),
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
                     width: double.infinity,
                     height: 150,
                     color: Colors.white,
@@ -127,19 +127,21 @@ class _ListArsipState extends State<ListArsip> {
                                               'assets/image/Left.png'))),
                                 ),
                               ),
-                              const SizedBox(
-                                width: 100,
-                              ),
+
                               Padding(
-                                padding: const EdgeInsets.only(
-                                    top: 10, left: 70, right: 70),
-                                child: Text(
-                                  '${widget.title}',
-                                  style: const TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 26.4,
-                                      fontFamily: 'Raleway',
-                                      fontWeight: FontWeight.bold),
+                                padding: widget.title!.length >= 16
+                                    ? EdgeInsets.only(left: 80)
+                                    : EdgeInsets.symmetric(horizontal: 160),
+                                child: Container(
+                                //  width: MediaQuery.of(context).size.width / 2,
+                                  child: Text(
+                                    '${widget.title}',
+                                    style: const TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 26.4,
+                                        fontFamily: 'Raleway',
+                                        fontWeight: FontWeight.bold),
+                                  ),
                                 ),
                               ),
                             ],
@@ -208,9 +210,25 @@ class _ListArsipState extends State<ListArsip> {
                   itemBuilder: (context, index) => (index < listArsip.length)
                       ? GestureDetector(
                           onTap: () {
-                            Get.to(Answer(
-                              id: listArsip[index].questionId.toString(),
-                            ));
+                            context
+                                .read<QuestiondetailCubit>()
+                                .getQuestionDetail(
+                                    listArsip[index].questionId.toString())
+                                .then((value) {
+                              Get.to(Answer(
+                                visible: true,
+                                id: listArsip[index].questionId.toString(),
+                                jawab: (context
+                                        .bloc<QuestiondetailCubit>()
+                                        .state as QuestionDetailSuccess)
+                                    .questionDetail
+                                    .data!
+                                    .questions!
+                                    .answer!
+                                    .answer!,
+                              ));
+                            });
+
                             print("Halo");
                           },
                           child: Row(
@@ -240,7 +258,7 @@ class _ListArsipState extends State<ListArsip> {
                                     ),
                                   ),
                                   DescriptionTextWidget(
-                                    text: deskripsi,
+                                    text: listArsip[index].qTitle.toString(),
                                     length: 60,
                                     size: 16,
                                   ),

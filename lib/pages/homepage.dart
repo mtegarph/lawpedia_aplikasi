@@ -383,7 +383,7 @@ class _HomePageState extends State<HomePage> {
                               width: 130,
                             ),
                             Container(
-                              margin: const EdgeInsets.only(right: 20, top: 6),
+                              margin: const EdgeInsets.only(left: 30, top: 6),
                               width: 100,
                               height: 30,
                               child: Align(
@@ -402,27 +402,27 @@ class _HomePageState extends State<HomePage> {
                                   borderRadius: const BorderRadius.all(
                                       Radius.circular(10))),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                top: 5,
-                                right: 20,
-                              ),
-                              child: GestureDetector(
-                                onTap: () {
-                                  //  Get.to(const Notif());
-                                },
-                                child: const FaIcon(
-                                  FontAwesomeIcons.solidBell,
-                                  color: Colors.black,
-                                  size: 25,
-                                ),
-                              ),
-                            ),
+                            // Padding(
+                            //   padding: const EdgeInsets.only(
+                            //     top: 5,
+                            //     right: 20,
+                            //   ),
+                            //   child: GestureDetector(
+                            //     onTap: () {
+                            //       //  Get.to(const Notif());
+                            //     },
+                            //     child: const FaIcon(
+                            //       FontAwesomeIcons.solidBell,
+                            //       color: Colors.black,
+                            //       size: 25,
+                            //     ),
+                            //   ),
+                            // ),
                             BlocBuilder<UserCubit, UserState>(
                                 builder: (context, state) {
                               if (state is userSuccess) {
                                 return Padding(
-                                  padding: const EdgeInsets.only(right: 5),
+                                  padding: const EdgeInsets.only(left: 25),
                                   child: GestureDetector(
                                     onTap: () => Get.to(Setting(
                                       user: widget.user,
@@ -549,7 +549,7 @@ class _HomePageState extends State<HomePage> {
                                             CrossAxisAlignment.center,
                                         children: [
                                           SizedBox(
-                                            height: 35,
+                                           // height: 35,
                                             width: 290,
                                             child: Padding(
                                               padding: const EdgeInsets.only(

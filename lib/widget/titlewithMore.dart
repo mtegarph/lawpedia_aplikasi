@@ -4,10 +4,10 @@ class TitleWithMoreBtn extends StatelessWidget {
   const TitleWithMoreBtn({
     Key? key,
     required this.title,
-    required this.press,
+    @required this.press,
   }) : super(key: key);
   final String title;
-  final VoidCallback press;
+  final VoidCallback? press;
 
   @override
   Widget build(BuildContext context) {
@@ -18,15 +18,17 @@ class TitleWithMoreBtn extends StatelessWidget {
           children: <Widget>[
             TitleWithCustomUnderline(text: title),
             const Spacer(),
-            GestureDetector(
-                onTap: press,
-                child: Text(
-                  "Lihat Selengkapnya",
-                  style: TextStyle(
-                      color: "DA2323".toColor(),
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16),
-                ))
+            press == null
+                ? Container()
+                : GestureDetector(
+                    onTap: press,
+                    child: Text(
+                      "Lihat Selengkapnya",
+                      style: TextStyle(
+                          color: "DA2323".toColor(),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16),
+                    ))
           ],
         ),
       ),

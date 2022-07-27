@@ -67,7 +67,92 @@ class _InboxState extends State<Inbox> {
       padding: const EdgeInsets.only(top: 5),
       child: InkWell(
         onTap: () {
-          Get.to(Answer(id: questionList.questionId.toString()));
+          context
+              .read<QuestiondetailCubit>()
+              .getQuestionDetail(questionList.questionId.toString())
+              .then((value) {
+            Get.to(Answer(
+              visible: true,
+              id: questionList.questionId.toString(),
+              jawab: (context.bloc<QuestiondetailCubit>().state
+                      as QuestionDetailSuccess)
+                  .questionDetail
+                  .data!
+                  .questions!
+                  .answer
+                  .isBlank
+                  .toString(),
+            ));
+          });
+          print("date utc : " + questionList.createdAt!.toString());
+          print("date local : " + questionList.createdAt!.toLocal().toString());
+        },
+        child: Container(
+          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+          width: double.infinity,
+          height: 100,
+          color: Colors.white,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 10.0, vertical: 5),
+                    child: Text(questionList.qTitle.toString(),
+                        style: TextStyle(
+                            color: '4F4F4F'.toColor(),
+                            fontSize: 20,
+                            fontFamily: 'Raleway',
+                            fontWeight: FontWeight.normal)),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                    child: Text(
+                      convertDateTime(questionList.createdAt!.toLocal()),
+                      style: TextStyle(
+                          color: 'A1A1A1'.toColor(),
+                          fontSize: 14,
+                          fontFamily: 'Raleway',
+                          fontWeight: FontWeight.w600),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  //fungsi untuk membuat list widget nya
+  Widget listItemBuilder2(dynamic item, int index) {
+    Datum questionList = item as Datum;
+    return Padding(
+      padding: const EdgeInsets.only(top: 5),
+      child: InkWell(
+        onTap: () {
+          context
+              .read<QuestiondetailCubit>()
+              .getQuestionDetail(questionList.questionId.toString())
+              .then((value) {
+            Get.to(Answer(
+              visible: true,
+              id: questionList.questionId.toString(),
+              jawab: (context.bloc<QuestiondetailCubit>().state
+                      as QuestionDetailSuccess)
+                  .questionDetail
+                  .data!
+                  .questions!
+                  .answer!
+                  .answer!,
+            ));
+          });
           print("date utc : " + questionList.createdAt!.toString());
           print("date local : " + questionList.createdAt!.toLocal().toString());
         },
@@ -250,7 +335,7 @@ class _InboxState extends State<Inbox> {
                 emptyListWidgetBuilder: (pageData) {
                   return Container();
                 },
-                listItemBuilder: listItemBuilder,
+                listItemBuilder: listItemBuilder2,
                 pageLoadFuture: getQuestionDetailAnswered,
                 scrollPhysics: const BouncingScrollPhysics(),
                 loadingWidgetBuilder: loadingWidgetMaker,

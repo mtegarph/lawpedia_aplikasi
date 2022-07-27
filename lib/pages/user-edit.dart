@@ -44,20 +44,16 @@ class _UserEditState extends State<UserEdit> {
     context.read<UserCubit>().getUser().then((value) {
       nama = TextEditingController(
           text: (context.bloc<UserCubit>().state as userSuccess)
-                  .userDetail
-                  .data
-                  ?.userProfile
-                  ?.firstName ??
-              widget.user?.displayName ??
-              widget.facebook?['name']);
+              .userDetail
+              .data
+              ?.userProfile
+              ?.firstName);
       lastNama = TextEditingController(
           text: (context.bloc<UserCubit>().state as userSuccess)
-                  .userDetail
-                  .data
-                  ?.userProfile
-                  ?.lastName ??
-              widget.user?.displayName ??
-              widget.facebook?['name']);
+              .userDetail
+              .data
+              ?.userProfile
+              ?.lastName);
       email = TextEditingController(
           text: (context.bloc<UserCubit>().state as userSuccess)
                   .userDetail

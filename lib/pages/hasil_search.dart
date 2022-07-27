@@ -76,7 +76,6 @@ class _HasilSearchState extends State<HasilSearch> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView(
-        controller: controller,
         children: [
           Column(
             children: [
@@ -122,7 +121,8 @@ class _HasilSearchState extends State<HasilSearch> {
                 ),
               ),
               Container(
-                margin: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 15),
+                margin:
+                    const EdgeInsets.symmetric(horizontal: 15.0, vertical: 15),
                 width: MediaQuery.of(context).size.width,
                 height: 50.0,
                 decoration: BoxDecoration(
@@ -172,9 +172,23 @@ class _HasilSearchState extends State<HasilSearch> {
                 itemBuilder: (context, index) => (index < listArsip.length)
                     ? GestureDetector(
                         onTap: () {
-                          Get.to(Answer(
-                            id: listArsip[index].questionId.toString(),
-                          ));
+                          context
+                              .read<QuestiondetailCubit>()
+                              .getQuestionDetail(
+                                  listArsip[index].questionId.toString())
+                              .then((value) {
+                            Get.to(Answer(
+                              visible: true,
+                              id: listArsip[index].questionId.toString(),
+                              jawab: (context.bloc<QuestiondetailCubit>().state
+                                      as QuestionDetailSuccess)
+                                  .questionDetail
+                                  .data!
+                                  .questions!
+                                  .answer!
+                                  .answer!,
+                            ));
+                          });
                           print("Halo");
                         },
                         child: Row(
@@ -203,7 +217,7 @@ class _HasilSearchState extends State<HasilSearch> {
                                   ),
                                 ),
                                 DescriptionTextWidget(
-                                  text: deskripsi,
+                                  text: listArsip[index].qTitle.toString(),
                                   length: 60,
                                   size: 16,
                                 ),

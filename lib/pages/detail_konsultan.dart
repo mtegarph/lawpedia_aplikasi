@@ -41,21 +41,22 @@ class _DetailKonsultanState extends State<DetailKonsultan> {
                     ),
                     CircleAvatar(
                         radius: 75,
-                        backgroundImage:
-                            state.detailkonsultan.data!.konsultanHukum!.khImg !=
-                                    null
-                                ? NetworkImage(state.detailkonsultan.data!
-                                    .konsultanHukum!.khImg!)
-                                : const AssetImage('assets/image/user_vector.png')
-                                    as ImageProvider),
-                    Padding(
-                      padding:
-                          const EdgeInsets.only(top: 30, left: 10, right: 10),
+                        backgroundImage: state.detailkonsultan.data!
+                                    .konsultanHukum!.khImg !=
+                                null
+                            ? NetworkImage(state
+                                .detailkonsultan.data!.konsultanHukum!.khImg!)
+                            : const AssetImage('assets/image/user_vector.png')
+                                as ImageProvider),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Center(
                       child: Text(
                         state.detailkonsultan.data!.konsultanHukum!.khName!,
                         style: const TextStyle(
                             color: Colors.black,
-                            fontSize: 28,
+                            fontSize: 26,
                             fontFamily: 'Courier',
                             fontWeight: FontWeight.bold),
                       ),
@@ -77,7 +78,7 @@ class _DetailKonsultanState extends State<DetailKonsultan> {
                     Container(
                       margin: const EdgeInsets.only(top: 8),
                       width: 450,
-                      height: 280,
+                      height: MediaQuery.of(context).size.height / 2.2,
                       child: Text(
                         state.detailkonsultan.data!.konsultanHukum!.khDesc!,
                         style: const TextStyle(
@@ -89,7 +90,7 @@ class _DetailKonsultanState extends State<DetailKonsultan> {
                       ),
                     ),
                     TitleWithMoreBtn(
-                        title: 'Konsultan Hukum Lainnya', press: () {}),
+                        title: 'Konsultan Hukum Lainnya', press: null),
                     const SizedBox(
                       height: 30,
                     ),
@@ -187,20 +188,17 @@ class _DetailKonsultanState extends State<DetailKonsultan> {
                                                             .symmetric(
                                                         horizontal: 15.0,
                                                         vertical: 10.0),
-                                                    child: Text(
-                                                      state
-                                                          .detailkonsultan
-                                                          .data!
-                                                          .konsultanHukum!
-                                                          .data![index]
-                                                          .khName!,
-                                                      style: const TextStyle(
-                                                          color: Colors.black,
-                                                          fontSize: 16,
-                                                          fontFamily: 'Raleway',
-                                                          fontWeight:
-                                                              FontWeight.bold),
-                                                    ),
+                                                    child:
+                                                        DescriptionTextWidget(
+                                                            text: state
+                                                                .detailkonsultan
+                                                                .data!
+                                                                .konsultanHukum!
+                                                                .data![index]
+                                                                .khName!,
+                                                            size: 16,
+                                                            length: 13,
+                                                            color: "100F0F"),
                                                   ),
                                                 ),
                                               ),

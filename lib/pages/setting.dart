@@ -109,11 +109,13 @@ class _SettingState extends State<Setting> {
                           width: 150,
                           height: 50,
                           child: Text(
-                            state.userDetail.data!.userProfile!.lastName != null || state.userDetail.data!.userProfile!.lastName != "-" ?   '${state.userDetail.data!.userProfile!.firstName} ' +
-                                '${state.userDetail.data!.userProfile!.lastName}'
-                                    .toString() : '${state.userDetail.data!.userProfile!.firstName} ' 
+                            state.userDetail.data!.userProfile!.lastName == null
+                                // || state.userDetail.data!.userProfile!.lastName != "-"
+                                ? '${state.userDetail.data!.userProfile!.firstName} '
                                     .toString()
-                         ,
+                                : '${state.userDetail.data!.userProfile!.firstName} ' +
+                                    '${state.userDetail.data!.userProfile!.lastName}'
+                                        .toString(),
                             style: const TextStyle(
                                 color: Colors.black,
                                 fontSize: 20,

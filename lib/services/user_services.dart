@@ -17,12 +17,12 @@ class UserService {
   }
 
   static Future<ApiReturnValue<Login>> register(
-      String email,
-      String account,
-      String profile,
-      String firstName,
-      String lastName,
-      String tglLahir) async {
+      String? email,
+      String? account,
+      String? profile,
+      String? firstName,
+      String? lastName,
+      String? tglLahir) async {
     String apiUrl = baseUrl + 'register';
     var client = http.Client();
     var apiResult = await client.post(Uri.parse(apiUrl), body: {
@@ -65,7 +65,7 @@ class UserService {
   }
 
   static Future<ApiReturnValue> editUsesr(
-      String firstName, String lastName, String tglLahir,String noTelp) async {
+      String firstName, String lastName, String tglLahir, String noTelp) async {
     String apiUrl = baseUrl + 'user-profile';
     var client = http.Client();
     SharedPreferences logindata = await SharedPreferences.getInstance();

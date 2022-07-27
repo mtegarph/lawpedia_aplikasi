@@ -33,7 +33,8 @@ class _TemplateState extends State<Template> {
       child: Scaffold(
         backgroundColor: Colors.white,
         body: ListView(
-          
+          controller: ScrollController(),
+          physics: ClampingScrollPhysics(),
           children: [
             Column(mainAxisAlignment: MainAxisAlignment.start,
                 //crossAxisAlignment: CrossAxisAlignment.start,

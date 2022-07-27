@@ -60,15 +60,21 @@ class _LoginState extends State<Login> {
                   "google",
                   user.photoUrl.toString(),
                   user.displayName.toString(),
-                  "-",
+                  "",
                   "31/05/2002")
               .then((value) {
             // print(value.message);
-            Navigator.of(context).pushReplacement(MaterialPageRoute(
-                builder: (context) => MainPage(
-                      //google: user,
-                      google: user,
-                    )));
+            LoginState state1 = context.read<LoginCubit>().state;
+            if (state1 is berhasilLogin) {
+              logindata!.setBool('google', true);
+              logindata!.setBool('login', false);
+              logindata!.setString('token', state1.token.toString());
+              Navigator.of(context).pushReplacement(MaterialPageRoute(
+                  builder: (context) => MainPage(
+                        //google: user,
+                        google: user,
+                      )));
+            }
           });
         });
         print(status);
@@ -287,7 +293,7 @@ class _LoginState extends State<Login> {
                                                 _userFaceboook?["picture"]
                                                     ["data"]["url"],
                                                 _userFaceboook?['name'],
-                                                "-",
+                                                "",
                                                 "31/05/2002")
                                             .then((value) {
                                           LoginState state1 =

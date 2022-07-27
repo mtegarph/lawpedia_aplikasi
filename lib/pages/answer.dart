@@ -3,7 +3,12 @@ part of 'page.dart';
 class Answer extends StatefulWidget {
   final bool? visible;
   final String? id;
-  const Answer({Key? key, @required this.visible = false, @required this.id})
+  final String? jawab;
+  const Answer(
+      {Key? key,
+      @required this.visible = false,
+      @required this.id,
+      @required this.jawab = null})
       : super(key: key);
 
   @override
@@ -18,26 +23,16 @@ class _AnswerState extends State<Answer> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    context
-        .read<QuestiondetailCubit>()
-        .getQuestionDetail(widget.id)
-        .then((value) {
-      setState(() {
-        desc =
-            (context.bloc<QuestiondetailCubit>().state as QuestionDetailSuccess)
-                .questionDetail
-                .data!
-                .questions!
-                .answer!
-                .answer!;
-      });
-      final document = parse(desc);
+    if (widget.jawab == false) {
+      print("Tidak ada jawaban");
+    } else {
+      final document = parse(widget.jawab);
       final String parsedString =
           parse(document.body!.text).documentElement!.text;
       setState(() {
         desc = parsedString;
       });
-    });
+    }
   }
 
   @override
@@ -83,7 +78,7 @@ class _AnswerState extends State<Answer> {
                               textAlign: TextAlign.justify,
                             ),
                           )),
-                      state.questionDetail.data?.questions?.answer != null
+                      state.questionDetail.data!.questions!.answer != null
                           ? Container(
                               margin:
                                   const EdgeInsets.only(right: 10, left: 10),

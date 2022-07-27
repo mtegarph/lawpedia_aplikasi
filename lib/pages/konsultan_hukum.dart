@@ -43,9 +43,9 @@ class _KonsultanHukumState extends State<KonsultanHukum> {
       if (list.data!.konsultanHukum!.to ==
           list.data!.konsultanHukum!.data!.length) {
         full = true;
-        hasMore = false;
-      } else {
         hasMore = true;
+      } else {
+        hasMore = false;
       }
       listKonsultan.addAll(list.data!.konsultanHukum!.data!);
     });
@@ -219,12 +219,12 @@ class _KonsultanHukumState extends State<KonsultanHukum> {
                     );
                   } else {
                     return hasMore == true
-                        ? Container()
+                        ? const Center(
+                            child: Loading(),
+                          )
                         : full == true
                             ? Container()
-                            : const Center(
-                                child: Loading(),
-                              );
+                            : Container();
                   }
                 },
               )),
