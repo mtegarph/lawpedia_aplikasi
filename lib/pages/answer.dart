@@ -82,13 +82,14 @@ class _AnswerState extends State<Answer> {
                           ? Container(
                               margin:
                                   const EdgeInsets.only(right: 10, left: 10),
-                              width: 500,
-                              height: 400,
+                              //width: MediaQuery.of(context).size.width,
+                              //height: 400,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10.0),
                                 color: "FF4A4A".toColor(),
                               ),
                               child: SingleChildScrollView(
+                                physics: const NeverScrollableScrollPhysics(),
                                 child: Column(
                                   //mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -107,9 +108,10 @@ class _AnswerState extends State<Answer> {
                                     ),
                                     Container(
                                       margin: const EdgeInsets.only(
-                                          top: 8, bottom: 10, left: 25),
-                                      width: 440,
-                                      height: 400,
+                                          top: 8, bottom: 25, left: 25),
+                                      width: MediaQuery.of(context).size.width,
+                                      // width: 440,
+                                      //height: 400,
                                       child: Text(
                                         '$desc',
                                         style: const TextStyle(

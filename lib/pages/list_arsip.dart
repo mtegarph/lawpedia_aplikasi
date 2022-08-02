@@ -133,7 +133,7 @@ class _ListArsipState extends State<ListArsip> {
                                     ? EdgeInsets.only(left: 80)
                                     : EdgeInsets.symmetric(horizontal: 160),
                                 child: Container(
-                                //  width: MediaQuery.of(context).size.width / 2,
+                                  //  width: MediaQuery.of(context).size.width / 2,
                                   child: Text(
                                     '${widget.title}',
                                     style: const TextStyle(
@@ -258,7 +258,7 @@ class _ListArsipState extends State<ListArsip> {
                                     ),
                                   ),
                                   DescriptionTextWidget(
-                                    text: listArsip[index].qTitle.toString(),
+                                    text: listArsip[index].qBody.toString(),
                                     length: 60,
                                     size: 16,
                                   ),

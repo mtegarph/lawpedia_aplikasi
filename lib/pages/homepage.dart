@@ -211,8 +211,10 @@ class _HomePageState extends State<HomePage> {
                               ),
                               child: TextField(
                                 style: const TextStyle(fontSize: 18),
+                                maxLength: 100,
                                 controller: judulController,
                                 decoration: const InputDecoration(
+                                    counterText: "",
                                     border: InputBorder.none,
                                     hintStyle: TextStyle(fontSize: 18),
                                     hintText: "Judul Pertanyaan"),
@@ -234,7 +236,9 @@ class _HomePageState extends State<HomePage> {
                                   controller: pertanyaanController,
                                   keyboardType: TextInputType.multiline,
                                   maxLines: 500,
+                                  maxLength: 500,
                                   decoration: const InputDecoration(
+                                      counterText: "",
                                       border: InputBorder.none,
                                       hintStyle: TextStyle(fontSize: 18),
                                       hintText: "Pertanyaan Anda"),
@@ -549,7 +553,7 @@ class _HomePageState extends State<HomePage> {
                                             CrossAxisAlignment.center,
                                         children: [
                                           SizedBox(
-                                           // height: 35,
+                                            // height: 35,
                                             width: 290,
                                             child: Padding(
                                               padding: const EdgeInsets.only(

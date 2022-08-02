@@ -215,6 +215,7 @@ class DatumKategoriDetail {
     this.questionId,
     this.userId,
     this.qTitle,
+    this.qBody,
     this.qAnonymity,
     this.answeredAt,
     this.questionedAt,
@@ -223,6 +224,7 @@ class DatumKategoriDetail {
   int? questionId;
   int? userId;
   String? qTitle;
+  String? qBody;
   int? qAnonymity;
   DateTime? answeredAt;
   DateTime? questionedAt;
@@ -232,6 +234,7 @@ class DatumKategoriDetail {
         questionId: json["question_id"],
         userId: json["user_id"],
         qTitle: json["q_title"],
+        qBody: json["q_body"],
         qAnonymity: json["q_anonymity"],
         answeredAt: DateTime.parse(json["published_at"]),
         questionedAt: DateTime.parse(json["questioned_at"]),
@@ -246,4 +249,3 @@ class DatumKategoriDetail {
         "questioned_at": questionedAt?.toIso8601String(),
       };
 }
-
